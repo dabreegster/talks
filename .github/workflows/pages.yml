@@ -1,0 +1,32 @@
+name: Deploy books
+
+on:
+  push:
+    branches: [disabled]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Install quarto
+      run: |
+        wget https://github.com/quarto-dev/quarto-cli/releases/download/v0.9.4/quarto-0.9.4-linux-amd64.deb
+        sudo dpkg -i quarto-0.9.4-linux-amd64.deb
+
+    - name: Render map_model_v2
+      run: |
+        cd map_model_v2
+        quarto render slides.md
+
+    - name: Copy stuff
+      run: |
+        mkdir -p dist
+        cp -Rv map_model_v2 dist/
+
+    - name: Publish
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
