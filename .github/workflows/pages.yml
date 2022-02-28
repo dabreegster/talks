@@ -1,8 +1,8 @@
-name: Deploy books
+name: Deploy slides
 
 on:
   push:
-    branches: [disabled]
+    branches: [main]
 
 jobs:
   build:
