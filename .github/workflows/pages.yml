@@ -20,10 +20,16 @@ jobs:
         cd map_model_v2
         quarto render slides.md
 
+    - name: Render tds_seminar_synthpop
+      run: |
+        cd tds_seminar_synthpop
+        quarto render slides.md
+
     - name: Copy stuff
       run: |
         mkdir -p dist
         cp -Rv map_model_v2 dist/
+        cp -Rv tds_seminar_synthpop dist/
 
     - name: Publish
       uses: peaceiris/actions-gh-pages@v3
