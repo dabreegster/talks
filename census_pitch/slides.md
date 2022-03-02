@@ -20,6 +20,7 @@ format: revealjs
   - Between 18-30, employed, not owning a vehicle...
 - Who lives inside a proposed low-traffic neighborhood, or nearby where traffic is expected to detour in the short-term?
 - Are air-quality sensors equitably distributed? <https://github.com/alan-turing-institute/spatial-inequality>
+- Input into synthetic population pipelines
 
 Many researchers reinventing the same wheel -- why?
 
