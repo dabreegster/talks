@@ -143,7 +143,7 @@ This is just a brainstorm; I don't have plans to build it. The schema I'll pitch
 
 ## Appendix: Attempts to fix the current schema
 
-- [area:highway](<https://wiki.openstreetmap.org/wiki/Key:area:highway>)
+- [area:highway](https://wiki.openstreetmap.org/wiki/Key:area:highway)
 - [junction=intersection](https://wiki.openstreetmap.org/wiki/Proposed_features/junction%3Dintersection)
 - <https://wiki.openstreetmap.org/wiki/Proposed_features/Street_area>
 
@@ -153,10 +153,10 @@ Forget OSM entirely for the moment
 
 ## We want a representation that...
 
-1) shows geometry pretty accurately
-2) lets you understand hierarchy -- entire junction, just the north approaching road and its crossing islands, individual lanes, stopping line
-3) represents routing / turn restrictions
-4) represents semantics that apply over space (loading zones, no parking overnight)
+1. shows geometry pretty accurately
+2. lets you understand hierarchy -- entire junction, just the north approaching road and its crossing islands, individual lanes, stopping line
+3. represents routing / turn restrictions
+4. represents semantics that apply over space (loading zones, no parking overnight)
 
 ## Test cases
 
@@ -223,12 +223,12 @@ Varying width based on linear referencing? Cav contour "bulges"?
 
 - in ID or JOSM, oh yeah
 - needs a UI dedicated to it. what might that look like?
-	- demo of thickening lines over satellite
-	- when width varies, creating bulges and dragging them? do people know examples from CAD / 3d modeling?
+  - demo of thickening lines over satellite
+  - when width varies, creating bulges and dragging them? do people know examples from CAD / 3d modeling?
 - pay as you go
-	- just tag the center line, classic quick lane count
-	- do the abst approach: desperate heuristics, show it
-	- if the UI for adding detail is easy, people will do it, use that instead of inference
+  - just tag the center line, classic quick lane count
+  - do the abst approach: desperate heuristics, show it
+  - if the UI for adding detail is easy, people will do it, use that instead of inference
 
 ## Satellite imagery
 
@@ -251,7 +251,7 @@ Varying width based on linear referencing? Cav contour "bulges"?
 ### london
 
 - parcels, https://use-land-property-data.service.gov.uk/datasets/inspire
-	- good enough or not?
+  - good enough or not?
 
 ### São Paulo
 
