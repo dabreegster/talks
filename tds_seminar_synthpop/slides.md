@@ -37,29 +37,101 @@ format: revealjs
 
 ## What
 
-- https://a-b-street.github.io/docs/tech/dev/formats/scenarios.html
-- disaggregation is strange: one "typical" day repeated?
-- also attributes about people: what vehicles they own, comfortable biking up hills or alongside traffic
+<!-- picture with waypoints, departure time & mode -->
+
+```json
+{
+  "scenario_name": "minimal",
+  "people": [
+    {
+      "trips": [
+        {
+          "departure": 10000,
+          "origin": {
+            "longitude": -122.303723,
+            "latitude": 47.6372834
+          },
+          "destination": {
+            "longitude": -122.31905,
+            "latitude": 47.63786
+          },
+          "mode": "Bike",
+          "purpose": "Meal"
+        },
+        {
+          "departure": 12000000,
+          "origin": {
+            "longitude": -122.31905,
+            "latitude": 47.63786
+          },
+          "destination": {
+            "longitude": -122.3075948,
+            "latitude": 47.6394773
+          },
+          "mode": "Walk",
+          "purpose": "Recreation"
+        }
+      ]
+    }
+  ]
+}
+```
+
+<https://a-b-street.github.io/docs/tech/dev/formats/scenarios.html>
+
+## What
+
+- More attributes about people
+  - vehicle ownership
+  - routing preference
+  - willing to pay toll road
+  - comfortable biking up-hills, at night, alongside fast traffic
+
+## What
+
+- One "typical" weekday?
+  - Different scenario for weekends, special events
+  - People have different travel behavior daily
+  - Dangers of disaggregation
 
 ## Use cases
 
 - traffic simulation
-- LTN tool: just need to know where people drive, to A/B test routes
-- PCT & Ungap the Map: look for short driving trips
-- RAMP: needs to know purpose of trips / activity type on the other end, to model lockdown behavior and risk
+- low-traffic neighborhoods: where do people drive, to predict detours
+- PCT & Ungap the Map: look for short driving trips that might cycle instead
+- RAMP: daily behavior in shared spaces for COVID transmission
+  - broken down by activity -- entertainment, work, home, retail
+  - lockdown behavior, risk at venues
 
-## Other projects
+## Some open source travel demand models
 
-- normits, soundcast
-- grid2demand
-- https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html
+- [Soundcast](https://www.psrc.org/activity-based-travel-model-soundcast)
+- [NorMITs](https://github.com/Transport-for-the-North/NorMITs-Demand/)
+- [grid2demand](https://github.com/asu-trans-ai-lab/grid2demand/)
+- [SUMO](https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html)
 
 # Part 3: Let's build one for the UK!
 
-- input is just home->work
-- diagram of overall process
+## Input data
 
-- Go through each desire line, sample an origin and destination from the appropriate zone. Sample from the normal time distributions
+![](uk_input_csv.png)
+
+- `wu03ew_v2`: 2011, Location of usual residence and Place of work by Method of travel to work
+  - Old, pre-pandemic
+  - Only home -> work
+
+## Input data: MSOA zones
+
+![](msoa_zones.png)
+
+## Overall idea
+
+<!-- diagram of overall process -->
+
+- For each (origin, destination, mode) desire line
+  - Repeat for the number of trips here
+    - Sample an origin and destination from the MSOA
+    - Create a person who goes home -> work in AM, work -> home in PM
 
 ## Desire lines
 
@@ -67,57 +139,68 @@ format: revealjs
 {
   from_zone: zone123,
   to_zone: zone456,
-    mode: walk, bike, drive...,
-    number_trips: 500
+  mode: walk, bike, drive...,
+  number_trips: 500
 }
 ```
 
-along with a polygon per named zone, and a study area to clip to.
+- Re-shape the input into this format
+  - One mode per entry
+  - Filter + simplify the modes
+- Why have an intermediate common format?
 
-## Desires lines for the UK
+## Jittering: sampling an origin or destination
 
-- wu03ew_v2 and MSOA zones. https://github.com/a-b-street/abstreet/blob/master/importer/src/uk.rs
+![](one_zone.png)
 
-- re-shape into a different input format (one mode per row)
+- Just inside the study area
+- [odjitter](https://github.com/dabreegster/odjitter)
+- Random points?
+  - Origins: buildings where people live
+  - Destinations: buildings where people work
 
-- why have an intermediate common format?
+## Buildings from OpenStreetMap tags
 
-- why one mode per row?
+![](osm_bldg.png)
 
-## Sampling an origin or destination / jittering
+- Building type is rarely tagged
 
-- The simple case first: inside the map
-- odjitter
+## Buildings from OpenStreetMap tags
 
-- O: homes
-- D: places where people work
+![](osm_amenity.png)
 
-## Detecting these from OSM tags
+- Make sure your library gives you the right data, `building=shop`
+- Just look at the data in OSM
 
-- most just `building=yes`
-- actually go look at the data in OSM
-- amenity nodes inside polygons
+## Weighted choices (for origins)
 
-## Weighted subpoints (for origins)
-
-- SFH vs a tower block
-- some OSM tags that could help
-- but frequency of those tags is low
+- single-family home vs tower block
+  - area of the polygon
+  - `building:levels`
+- [Colouring London](https://colouringlondon.org)
+- [Seattle housing units](https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1/explore)
+- Use zoning codes?
 
 ## Trip attractor tables (for destinations)
 
+![](attractor_table.png)
+
 - cafe vs shopping mall
+- [Trip attractor table](https://github.com/asu-trans-ai-lab/grid2demand/blob/main/examples/poi_trip_rate.csv)
+  - ITE publishes one
 
 ## What data could help us pick better?
 
-- what if we had SIC percentages for desire lines?
+- Desire line breakdown by Standard Industry Codes?
 
 ## Aside: missing buildings in OSM
 
-- show the problem (and emphasize looking at the data!)
-- procgen as a workaround
-- tradeoffs
-- OS building footprints?
+![](procgen.png)
+
+- OSM isn't perfect, check your data
+- Procedural generation
+  - limitations
+- Alternate data: OS building footprints?
 
 ## Study area size
 
