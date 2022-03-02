@@ -26,9 +26,9 @@ Many researchers reinventing the same wheel -- why?
 # How (the data)
 
 - One pipeline transforming region-specific data sources into one format
-	- [US census](https://www.nhgis.org) (census block)
-	- UK census (output area)
-	- [Brazil](https://www.ibge.gov.br/en/statistics/social/population/22836-2020-census-censo4.html?=&t=o-que-e) (enumeration area)
+  - [US census](https://www.nhgis.org) (census block)
+  - UK census (output area)
+  - [Brazil](https://www.ibge.gov.br/en/statistics/social/population/22836-2020-census-censo4.html?=&t=o-que-e) (enumeration area)
   - etc
 - Use the smallest geography available
 - [WorldPop](https://www.worldpop.org/project/categories?id=3) fallback
@@ -40,7 +40,7 @@ Many researchers reinventing the same wheel -- why?
   - HTTP range requests to cheaply fetch what's needed (3-4MB over 8-10 requests for one small city)
   - no hosted API to productionize; just a file!
 - Rust client library
-	- Bindings for any language, cross-platform, WebAssembly, Jupyter notebooks
+  - Bindings for any language, cross-platform, WebAssembly, Jupyter notebooks
 
 # Alternatives considered
 

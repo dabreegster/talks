@@ -4,6 +4,8 @@ Using [Quarto](https://quarto.org) for now.
 
 Development workflow tldr: `quarto preview foo.qmd`
 
+To format markdown, use [prettier](https://prettier.io): `prettier --write slides.md`
+
 Deployed slides:
 
 - https://dabreegster.github.io/talks/map_model_v2/slides.html
