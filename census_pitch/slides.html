@@ -342,7 +342,7 @@
 <section id="what" class="title-slide slide level1 center">
 <h1>What</h1>
 <ul>
-<li>Web tool: Draw a boundary, get demographic breakdown of people living there</li>
+<li>Web tool: Draw a boundary, get demographic breakdown of people living / working there</li>
 <li>and an API: from any language, give a boundary polygon, and get demographic breakdown</li>
 <li>Worldwide scope, “pay as you go” model for data</li>
 </ul>
@@ -369,9 +369,11 @@
 <li><a href="https://www.nhgis.org">US census</a> (census block)</li>
 <li>UK census (output area)</li>
 <li><a href="https://www.ibge.gov.br/en/statistics/social/population/22836-2020-census-censo4.html?=&amp;t=o-que-e">Brazil</a> (enumeration area)</li>
-<li>etc</li>
 </ul></li>
-<li>Use the smallest geography available</li>
+<li>Use the smallest geography available
+<ul>
+<li>and intersect with the input boundary area, scale numbers accordingly</li>
+</ul></li>
 <li><a href="https://www.worldpop.org/project/categories?id=3">WorldPop</a> fallback</li>
 </ul>
 </section>
