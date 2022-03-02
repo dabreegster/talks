@@ -204,27 +204,48 @@ format: revealjs
 
 ## Study area size
 
-- show zones partially intersecting study area
-- we cant just keep expanding our study area forever
-- use area overlap as a percentage?
+![](study_area.png)
+
+- We can't just keep expanding our study area forever
+- Some trips will begin or end off-map
+- Use % overlap to scale number of trips
 
 ## Jittering when out-of-bounds
 
-https://github.com/a-b-street/abstreet/pull/853
+![](off_map_snap.png)
 
-when getting it wrong, we might send traffic on tiny service roads or residential streets!
+- We don't know off-map buildings
+- Snap to a border
+  - Nearest Euclidean distance?
+	- Weight by road type?
+- Quickly pruning desire lines
+- **Or just do pathfinding on a larger map?**
 
-## Back out of the details
+## Popping the stack
 
-- overall flow again
-- just review all the edge cases we covered
+<!-- show diagram again -->
+
+- Issues we covered
+  - OSM building tagging
+  - Missing OSM buildings
+  - Partly overlapping zones
+  - Off-map origins/destinations
 
 ## Enjoying the results
 
-- watch the simulation in abstreet, zoom in on examples of gridlock, discuss the dangers of blindly trusting a microsimulation
-- Routing
+- Let's simulate the results!
+- Dangers of using a microsimulation
+  - Routing
+  - Traffic signal timing
+  - Parking
+  - Conflicting movements near complex junctions
 
 # Part 4: Bonus: Activity models
+
+Limitations of the previous approach:
+
+- You need data
+- Only home to work
 
 http://play.abstreet.org/papers/synthpop/strawmen.html#activity-model
 
