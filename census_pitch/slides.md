@@ -10,7 +10,7 @@ format: revealjs
 
 # What
 
-- Web tool: Draw a boundary, get demographic breakdown of people living there
+- Web tool: Draw a boundary, get demographic breakdown of people living / working there
 - and an API: from any language, give a boundary polygon, and get demographic breakdown
 - Worldwide scope, "pay as you go" model for data
 
@@ -29,8 +29,8 @@ Many researchers reinventing the same wheel -- why?
   - [US census](https://www.nhgis.org) (census block)
   - UK census (output area)
   - [Brazil](https://www.ibge.gov.br/en/statistics/social/population/22836-2020-census-censo4.html?=&t=o-que-e) (enumeration area)
-  - etc
 - Use the smallest geography available
+  - and intersect with the input boundary area, scale numbers accordingly
 - [WorldPop](https://www.worldpop.org/project/categories?id=3) fallback
 
 # How (the code)
