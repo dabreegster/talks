@@ -421,8 +421,8 @@
 <li>A/B Street from 10,000 feet</li>
 <li>Travel demand models overview</li>
 <li>From UK OD data to a demand model</li>
-<li>Bonus: Activity models</li>
-<li>Bonus: Mode shift</li>
+<li>Activity models</li>
+<li>Mode shift</li>
 <li>Exercises / discussion</li>
 </ol>
 </section></section>
@@ -524,6 +524,10 @@
 <li><a href="https://github.com/Transport-for-the-North/NorMITs-Demand/">NorMITs</a></li>
 <li><a href="https://github.com/asu-trans-ai-lab/grid2demand/">grid2demand</a></li>
 <li><a href="https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html">SUMO</a></li>
+<li><a href="https://gist.github.com/Alfred-Mountfield/d880b05aa6327d69d8bc4d95e5bc7df8">Python notebook by Alfred Mountfield</a>
+<ul>
+<li><a href="https://github.com/a-b-street/abstreet/issues/424#issuecomment-786722031">Description</a></li>
+</ul></li>
 </ul>
 </section></section>
 <section>
@@ -663,10 +667,8 @@
 <li>We don’t know off-map buildings</li>
 <li>Snap to a border
 <ul>
-<li>Nearest Euclidean distance?
-<ul>
+<li>Nearest Euclidean distance?</li>
 <li>Weight by road type?</li>
-</ul></li>
 </ul></li>
 <li>Quickly pruning desire lines</li>
 <li><strong>Or just do pathfinding on a larger map?</strong></li>
@@ -698,21 +700,132 @@
 </ul></li>
 </ul>
 </section></section>
-<section id="part-4-bonus-activity-models" class="title-slide slide level1 center">
-<h1>Part 4: Bonus: Activity models</h1>
-<p>Limitations of the previous approach:</p>
+<section>
+<section id="part-4-activity-models" class="title-slide slide level1 center">
+<h1>Part 4: Activity models</h1>
+<ul>
+<li>Limitations of the previous approach:
 <ul>
 <li>You need data</li>
 <li>Only home to work</li>
+</ul></li>
+<li>What are activity models?</li>
 </ul>
-<p>http://play.abstreet.org/papers/synthpop/strawmen.html#activity-model</p>
 </section>
-
-<section id="part-5-bonus-mode-shift" class="title-slide slide level1 center">
-<h1>Part 5: Bonus: Mode shift</h1>
-<p>https://a-b-street.github.io/docs/software/ungap_the_map/tech_details.html#predict-impact</p>
+<section id="the-pipeline" class="slide level2">
+<h2>The pipeline</h2>
+<ul>
+<li>Input
+<ul>
+<li>Number of people living in a zone</li>
+<li>OpenStreetMap</li>
+</ul></li>
+<li>Per-person
+<ul>
+<li>Assign a building as a home</li>
+<li>Assign an “archetype” – student, worker, care-taker</li>
+<li>Assign a schedule</li>
+<li>Pick buildings matching each activity</li>
+<li>Assign mode</li>
+</ul></li>
+</ul>
 </section>
-
+<section id="archetypes" class="slide level2">
+<h2>Archetypes</h2>
+<ul>
+<li>Student, worker, care-taker
+<ul>
+<li>Other ideas?</li>
+</ul></li>
+<li>What data would help us assign these?
+<ul>
+<li>Age, employment</li>
+</ul></li>
+</ul>
+</section>
+<section id="archetype-to-schedule" class="slide level2">
+<h2>Archetype to schedule</h2>
+<ul>
+<li>A student…
+<ul>
+<li>leaves home between 8-11</li>
+<li>95% of the time, spends 30 minutes on breakfast</li>
+<li>goes to school for 3-6 hours</li>
+<li>30% of the time, spends 20-30 minutes on lunch</li>
+<li>60% of the time, spends 2 hours on “entertainment” – otherwise, 0.5-1.5 hours on errands</li>
+<li>returns home</li>
+</ul></li>
+<li>Data-driven schedules?
+<ul>
+<li>time use surveys</li>
+</ul></li>
+</ul>
+</section>
+<section id="where-do-activities-occur" class="slide level2">
+<h2>Where do activities occur?</h2>
+<ul>
+<li>breakfast: <code>cafe</code></li>
+<li>lunch: <code>pub</code>, <code>food_court</code>, <code>fast_food</code></li>
+<li>dinner: <code>restaurant</code>, <code>theatre</code>, <code>biergarten</code></li>
+<li>school: <code>college</code>, <code>kindergarten</code>, <code>language_school</code>, <code>library</code>, <code>music_school</code>, <code>university</code>,</li>
+<li>entertainment, errands, financial, healthcare, home, work</li>
+<li><a href="https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64" class="uri">https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64</a></li>
+</ul>
+</section>
+<section id="gravity-model-mode-choice" class="slide level2">
+<h2>Gravity model / mode choice</h2>
+<ul>
+<li>Attraction based on venue type</li>
+<li>Repulsion based on cost of getting there</li>
+<li>Mode choice weighted by costs
+<ul>
+<li>but if know vehicle ownership, age of people…</li>
+</ul></li>
+</ul>
+</section>
+<section id="activity-models-for-real" class="slide level2">
+<h2>Activity models for real</h2>
+<ul>
+<li><a href="https://www.psrc.org/activity-based-travel-model-soundcast">Soundcast</a>
+<ul>
+<li>Plenty of reading material here!</li>
+<li><a href="https://www.psrc.org/sites/default/files/shrp2_c46.pdf">Activity model primer by TRB</a></li>
+<li><a href="https://www.psrc.org/sites/default/files/2015psrc-modechoiceautomodels.pdf">Mode choice</a></li>
+</ul></li>
+<li><a href="https://github.com/Transport-for-the-North/NorMITs-Demand/">NorMITs</a></li>
+</ul>
+</section></section>
+<section>
+<section id="part-5-mode-shift" class="title-slide slide level1 center">
+<h1>Part 5: Mode shift</h1>
+<ul>
+<li>The most important question: how do planners convince people to change travel behavior?
+<ul>
+<li>Public transit: frequency, reliability, safety, price, coverage?</li>
+<li>Cycling: safety, secure parking, showering at work, subsidizing e-bikes, culture?</li>
+</ul></li>
+</ul>
+</section>
+<section id="an-application-of-travel-demand-models" class="slide level2">
+<h2>An application of travel demand models</h2>
+<ul>
+<li>A small piece of the puzzle: <a href="https://itsleeds.github.io/pct/">PCT</a> and <a href="http://bike.abstreet.org">Ungap the Map</a>
+<ul>
+<li>Where should cycling interventions be prioritized?</li>
+</ul></li>
+<li><a href="https://a-b-street.github.io/docs/software/ungap_the_map/tech_details.html#predict-impact">Pipeline</a>
+<ul>
+<li>Find (origin, destination) of driving trips</li>
+<li>Filter by max time spent cycling and uphill distance</li>
+<li>Convert to a route network, look for <strong>popular</strong> segments without <strong>cycle infrastructure</strong></li>
+</ul></li>
+<li>Questions
+<ul>
+<li>How do we calculate the cycling routes? (fastest vs quietest)</li>
+<li>How much of a route has to be safe for someone to consider mode shift?</li>
+</ul></li>
+</ul>
+</section></section>
 <section id="part-6-exercises-discussion" class="title-slide slide level1 center">
 <h1>Part 6: Exercises / discussion</h1>
 <ul>

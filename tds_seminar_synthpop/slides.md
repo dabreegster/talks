@@ -22,8 +22,8 @@ format: revealjs
 1.  A/B Street from 10,000 feet
 2.  Travel demand models overview
 3.  From UK OD data to a demand model
-4.  Bonus: Activity models
-5.  Bonus: Mode shift
+4.  Activity models
+5.  Mode shift
 6.  Exercises / discussion
 
 # Part 1: A/B Street overview
@@ -109,6 +109,8 @@ format: revealjs
 - [NorMITs](https://github.com/Transport-for-the-North/NorMITs-Demand/)
 - [grid2demand](https://github.com/asu-trans-ai-lab/grid2demand/)
 - [SUMO](https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html)
+- [Python notebook by Alfred Mountfield](https://gist.github.com/Alfred-Mountfield/d880b05aa6327d69d8bc4d95e5bc7df8)
+  - [Description](https://github.com/a-b-street/abstreet/issues/424#issuecomment-786722031)
 
 # Part 3: Let's build one for the UK!
 
@@ -217,7 +219,7 @@ format: revealjs
 - We don't know off-map buildings
 - Snap to a border
   - Nearest Euclidean distance?
-	- Weight by road type?
+  - Weight by road type?
 - Quickly pruning desire lines
 - **Or just do pathfinding on a larger map?**
 
@@ -240,18 +242,85 @@ format: revealjs
   - Parking
   - Conflicting movements near complex junctions
 
-# Part 4: Bonus: Activity models
+# Part 4: Activity models
 
-Limitations of the previous approach:
+- Limitations of the previous approach:
+  - You need data
+  - Only home to work
+- What are activity models?
 
-- You need data
-- Only home to work
+## The pipeline
 
-http://play.abstreet.org/papers/synthpop/strawmen.html#activity-model
+- Input
+  - Number of people living in a zone
+  - OpenStreetMap
+- Per-person
+  - Assign a building as a home
+  - Assign an "archetype" -- student, worker, care-taker
+  - Assign a schedule
+  - Pick buildings matching each activity
+  - Assign mode
 
-# Part 5: Bonus: Mode shift
+## Archetypes
 
-https://a-b-street.github.io/docs/software/ungap_the_map/tech_details.html#predict-impact
+- Student, worker, care-taker
+  - Other ideas?
+- What data would help us assign these?
+  - Age, employment
+
+## Archetype to schedule
+
+- A student...
+  - leaves home between 8-11
+  - 95% of the time, spends 30 minutes on breakfast
+  - goes to school for 3-6 hours
+  - 30% of the time, spends 20-30 minutes on lunch
+  - 60% of the time, spends 2 hours on "entertainment" -- otherwise, 0.5-1.5 hours on errands
+  - returns home
+- Data-driven schedules?
+  - time use surveys
+
+## Where do activities occur?
+
+- breakfast: `cafe`
+- lunch: `pub`, `food_court`, `fast_food`
+- dinner: `restaurant`, `theatre`, `biergarten`
+- school: `college`, `kindergarten`, `language_school`, `library`, `music_school`, `university`,
+- entertainment, errands, financial, healthcare, home, work
+- <https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64>
+
+## Gravity model / mode choice
+
+- Attraction based on venue type
+- Repulsion based on cost of getting there
+- Mode choice weighted by costs
+  - but if know vehicle ownership, age of people...
+
+## Activity models for real
+
+- [Soundcast](https://www.psrc.org/activity-based-travel-model-soundcast)
+  - Plenty of reading material here!
+  - [Activity model primer by TRB](https://www.psrc.org/sites/default/files/shrp2_c46.pdf)
+  - [Mode choice](https://www.psrc.org/sites/default/files/2015psrc-modechoiceautomodels.pdf)
+- [NorMITs](https://github.com/Transport-for-the-North/NorMITs-Demand/)
+
+# Part 5: Mode shift
+
+- The most important question: how do planners convince people to change travel behavior?
+  - Public transit: frequency, reliability, safety, price, coverage?
+  - Cycling: safety, secure parking, showering at work, subsidizing e-bikes, culture?
+
+## An application of travel demand models
+
+- A small piece of the puzzle: [PCT](https://itsleeds.github.io/pct/) and [Ungap the Map](http://bike.abstreet.org)
+  - Where should cycling interventions be prioritized?
+- [Pipeline](https://a-b-street.github.io/docs/software/ungap_the_map/tech_details.html#predict-impact)
+  - Find (origin, destination) of driving trips
+  - Filter by max time spent cycling and uphill distance
+  - Convert to a route network, look for **popular** segments without **cycle infrastructure**
+- Questions
+  - How do we calculate the cycling routes? (fastest vs quietest)
+  - How much of a route has to be safe for someone to consider mode shift?
 
 # Part 6: Exercises / discussion
 
