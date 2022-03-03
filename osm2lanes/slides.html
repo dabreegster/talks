@@ -2,8 +2,8 @@
 <html lang="en"><head>
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.4">
-  <meta name="author" content="Dustin Carlino">
-  <title>From OD data to agent-based-modelling for car-free futures</title>
+  <meta name="author" content="Dustin Carlino &amp; Michael Droogleever">
+  <title>osm2lanes</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -19,69 +19,6 @@
     div.column{display: inline-block; vertical-align: top; width: 50%;}
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      {   }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-    code span.at { color: #7d9029; } /* Attribute */
-    code span.bn { color: #40a070; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #4070a0; } /* Char */
-    code span.cn { color: #880000; } /* Constant */
-    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-    code span.dt { color: #902000; } /* DataType */
-    code span.dv { color: #40a070; } /* DecVal */
-    code span.er { color: #ff0000; font-weight: bold; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #40a070; } /* Float */
-    code span.fu { color: #06287e; } /* Function */
-    code span.im { } /* Import */
-    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-    code span.op { color: #666666; } /* Operator */
-    code span.ot { color: #007020; } /* Other */
-    code span.pp { color: #bc7a00; } /* Preprocessor */
-    code span.sc { color: #4070a0; } /* SpecialChar */
-    code span.ss { color: #bb6688; } /* SpecialString */
-    code span.st { color: #4070a0; } /* String */
-    code span.va { color: #19177c; } /* Variable */
-    code span.vs { color: #4070a0; } /* VerbatimString */
-    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="slides_files/libs/revealjs/dist/theme/quarto.css" id="theme">
 
@@ -393,52 +330,57 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">From OD data to agent-based-modelling for car-free futures</h1>
-  <p class="subtitle">9 March 2022, Transport Data Science seminar</p>
-  <p class="author">Dustin Carlino</p>
+  <h1 class="title">osm2lanes</h1>
+  <p class="subtitle">12 March 2022, FOSSGIS OSM-Samstag</p>
+  <p class="author">Dustin Carlino &amp; Michael Droogleever</p>
 </section>
 
 <section>
 <section id="intro" class="title-slide slide level1 center">
 <h1>Intro</h1>
 <ul>
-<li>These slides: <a href="https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html" class="uri">https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html</a></li>
+<li>These slides: <a href="https://dabreegster.github.io/talks/osm2lanes/slides.html" class="uri">https://dabreegster.github.io/talks/osm2lanes/slides.html</a></li>
 <li>Contribute: <a href="https://github.com/dabreegster/talks" class="uri">https://github.com/dabreegster/talks</a></li>
 </ul>
 </section>
-<section id="about-me" class="slide level2">
-<h2>About me</h2>
+<section id="about-dustin" class="slide level2">
+<h2>About Dustin</h2>
 <ul>
 <li><a href="https://twitter.com/CarlinoDustin" class="uri">https://twitter.com/CarlinoDustin</a></li>
 <li>A/B Street since 2018</li>
 <li>Alan Turing Institute since December 2021</li>
-<li>Not an expert on demand modeling; I just need it as input
-<ul>
-<li>Traffic simulation community</li>
-<li>Transport data science community</li>
-<li>Videogame industry?! <a href="https://youtu.be/oYUZp4I3ksE?t=225">Watch Dogs: Legion</a></li>
-</ul></li>
 </ul>
+</section>
+<section id="about-michael" class="slide level2">
+<h2>About Michael</h2>
 </section>
 <section id="talk-outline" class="slide level2">
 <h2>Talk outline</h2>
 <ol type="1">
-<li>A/B Street from 10,000 feet</li>
-<li>Travel demand models overview</li>
-<li>From UK OD data to a demand model</li>
-<li>Activity models</li>
-<li>Mode shift</li>
-<li>Exercises / discussion</li>
+<li>Background</li>
+<li>How it works today</li>
+<li>Complications</li>
+<li>Next steps / contributing</li>
 </ol>
 </section></section>
 <section>
-<section id="part-1-ab-street-overview" class="title-slide slide level1 center">
-<h1>Part 1: A/B Street overview</h1>
+<section id="part-1-background" class="title-slide slide level1 center">
+<h1>Part 1: Background</h1>
 
 </section>
-<section id="simulator" class="slide level2">
-<h2>Simulator</h2>
-<p><a href="https://a-b-street.github.io/docs/software/abstreet.html">Edit roads, simulate traffic</a></p>
+<section id="ab-street" class="slide level2">
+<h2>A/B Street</h2>
+<ul>
+<li>a bunch of tools to explore less cars in cities</li>
+<li>all work off a heavily processed map representation</li>
+</ul>
+</section>
+<section id="edit-roads" class="slide level2">
+<h2>Edit roads</h2>
+
+<img data-src="https://a-b-street.github.io/docs/project/history/retrospective/edit_roads.gif" class="r-stretch"></section>
+<section id="simulate-traffic" class="slide level2">
+<h2>Simulate traffic</h2>
 
 <img data-src="https://a-b-street.github.io/docs/project/history/retrospective/traffic_sim.gif" class="r-stretch"></section>
 <section id="plan-bike-networks" class="slide level2">
@@ -451,453 +393,109 @@
 <p><a href="http://ltn.abstreet.org">ltn.abstreet.org</a></p>
 
 <img data-src="https://a-b-street.github.io/docs/software/ltn/ltn.png" class="r-stretch"></section>
-<section id="minute-neighborhoods" class="slide level2">
-<h2>15-minute neighborhoods</h2>
-<p><a href="http://15m.abstreet.org">15m.abstreet.org</a></p>
-
-<img data-src="https://a-b-street.github.io/docs/software/walkshed.gif" class="r-stretch"></section>
-<section id="arcade-game-edutainment" class="slide level2">
-<h2>Arcade game, “edutainment”</h2>
-<p><a href="http://santa.abstreet.org">santa.abstreet.org</a></p>
-
-<img data-src="https://a-b-street.github.io/docs/project/history/retrospective/santa.gif" class="r-stretch"></section>
-<section id="architecture" class="slide level2">
-<h2>Architecture</h2>
-
-<img data-src="architecture.png" class="r-stretch"></section>
-<section id="architecture-1" class="slide level2">
-<h2>Architecture</h2>
-
-<img data-src="ltn_architecture.png" class="r-stretch"></section>
-<section id="components" class="slide level2">
-<h2>Components</h2>
+<section id="sharing-code" class="slide level2">
+<h2>Sharing code</h2>
 <ul>
-<li><a href="https://github.com/a-b-street/osm2lanes">osm2lanes</a></li>
-<li>Planned: osm2polygons, synthpop tools, census data exploration</li>
+<li><a href="https://github.com/a-b-street/abstreet/discussions/789" class="uri">https://github.com/a-b-street/abstreet/discussions/789</a></li>
+<li>Other projects looking at OSM lanes in detail
+<ul>
+<li>StreetComplete, Map Machine, Bjorn’s JOSM plugin, shared-row, Cycle Streets, 3D Street</li>
+</ul></li>
+</ul>
+</section>
+<section id="whys-this-hard" class="slide level2">
+<h2>Why’s this hard?</h2>
+<p>Cyclestreets example</p>
+</section>
+<section id="end-user-stories" class="slide level2">
+<h2>End-user stories</h2>
+<ul>
+<li>vector map of whole world showing lane tagging</li>
+<li>streetmix style editor for lane tagging
+<ul>
+<li><a href="https://github.com/openstreetmap/iD/issues/387" class="uri">https://github.com/openstreetmap/iD/issues/387</a></li>
+</ul></li>
+<li>both of these help improve lane tagging</li>
 </ul>
 </section></section>
 <section>
-<section id="part-2-demand-model-overview" class="title-slide slide level1 center">
-<h1>Part 2: Demand model overview</h1>
-
+<section id="part-2-how-it-works-today" class="title-slide slide level1 center">
+<h1>Part 2: How it works today</h1>
+<p>Start with web demo: https://a-b-street.github.io/osm2lanes/</p>
 </section>
-<section id="what" class="slide level2">
-<h2>What</h2>
-<!-- picture with waypoints, departure time & mode -->
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  <span class="dt">"scenario_name"</span><span class="fu">:</span> <span class="st">"minimal"</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="dt">"people"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>    <span class="fu">{</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>      <span class="dt">"trips"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>        <span class="fu">{</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a>          <span class="dt">"departure"</span><span class="fu">:</span> <span class="dv">10000</span><span class="fu">,</span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>          <span class="dt">"origin"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-9"><a href="#cb1-9"></a>            <span class="dt">"longitude"</span><span class="fu">:</span> <span class="fl">-122.303723</span><span class="fu">,</span></span>
-<span id="cb1-10"><a href="#cb1-10"></a>            <span class="dt">"latitude"</span><span class="fu">:</span> <span class="fl">47.6372834</span></span>
-<span id="cb1-11"><a href="#cb1-11"></a>          <span class="fu">},</span></span>
-<span id="cb1-12"><a href="#cb1-12"></a>          <span class="dt">"destination"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-13"><a href="#cb1-13"></a>            <span class="dt">"longitude"</span><span class="fu">:</span> <span class="fl">-122.31905</span><span class="fu">,</span></span>
-<span id="cb1-14"><a href="#cb1-14"></a>            <span class="dt">"latitude"</span><span class="fu">:</span> <span class="fl">47.63786</span></span>
-<span id="cb1-15"><a href="#cb1-15"></a>          <span class="fu">},</span></span>
-<span id="cb1-16"><a href="#cb1-16"></a>          <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"Bike"</span><span class="fu">,</span></span>
-<span id="cb1-17"><a href="#cb1-17"></a>          <span class="dt">"purpose"</span><span class="fu">:</span> <span class="st">"Meal"</span></span>
-<span id="cb1-18"><a href="#cb1-18"></a>        <span class="fu">}</span><span class="ot">,</span></span>
-<span id="cb1-19"><a href="#cb1-19"></a>        <span class="fu">{</span></span>
-<span id="cb1-20"><a href="#cb1-20"></a>          <span class="dt">"departure"</span><span class="fu">:</span> <span class="dv">12000000</span><span class="fu">,</span></span>
-<span id="cb1-21"><a href="#cb1-21"></a>          <span class="dt">"origin"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-22"><a href="#cb1-22"></a>            <span class="dt">"longitude"</span><span class="fu">:</span> <span class="fl">-122.31905</span><span class="fu">,</span></span>
-<span id="cb1-23"><a href="#cb1-23"></a>            <span class="dt">"latitude"</span><span class="fu">:</span> <span class="fl">47.63786</span></span>
-<span id="cb1-24"><a href="#cb1-24"></a>          <span class="fu">},</span></span>
-<span id="cb1-25"><a href="#cb1-25"></a>          <span class="dt">"destination"</span><span class="fu">:</span> <span class="fu">{</span></span>
-<span id="cb1-26"><a href="#cb1-26"></a>            <span class="dt">"longitude"</span><span class="fu">:</span> <span class="fl">-122.3075948</span><span class="fu">,</span></span>
-<span id="cb1-27"><a href="#cb1-27"></a>            <span class="dt">"latitude"</span><span class="fu">:</span> <span class="fl">47.6394773</span></span>
-<span id="cb1-28"><a href="#cb1-28"></a>          <span class="fu">},</span></span>
-<span id="cb1-29"><a href="#cb1-29"></a>          <span class="dt">"mode"</span><span class="fu">:</span> <span class="st">"Walk"</span><span class="fu">,</span></span>
-<span id="cb1-30"><a href="#cb1-30"></a>          <span class="dt">"purpose"</span><span class="fu">:</span> <span class="st">"Recreation"</span></span>
-<span id="cb1-31"><a href="#cb1-31"></a>        <span class="fu">}</span></span>
-<span id="cb1-32"><a href="#cb1-32"></a>      <span class="ot">]</span></span>
-<span id="cb1-33"><a href="#cb1-33"></a>    <span class="fu">}</span></span>
-<span id="cb1-34"><a href="#cb1-34"></a>  <span class="ot">]</span></span>
-<span id="cb1-35"><a href="#cb1-35"></a><span class="fu">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><a href="https://a-b-street.github.io/docs/tech/dev/formats/scenarios.html" class="uri">https://a-b-street.github.io/docs/tech/dev/formats/scenarios.html</a></p>
-</section>
-<section id="what-1" class="slide level2">
-<h2>What</h2>
+<section id="input" class="slide level2">
+<h2>Input</h2>
 <ul>
-<li>More attributes about people
-<ul>
-<li>vehicle ownership</li>
-<li>routing preference</li>
-<li>willing to pay toll road</li>
-<li>comfortable biking up-hills, at night, alongside fast traffic</li>
-</ul></li>
+<li>localization</li>
 </ul>
 </section>
-<section id="what-2" class="slide level2">
-<h2>What</h2>
+<section id="output" class="slide level2">
+<h2>Output</h2>
 <ul>
-<li>One “typical” weekday?
-<ul>
-<li>Different scenario for weekends, special events</li>
-<li>People have different travel behavior daily</li>
-<li>Dangers of disaggregation</li>
-</ul></li>
+<li>lane type, width, direction</li>
+<li>turn:lanes, allowed vehicles (bus lanes with bikes or taxis), time restrictions, surface type</li>
+<li>markings / separators are lanes!</li>
 </ul>
 </section>
-<section id="use-cases" class="slide level2">
-<h2>Use cases</h2>
+<section id="inverse-lanes2osm" class="slide level2">
+<h2>Inverse, lanes2osm</h2>
+</section>
+<section id="web-tool" class="slide level2">
+<h2>Web tool</h2>
+</section>
+<section id="from-code" class="slide level2">
+<h2>From code</h2>
 <ul>
-<li>traffic simulation</li>
-<li>low-traffic neighborhoods: where do people drive, to predict detours</li>
-<li>PCT &amp; Ungap the Map: look for short driving trips that might cycle instead</li>
-<li>RAMP: daily behavior in shared spaces for COVID transmission
+<li>multi language or not? we’ve diverged
 <ul>
-<li>broken down by activity – entertainment, work, home, retail</li>
-<li>lockdown behavior, risk at venues</li>
+<li>python 3.9 and kotlin too</li>
 </ul></li>
+<li>originally trying to make it easy for other people to get involved</li>
 </ul>
 </section>
-<section id="some-open-source-travel-demand-models" class="slide level2">
-<h2>Some open source travel demand models</h2>
-<ul>
-<li><a href="https://www.psrc.org/activity-based-travel-model-soundcast">Soundcast</a></li>
-<li><a href="https://github.com/Transport-for-the-North/NorMITs-Demand/">NorMITs</a></li>
-<li><a href="https://github.com/asu-trans-ai-lab/grid2demand/">grid2demand</a></li>
-<li><a href="https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html">SUMO</a></li>
-<li><a href="https://gist.github.com/Alfred-Mountfield/d880b05aa6327d69d8bc4d95e5bc7df8">Python notebook by Alfred Mountfield</a>
-<ul>
-<li><a href="https://github.com/a-b-street/abstreet/issues/424#issuecomment-786722031">Description</a></li>
-</ul></li>
-</ul>
+<section id="code-walkthrough" class="slide level2">
+<h2>Code walkthrough</h2>
+</section>
+<section id="inferred-values" class="slide level2">
+<h2>Inferred values</h2>
 </section></section>
 <section>
-<section id="part-3-lets-build-one-for-the-uk" class="title-slide slide level1 center">
-<h1>Part 3: Let’s build one for the UK!</h1>
+<section id="part-3-complications" class="title-slide slide level1 center">
+<h1>Part 3: Complications</h1>
 
 </section>
-<section id="input-data" class="slide level2">
-<h2>Input data</h2>
-
-<img data-src="uk_input_csv.png" class="r-stretch"><ul>
-<li><code>wu03ew_v2</code>: 2011, Location of usual residence and Place of work by Method of travel to work
+<section id="separate-ways" class="slide level2">
+<h2>Separate ways</h2>
 <ul>
-<li>Old, pre-pandemic</li>
-<li>Only home -&gt; work</li>
+<li>the caller has to figure out all of the related ways?
+<ul>
+<li>next talk will go into more detail</li>
+<li>just look for everything btwn buildings/parks/water</li>
 </ul></li>
+<li>also provide geometry, so we can glue things together in the right order?</li>
+<li>inferred separators</li>
 </ul>
 </section>
-<section id="input-data-msoa-zones" class="slide level2">
-<h2>Input data: MSOA zones</h2>
-
-<img data-src="msoa_zones.png" class="r-stretch"></section>
-<section id="overall-idea" class="slide level2">
-<h2>Overall idea</h2>
-<!-- diagram of overall process -->
-<ul>
-<li>For each (origin, destination, mode) desire line
-<ul>
-<li>Repeat for the number of trips here
-<ul>
-<li>Sample an origin and destination from the MSOA</li>
-<li>Create a person who goes home -&gt; work in AM, work -&gt; home in PM</li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="desire-lines" class="slide level2">
-<h2>Desire lines</h2>
-<pre><code>{
-  from_zone: zone123,
-  to_zone: zone456,
-  mode: walk, bike, drive...,
-  number_trips: 500
-}</code></pre>
-<ul>
-<li>Re-shape the input into this format
-<ul>
-<li>One mode per entry</li>
-<li>Filter + simplify the modes</li>
-</ul></li>
-<li>Why have an intermediate common format?</li>
-</ul>
-</section>
-<section id="jittering-sampling-an-origin-or-destination" class="slide level2">
-<h2>Jittering: sampling an origin or destination</h2>
-
-<img data-src="one_zone.png" class="r-stretch"><ul>
-<li>Just inside the study area</li>
-<li><a href="https://github.com/dabreegster/odjitter">odjitter</a></li>
-<li>Random points?
-<ul>
-<li>Origins: buildings where people live</li>
-<li>Destinations: buildings where people work</li>
-</ul></li>
-</ul>
-</section>
-<section id="buildings-from-openstreetmap-tags" class="slide level2">
-<h2>Buildings from OpenStreetMap tags</h2>
-
-<img data-src="osm_bldg.png" class="r-stretch"><ul>
-<li>Building type is rarely tagged</li>
-</ul>
-</section>
-<section id="buildings-from-openstreetmap-tags-1" class="slide level2">
-<h2>Buildings from OpenStreetMap tags</h2>
-
-<img data-src="osm_amenity.png" class="r-stretch"><ul>
-<li>Make sure your library gives you the right data, <code>building=shop</code></li>
-<li>Just look at the data in OSM</li>
-</ul>
-</section>
-<section id="weighted-choices-for-origins" class="slide level2">
-<h2>Weighted choices (for origins)</h2>
-<ul>
-<li>single-family home vs tower block
-<ul>
-<li>area of the polygon</li>
-<li><code>building:levels</code></li>
-</ul></li>
-<li><a href="https://colouringlondon.org">Colouring London</a></li>
-<li><a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1/explore">Seattle housing units</a></li>
-<li>Use zoning codes?</li>
-</ul>
-</section>
-<section id="trip-attractor-tables-for-destinations" class="slide level2">
-<h2>Trip attractor tables (for destinations)</h2>
-
-<img data-src="attractor_table.png" class="r-stretch"><ul>
-<li>cafe vs shopping mall</li>
-<li><a href="https://github.com/asu-trans-ai-lab/grid2demand/blob/main/examples/poi_trip_rate.csv">Trip attractor table</a>
-<ul>
-<li>ITE publishes one</li>
-</ul></li>
-</ul>
-</section>
-<section id="what-data-could-help-us-pick-better" class="slide level2">
-<h2>What data could help us pick better?</h2>
-<ul>
-<li>Desire line breakdown by Standard Industry Codes?</li>
-</ul>
-</section>
-<section id="aside-missing-buildings-in-osm" class="slide level2">
-<h2>Aside: missing buildings in OSM</h2>
-
-<img data-src="procgen.png" class="r-stretch"><ul>
-<li>OSM isn’t perfect, check your data</li>
-<li>Procedural generation
-<ul>
-<li>limitations</li>
-</ul></li>
-<li>Alternate data: OS building footprints?</li>
-</ul>
-</section>
-<section id="study-area-size" class="slide level2">
-<h2>Study area size</h2>
-
-<img data-src="study_area.png" class="r-stretch"><ul>
-<li>We can’t just keep expanding our study area forever</li>
-<li>Some trips will begin or end off-map</li>
-<li>Use % overlap to scale number of trips</li>
-</ul>
-</section>
-<section id="jittering-when-out-of-bounds" class="slide level2">
-<h2>Jittering when out-of-bounds</h2>
-
-<img data-src="off_map_snap.png" class="r-stretch"><ul>
-<li>We don’t know off-map buildings</li>
-<li>Snap to a border
-<ul>
-<li>Nearest Euclidean distance?</li>
-<li>Weight by road type?</li>
-</ul></li>
-<li>Quickly pruning desire lines</li>
-<li><strong>Or just do pathfinding on a larger map?</strong></li>
-</ul>
-</section>
-<section id="popping-the-stack" class="slide level2">
-<h2>Popping the stack</h2>
-<!-- show diagram again -->
-<ul>
-<li>Issues we covered
-<ul>
-<li>OSM building tagging</li>
-<li>Missing OSM buildings</li>
-<li>Partly overlapping zones</li>
-<li>Off-map origins/destinations</li>
-</ul></li>
-</ul>
-</section>
-<section id="enjoying-the-results" class="slide level2">
-<h2>Enjoying the results</h2>
-<ul>
-<li>Let’s simulate the results!</li>
-<li>Dangers of using a microsimulation
-<ul>
-<li>Routing</li>
-<li>Traffic signal timing</li>
-<li>Parking</li>
-<li>Conflicting movements near complex junctions</li>
-</ul></li>
-</ul>
+<section id="schema-may-be-kinda-complicated" class="slide level2">
+<h2>schema may be kinda complicated?</h2>
 </section></section>
 <section>
-<section id="part-4-activity-models" class="title-slide slide level1 center">
-<h1>Part 4: Activity models</h1>
+<section id="part-4-next-steps-contributing" class="title-slide slide level1 center">
+<h1>Part 4: Next steps / contributing</h1>
+
+</section>
+<section id="web-tool-steps" class="slide level2">
+<h2>Web tool steps</h2>
 <ul>
-<li>Limitations of the previous approach:
-<ul>
-<li>You need data</li>
-<li>Only home to work</li>
-</ul></li>
-<li>What are activity models?</li>
+<li>npm</li>
 </ul>
 </section>
-<section id="the-pipeline" class="slide level2">
-<h2>The pipeline</h2>
-<ul>
-<li>Input
-<ul>
-<li>Number of people living in a zone</li>
-<li>OpenStreetMap</li>
-</ul></li>
-<li>Per-person
-<ul>
-<li>Assign a building as a home</li>
-<li>Assign an “archetype” – student, worker, care-taker</li>
-<li>Assign a schedule</li>
-<li>Pick buildings matching each activity</li>
-<li>Assign mode</li>
-</ul></li>
-</ul>
+<section id="test-cases" class="slide level2">
+<h2>Test cases</h2>
 </section>
-<section id="archetypes" class="slide level2">
-<h2>Archetypes</h2>
-<ul>
-<li>Student, worker, care-taker
-<ul>
-<li>Other ideas?</li>
-</ul></li>
-<li>What data would help us assign these?
-<ul>
-<li>Age, employment</li>
-</ul></li>
-</ul>
-</section>
-<section id="archetype-to-schedule" class="slide level2">
-<h2>Archetype to schedule</h2>
-<ul>
-<li>A student…
-<ul>
-<li>leaves home between 8-11</li>
-<li>95% of the time, spends 30 minutes on breakfast</li>
-<li>goes to school for 3-6 hours</li>
-<li>30% of the time, spends 20-30 minutes on lunch</li>
-<li>60% of the time, spends 2 hours on “entertainment” – otherwise, 0.5-1.5 hours on errands</li>
-<li>returns home</li>
-</ul></li>
-<li>Data-driven schedules?
-<ul>
-<li>time use surveys</li>
-</ul></li>
-</ul>
-</section>
-<section id="where-do-activities-occur" class="slide level2">
-<h2>Where do activities occur?</h2>
-<ul>
-<li>breakfast: <code>cafe</code></li>
-<li>lunch: <code>pub</code>, <code>food_court</code>, <code>fast_food</code></li>
-<li>dinner: <code>restaurant</code>, <code>theatre</code>, <code>biergarten</code></li>
-<li>school: <code>college</code>, <code>kindergarten</code>, <code>language_school</code>, <code>library</code>, <code>music_school</code>, <code>university</code>,</li>
-<li>entertainment, errands, financial, healthcare, home, work</li>
-<li><a href="https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64" class="uri">https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64</a></li>
-</ul>
-</section>
-<section id="gravity-model-mode-choice" class="slide level2">
-<h2>Gravity model / mode choice</h2>
-<ul>
-<li>Attraction based on venue type</li>
-<li>Repulsion based on cost of getting there</li>
-<li>Mode choice weighted by costs
-<ul>
-<li>but if know vehicle ownership, age of people…</li>
-</ul></li>
-</ul>
-</section>
-<section id="activity-models-for-real" class="slide level2">
-<h2>Activity models for real</h2>
-<ul>
-<li><a href="https://www.psrc.org/activity-based-travel-model-soundcast">Soundcast</a>
-<ul>
-<li>Plenty of reading material here!</li>
-<li><a href="https://www.psrc.org/sites/default/files/shrp2_c46.pdf">Activity model primer by TRB</a></li>
-<li><a href="https://www.psrc.org/sites/default/files/2015psrc-modechoiceautomodels.pdf">Mode choice</a></li>
-</ul></li>
-<li><a href="https://github.com/Transport-for-the-North/NorMITs-Demand/">NorMITs</a></li>
-</ul>
-</section></section>
-<section>
-<section id="part-5-mode-shift" class="title-slide slide level1 center">
-<h1>Part 5: Mode shift</h1>
-<ul>
-<li>The most important question: how do planners convince people to change travel behavior?
-<ul>
-<li>Public transit: frequency, reliability, safety, price, coverage?</li>
-<li>Cycling: safety, secure parking, showering at work, subsidizing e-bikes, culture?</li>
-</ul></li>
-</ul>
-</section>
-<section id="an-application-of-travel-demand-models" class="slide level2">
-<h2>An application of travel demand models</h2>
-<ul>
-<li>A small piece of the puzzle: <a href="https://itsleeds.github.io/pct/">PCT</a> and <a href="http://bike.abstreet.org">Ungap the Map</a>
-<ul>
-<li>Where should cycling interventions be prioritized?</li>
-</ul></li>
-<li><a href="https://a-b-street.github.io/docs/software/ungap_the_map/tech_details.html#predict-impact">Pipeline</a>
-<ul>
-<li>Find (origin, destination) of driving trips</li>
-<li>Filter by max time spent cycling and uphill distance</li>
-<li>Convert to a route network, look for <strong>popular</strong> segments without <strong>cycle infrastructure</strong></li>
-</ul></li>
-</ul>
-</section>
-<section id="questions" class="slide level2">
-<h2>Questions</h2>
-<ul>
-<li>How do we calculate the cycling routes? (fastest vs quietest)</li>
-<li>How much of a route has to be safe for someone to consider mode shift?</li>
-</ul>
-</section></section>
-<section>
-<section id="part-6-exercises-discussion" class="title-slide slide level1 center">
-<h1>Part 6: Exercises / discussion</h1>
-<ul>
-<li>Exercises
-<ul>
-<li>Install A/B Street</li>
-<li>Import a new place</li>
-<li>Procedurally generate buildings</li>
-<li>Run a traffic simulation, observe problems</li>
-<li>Try out LTN, 15-minute, other tools</li>
-</ul></li>
-</ul>
-</section>
-<section id="discussions" class="slide level2">
-<h2>Discussions</h2>
-<ul>
-<li>Region-specific data sources for improving what we talked about today</li>
-<li>How to calibrate a travel demand model?
-<ul>
-<li>What parameters change?</li>
-</ul></li>
-</ul>
-</section>
-<section id="notes" class="slide level2">
-<h2>Notes</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>./cli generate-houses \</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  --map data/system/us/seattle/maps/montlake.bin \</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  --num-required 1 \</span>
-<span id="cb3-4"><a href="#cb3-4"></a>  --output houses.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="per-lane-width" class="slide level2">
+<h2>Per-lane width</h2>
+<p>and if we can get total road/RoW width from another method, sanely distributing to lanes</p>
 
 <img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
 

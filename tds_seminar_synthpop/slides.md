@@ -1,6 +1,6 @@
 ---
 title: "From OD data to agent-based-modelling for car-free futures"
-subtitle: "9 March 2022 Transport Data Science seminar"
+subtitle: "9 March 2022, Transport Data Science seminar"
 author: "Dustin Carlino"
 format:
   revealjs:
