@@ -15,27 +15,20 @@ jobs:
         wget https://github.com/quarto-dev/quarto-cli/releases/download/v0.9.4/quarto-0.9.4-linux-amd64.deb
         sudo dpkg -i quarto-0.9.4-linux-amd64.deb
 
-    - name: Render map_model_v2
+    - name: Render
       run: |
-        cd map_model_v2
-        quarto render slides.md
-
-    - name: Render tds_seminar_synthpop
-      run: |
-        cd tds_seminar_synthpop
-        quarto render slides.md
-
-    - name: Render census_pitch
-      run: |
-        cd census_pitch
-        quarto render slides.md
+        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes; do
+          cd $x
+          quarto render slides.md
+          cd ..
+        done
 
     - name: Copy stuff
       run: |
         mkdir -p dist
-        cp -Rv map_model_v2 dist/
-        cp -Rv tds_seminar_synthpop dist/
-        cp -Rv census_pitch dist/
+        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes; do
+          cp -Rv $x dist/
+        done
 
     - name: Publish
       uses: peaceiris/actions-gh-pages@v3

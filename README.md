@@ -11,3 +11,4 @@ Deployed slides:
 - https://dabreegster.github.io/talks/map_model_v2/slides.html
 - https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html
 - https://dabreegster.github.io/talks/census_pitch/slides.html
+- https://dabreegster.github.io/talks/osm2lanes/slides.html
