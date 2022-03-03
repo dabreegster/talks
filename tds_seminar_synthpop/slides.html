@@ -3,7 +3,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.4">
   <meta name="author" content="Dustin Carlino">
-  <title>From OD data to agent based modelling for car free futures</title>
+  <title>From OD data to agent-based-modelling for car-free futures</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -393,7 +393,8 @@
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">From OD data to agent based modelling for car free futures</h1>
+  <h1 class="title">From OD data to agent-based-modelling for car-free futures</h1>
+  <p class="subtitle">9 March 2022 Transport Data Science seminar</p>
   <p class="author">Dustin Carlino</p>
 </section>
 
@@ -401,18 +402,22 @@
 <section id="intro" class="title-slide slide level1 center">
 <h1>Intro</h1>
 <ul>
-<li>revealjs: can all of this go on the title screen?</li>
-<li>date / venue</li>
-<li>abst logo</li>
-<li>links</li>
+<li>These slides: <a href="https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html" class="uri">https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html</a></li>
+<li>Contribute: <a href="https://github.com/dabreegster/talks" class="uri">https://github.com/dabreegster/talks</a></li>
 </ul>
 </section>
 <section id="about-me" class="slide level2">
 <h2>About me</h2>
 <ul>
+<li><a href="https://twitter.com/CarlinoDustin" class="uri">https://twitter.com/CarlinoDustin</a></li>
 <li>A/B Street since 2018</li>
 <li>Alan Turing Institute since December 2021</li>
-<li>Not an expert on TDM; I just need it as input</li>
+<li>Not an expert on demand modeling; I just need it as input
+<ul>
+<li>Traffic simulation community</li>
+<li>Transport data science community</li>
+<li>Videogame industry?! <a href="https://youtu.be/oYUZp4I3ksE?t=225">Watch Dogs: Legion</a></li>
+</ul></li>
 </ul>
 </section>
 <section id="talk-outline" class="slide level2">
@@ -426,16 +431,51 @@
 <li>Exercises / discussion</li>
 </ol>
 </section></section>
+<section>
 <section id="part-1-ab-street-overview" class="title-slide slide level1 center">
 <h1>Part 1: A/B Street overview</h1>
-<ul>
-<li>architecture at a glance</li>
-<li>OSM to map: osm2lanes, osm2polygons, turns, etc</li>
-<li>a traffic sim</li>
-<li>a bunch of apps built on top of commmon platform</li>
-</ul>
-</section>
 
+</section>
+<section id="simulator" class="slide level2">
+<h2>Simulator</h2>
+<p><a href="https://a-b-street.github.io/docs/software/abstreet.html">Edit roads, simulate traffic</a></p>
+
+<img data-src="https://a-b-street.github.io/docs/project/history/retrospective/traffic_sim.gif" class="r-stretch"></section>
+<section id="plan-bike-networks" class="slide level2">
+<h2>Plan bike networks</h2>
+<p><a href="http://bike.abstreet.org">bike.abstreet.org</a></p>
+
+<img data-src="https://a-b-street.github.io/docs/software/ungap_the_map/demo.gif" class="r-stretch"></section>
+<section id="low-traffic-neighborhoods" class="slide level2">
+<h2>Low-traffic neighborhoods</h2>
+<p><a href="http://ltn.abstreet.org">ltn.abstreet.org</a></p>
+
+<img data-src="https://a-b-street.github.io/docs/software/ltn/ltn.png" class="r-stretch"></section>
+<section id="minute-neighborhoods" class="slide level2">
+<h2>15-minute neighborhoods</h2>
+<p><a href="http://15m.abstreet.org">15m.abstreet.org</a></p>
+
+<img data-src="https://a-b-street.github.io/docs/software/walkshed.gif" class="r-stretch"></section>
+<section id="arcade-game-edutainment" class="slide level2">
+<h2>Arcade game, “edutainment”</h2>
+<p><a href="http://santa.abstreet.org">santa.abstreet.org</a></p>
+
+<img data-src="https://a-b-street.github.io/docs/project/history/retrospective/santa.gif" class="r-stretch"></section>
+<section id="architecture" class="slide level2">
+<h2>Architecture</h2>
+
+<img data-src="architecture.png" class="r-stretch"></section>
+<section id="architecture-1" class="slide level2">
+<h2>Architecture</h2>
+
+<img data-src="ltn_architecture.png" class="r-stretch"></section>
+<section id="components" class="slide level2">
+<h2>Components</h2>
+<ul>
+<li><a href="https://github.com/a-b-street/osm2lanes">osm2lanes</a></li>
+<li>Planned: osm2polygons, synthpop tools, census data exploration</li>
+</ul>
+</section></section>
 <section>
 <section id="part-2-demand-model-overview" class="title-slide slide level1 center">
 <h1>Part 2: Demand model overview</h1>
@@ -819,27 +859,50 @@
 <li>Filter by max time spent cycling and uphill distance</li>
 <li>Convert to a route network, look for <strong>popular</strong> segments without <strong>cycle infrastructure</strong></li>
 </ul></li>
-<li>Questions
+</ul>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions</h2>
 <ul>
 <li>How do we calculate the cycling routes? (fastest vs quietest)</li>
 <li>How much of a route has to be safe for someone to consider mode shift?</li>
-</ul></li>
 </ul>
 </section></section>
+<section>
 <section id="part-6-exercises-discussion" class="title-slide slide level1 center">
 <h1>Part 6: Exercises / discussion</h1>
 <ul>
-<li><p>install</p></li>
-<li><p>import a new place</p></li>
-<li><p>procgen buildings, use qgis or geojson.io to look</p></li>
-<li><p>use R to transform UK or other data into desire line format?</p></li>
-<li><p>or: abstr for scenario.json files</p></li>
-<li><p>discussion: how to calibrate models to real traffic counts?</p></li>
+<li>Exercises
+<ul>
+<li>Install A/B Street</li>
+<li>Import a new place</li>
+<li>Procedurally generate buildings</li>
+<li>Run a traffic simulation, observe problems</li>
+<li>Try out LTN, 15-minute, other tools</li>
+</ul></li>
 </ul>
-<div class="footer footer-default">
+</section>
+<section id="discussions" class="slide level2">
+<h2>Discussions</h2>
+<ul>
+<li>Region-specific data sources for improving what we talked about today</li>
+<li>How to calibrate a travel demand model?
+<ul>
+<li>What parameters change?</li>
+</ul></li>
+</ul>
+</section>
+<section id="notes" class="slide level2">
+<h2>Notes</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource shell number-lines code-with-copy"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>./cli generate-houses \</span>
+<span id="cb3-2"><a href="#cb3-2"></a>  --map data/system/us/seattle/maps/montlake.bin \</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  --num-required 1 \</span>
+<span id="cb3-4"><a href="#cb3-4"></a>  --output houses.json</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+
+<img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -893,7 +956,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',
