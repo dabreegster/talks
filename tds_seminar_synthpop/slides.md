@@ -1,21 +1,27 @@
 ---
-title: "From OD data to agent based modelling for car free futures"
+title: "From OD data to agent-based-modelling for car-free futures"
+subtitle: "9 March 2022 Transport Data Science seminar"
 author: "Dustin Carlino"
-format: revealjs
+format:
+  revealjs:
+    slide-number: true
+    logo: logo.svg
 ---
 
 # Intro
 
-- revealjs: can all of this go on the title screen?
-- date / venue
-- abst logo
-- links
+- These slides: <https://dabreegster.github.io/talks/tds_seminar_synthpop/slides.html>
+- Contribute: <https://github.com/dabreegster/talks>
 
 ## About me
 
+- <https://twitter.com/CarlinoDustin>
 - A/B Street since 2018
 - Alan Turing Institute since December 2021
-- Not an expert on TDM; I just need it as input
+- Not an expert on demand modeling; I just need it as input
+  - Traffic simulation community
+  - Transport data science community
+  - Videogame industry?! [Watch Dogs: Legion](https://youtu.be/oYUZp4I3ksE?t=225)
 
 ## Talk outline
 
@@ -28,10 +34,48 @@ format: revealjs
 
 # Part 1: A/B Street overview
 
-- architecture at a glance
-- OSM to map: osm2lanes, osm2polygons, turns, etc
-- a traffic sim
-- a bunch of apps built on top of commmon platform
+## Simulator
+
+[Edit roads, simulate traffic](https://a-b-street.github.io/docs/software/abstreet.html)
+
+![](https://a-b-street.github.io/docs/project/history/retrospective/traffic_sim.gif)
+
+## Plan bike networks
+
+[bike.abstreet.org](http://bike.abstreet.org)
+
+![](https://a-b-street.github.io/docs/software/ungap_the_map/demo.gif)
+
+## Low-traffic neighborhoods
+
+[ltn.abstreet.org](http://ltn.abstreet.org)
+
+![](https://a-b-street.github.io/docs/software/ltn/ltn.png)
+
+## 15-minute neighborhoods
+
+[15m.abstreet.org](http://15m.abstreet.org)
+
+![](https://a-b-street.github.io/docs/software/walkshed.gif)
+
+## Arcade game, "edutainment"
+
+[santa.abstreet.org](http://santa.abstreet.org)
+
+![](https://a-b-street.github.io/docs/project/history/retrospective/santa.gif)
+
+## Architecture
+
+![](architecture.png)
+
+## Architecture
+
+![](ltn_architecture.png)
+
+## Components
+
+- [osm2lanes](https://github.com/a-b-street/osm2lanes)
+- Planned: osm2polygons, synthpop tools, census data exploration
 
 # Part 2: Demand model overview
 
@@ -318,16 +362,32 @@ format: revealjs
   - Find (origin, destination) of driving trips
   - Filter by max time spent cycling and uphill distance
   - Convert to a route network, look for **popular** segments without **cycle infrastructure**
-- Questions
-  - How do we calculate the cycling routes? (fastest vs quietest)
-  - How much of a route has to be safe for someone to consider mode shift?
+
+## Questions
+
+- How do we calculate the cycling routes? (fastest vs quietest)
+- How much of a route has to be safe for someone to consider mode shift?
 
 # Part 6: Exercises / discussion
 
-- install
-- import a new place
-- procgen buildings, use qgis or geojson.io to look
-- use R to transform UK or other data into desire line format?
-- or: abstr for scenario.json files
+- Exercises
+  - Install A/B Street
+  - Import a new place
+  - Procedurally generate buildings
+  - Run a traffic simulation, observe problems
+  - Try out LTN, 15-minute, other tools
 
-- discussion: how to calibrate models to real traffic counts?
+## Discussions
+
+- Region-specific data sources for improving what we talked about today
+- How to calibrate a travel demand model?
+  - What parameters change?
+
+## Notes
+
+```shell
+./cli generate-houses \
+  --map data/system/us/seattle/maps/montlake.bin \
+  --num-required 1 \
+  --output houses.json
+```
