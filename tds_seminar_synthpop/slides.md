@@ -25,7 +25,7 @@ format:
 
 ## Talk outline
 
-1.  A/B Street from 10,000 feet
+1.  A/B Street quick overview
 2.  Travel demand models overview
 3.  From UK OD data to a demand model
 4.  Activity models
@@ -34,9 +34,17 @@ format:
 
 # Part 1: A/B Street overview
 
+## Squeeze detail out of OpenStreetMap
+
+![](osm_detail.png)
+
+## Edit the infrastructure
+
+![](https://a-b-street.github.io/docs/project/history/retrospective/edit_roads.gif)
+
 ## Simulator
 
-[Edit roads, simulate traffic](https://a-b-street.github.io/docs/software/abstreet.html)
+[Simulate traffic](https://a-b-street.github.io/docs/software/abstreet.html)
 
 ![](https://a-b-street.github.io/docs/project/history/retrospective/traffic_sim.gif)
 
@@ -50,7 +58,7 @@ format:
 
 [ltn.abstreet.org](http://ltn.abstreet.org)
 
-![](https://a-b-street.github.io/docs/software/ltn/ltn.png)
+![](https://a-b-street.github.io/docs/software/ltn/ltn.gif)
 
 ## 15-minute neighborhoods
 
@@ -75,13 +83,16 @@ format:
 ## Components
 
 - [osm2lanes](https://github.com/a-b-street/osm2lanes)
-- Planned: osm2polygons, synthpop tools, census data exploration
+- Planned
+  - [osm2polygons](https://a-b-street.github.io/docs/tech/map/geometry/index.html)
+  - [census data exploration](https://dabreegster.github.io/talks/census_pitch/slides.html)
+  - synthpop tools
 
 # Part 2: Demand model overview
 
-## What
+![](demand_model.png)
 
-<!-- picture with waypoints, departure time & mode -->
+## What
 
 ```json
 {
@@ -170,9 +181,24 @@ format:
 
 ![](msoa_zones.png)
 
+## Desire line
+
+![](desire_line.png)
+
 ## Overall idea
 
-<!-- diagram of overall process -->
+:::: {.columns}
+::: {.column width="50%"}
+Home
+![](home_zone.png)
+:::
+::: {.column width="50%"}
+Work
+![](work_zone.png)
+:::
+::::
+
+## Overall idea
 
 - For each (origin, destination, mode) desire line
   - Repeat for the number of trips here
@@ -197,19 +223,27 @@ format:
 
 ## Jittering: sampling an origin or destination
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](one_zone.png)
-
+:::
+::: {.column width="50%"}
+::: {.incremental}
 - Just inside the study area
 - [odjitter](https://github.com/dabreegster/odjitter)
 - Random points?
   - Origins: buildings where people live
   - Destinations: buildings where people work
+:::
+:::
+::::
 
 ## Buildings from OpenStreetMap tags
 
 ![](osm_bldg.png)
 
 - Building type is rarely tagged
+- <https://taginfo.openstreetmap.org/keys/building>
 
 ## Buildings from OpenStreetMap tags
 
@@ -238,11 +272,13 @@ format:
 ## What data could help us pick better?
 
 - Desire line breakdown by Standard Industry Codes?
+- [NOMIS UKBC](https://cran.r-project.org/web/packages/nomisr/index.html)
 
 ## Aside: missing buildings in OSM
 
 ![](procgen.png)
 
+- <https://www.openstreetmap.org/#map=14/51.5318/0.1192>
 - OSM isn't perfect, check your data
 - Procedural generation
   - limitations
@@ -252,39 +288,75 @@ format:
 
 ![](study_area.png)
 
+::: {.incremental}
 - We can't just keep expanding our study area forever
 - Some trips will begin or end off-map
 - Use % overlap to scale number of trips
+:::
 
 ## Jittering when out-of-bounds
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](off_map_snap.png)
-
+:::
+::: {.column width="50%"}
 - We don't know off-map buildings
 - Snap to a border
   - Nearest Euclidean distance?
   - Weight by road type?
+:::
+::::
+
+## Jittering when out-of-bounds
+
+:::: {.columns}
+::: {.column width="50%"}
+![](off_map_snap.png)
+:::
+::: {.column width="50%"}
 - Quickly pruning desire lines
 - **Or just do pathfinding on a larger map?**
+:::
+::::
 
 ## Popping the stack
 
-<!-- show diagram again -->
+![](desire_line.png)
+
+## Popping the stack
+
+:::: {.columns}
+::: {.column width="50%"}
+Home
+![](home_zone.png)
+:::
+::: {.column width="50%"}
+Work
+![](work_zone.png)
+:::
+::::
+
+## Popping the stack
 
 - Issues we covered
   - OSM building tagging
   - Missing OSM buildings
-  - Partly overlapping zones
+  - Partly out-of-bounds zones
   - Off-map origins/destinations
 
 ## Enjoying the results
 
 - Let's simulate the results!
-- Dangers of using a microsimulation
-  - Routing
-  - Traffic signal timing
-  - Parking
-  - Conflicting movements near complex junctions
+
+<!-- ./target/release/game --dev data/system/gb/leeds/maps/central.bin -->
+
+## Dangers of using a microsimulation
+
+- Routing
+- Traffic signal timing
+- Parking
+- Conflicting movements near complex junctions
 
 # Part 4: Activity models
 
@@ -321,8 +393,10 @@ format:
   - 30% of the time, spends 20-30 minutes on lunch
   - 60% of the time, spends 2 hours on "entertainment" -- otherwise, 0.5-1.5 hours on errands
   - returns home
-- Data-driven schedules?
-  - time use surveys
+
+## Data-driven schedules?
+
+- time use surveys
 
 ## Where do activities occur?
 
@@ -333,9 +407,10 @@ format:
 - entertainment, errands, financial, healthcare, home, work
 - <https://github.com/a-b-street/abstreet/blob/b969dbffe1bbb7a741b689be7e8f87b1d55a82f1/popdat/src/make_person.rs#L64>
 
-## Gravity model / mode choice
+## Gravity model + mode choice
 
 - Attraction based on venue type
+  - Advanced: based on income, prefer fancy vs cheap restaurant
 - Repulsion based on cost of getting there
 - Mode choice weighted by costs
   - but if know vehicle ownership, age of people...
@@ -370,18 +445,20 @@ format:
 
 # Part 6: Exercises / discussion
 
-- Exercises
-  - Install A/B Street
-  - Import a new place
-  - Procedurally generate buildings
-  - Run a traffic simulation, observe problems
-  - Try out LTN, 15-minute, other tools
+- Install A/B Street
+- Import a new place
+- Procedurally generate buildings
+- Run a traffic simulation, observe problems
+- Try out LTN, 15-minute, other tools
+- Let's edit OSM!
 
 ## Discussions
 
 - Region-specific data sources for improving what we talked about today
 - How to calibrate a travel demand model?
+  - What data tells us when we're realistic?
   - What parameters change?
+- Do we need to start from scratch to make a model for new regions?
 
 ## Notes
 
