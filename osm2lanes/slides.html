@@ -370,10 +370,21 @@
 </section>
 <section id="ab-street" class="slide level2">
 <h2>A/B Street</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img data-src="osm_detail.png"></p>
+</div><div class="column" style="width:60%;">
 <ul>
 <li>a bunch of tools to explore less cars in cities</li>
-<li>all work off a heavily processed map representation</li>
+<li>all work off a heavily processed map representation
+<ul>
+<li>road and intersection geometry</li>
+<li>driveways between buildings and roads</li>
+<li>turn restrictions, traffic signal timing, routing</li>
+</ul></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="edit-roads" class="slide level2">
 <h2>Edit roads</h2>
@@ -392,11 +403,12 @@
 <h2>Low-traffic neighborhoods</h2>
 <p><a href="http://ltn.abstreet.org">ltn.abstreet.org</a></p>
 
-<img data-src="https://a-b-street.github.io/docs/software/ltn/ltn.png" class="r-stretch"></section>
+<img data-src="https://a-b-street.github.io/docs/software/ltn/ltn.gif" class="r-stretch"></section>
 <section id="sharing-code" class="slide level2">
 <h2>Sharing code</h2>
 <ul>
 <li><a href="https://github.com/a-b-street/abstreet/discussions/789" class="uri">https://github.com/a-b-street/abstreet/discussions/789</a></li>
+<li><a href="https://github.com/a-b-street/abstreet/blob/master/raw_map/src/lane_specs.rs" class="uri">https://github.com/a-b-street/abstreet/blob/master/raw_map/src/lane_specs.rs</a></li>
 <li>Other projects looking at OSM lanes in detail
 <ul>
 <li>StreetComplete, Map Machine, Bjorn’s JOSM plugin, shared-row, Cycle Streets, 3D Street</li>
@@ -405,15 +417,45 @@
 </section>
 <section id="whys-this-hard" class="slide level2">
 <h2>Why’s this hard?</h2>
-<p>Cyclestreets example</p>
+
+<img data-src="cyclestreets.png" class="r-stretch"><ul>
+<li><a href="https://www.cyclestreets.org/news/2019/09/22/sotm2019/">Cyclestreets: Is the OSM data model creaking?</a></li>
+</ul>
+</section>
+<section id="why-does-it-have-to-be-hard" class="slide level2">
+<h2>Why does it have to be hard?</h2>
+<p>From left to right:</p>
+<pre><code>[
+  { type=sidewalk, surface_color=black },
+  { curb },
+  { type=cycle, direction=forward, surface_color=red, est_width=1.5 },
+  { curb },
+  { type=travel, surface_color=black, direction=forward, allow taxi },
+  { type=travel, surface_color=black, direction=backward, allow taxi },
+  { curb },
+  { type=cycle, direction=forward, surface_color=red, est_width=1.5 },
+  { curb },
+  { type=sidewalk, surface_color=black },
+]</code></pre>
+<ul>
+<li>Arguments for mapping as separate ways
+<ul>
+<li>geometry: doesn’t help</li>
+<li>per-lane detail: yes!</li>
+</ul></li>
+</ul>
 </section>
 <section id="end-user-stories" class="slide level2">
 <h2>End-user stories</h2>
 <ul>
 <li>vector map of whole world showing lane tagging</li>
-<li>streetmix style editor for lane tagging
+<li>Streetmix style editor for lane tagging
 <ul>
 <li><a href="https://github.com/openstreetmap/iD/issues/387" class="uri">https://github.com/openstreetmap/iD/issues/387</a></li>
+</ul></li>
+<li>road space studies
+<ul>
+<li>60% of width used by 20% of people</li>
 </ul></li>
 <li>both of these help improve lane tagging</li>
 </ul>
@@ -421,63 +463,219 @@
 <section>
 <section id="part-2-how-it-works-today" class="title-slide slide level1 center">
 <h1>Part 2: How it works today</h1>
-<p>Start with web demo: https://a-b-street.github.io/osm2lanes/</p>
+<p>Web demo: <a href="https://a-b-street.github.io/osm2lanes" class="uri">https://a-b-street.github.io/osm2lanes</a></p>
 </section>
 <section id="input" class="slide level2">
 <h2>Input</h2>
 <ul>
-<li>localization</li>
+<li>One way’s key/values</li>
+<li>left- or right-handed driving?</li>
+<li>country code (for inferring lane widths, colors)</li>
 </ul>
 </section>
 <section id="output" class="slide level2">
 <h2>Output</h2>
+<p><a href="https://www.openstreetmap.org/way/22760280" class="uri">https://www.openstreetmap.org/way/22760280</a></p>
+<pre><code>{
+  "Ok": {
+    "road": {
+      "lanes": [
+        {
+          "type": "travel",
+          "direction": "backward",
+          "designated": "bicycle",
+          "width": null
+        },
+        {
+          "type": "separator",
+          "markings": [
+            {
+              "style": "solid_line",
+              "width": 0.2,
+              "color": "white"
+            }
+          ]
+        },
+        {
+          "type": "travel",
+          "direction": "backward",
+          "designated": "motor_vehicle",
+          "width": null
+        },
+        {
+          "type": "separator",
+          "markings": [
+            {
+              "style": "dotted_line",
+              "width": 0.2,
+              "color": "white"
+            }
+          ]
+        },
+        {
+          "type": "travel",
+          "direction": "forward",
+          "designated": "motor_vehicle",
+          "width": null
+        },
+        {
+          "type": "separator",
+          "markings": [
+            {
+              "style": "solid_line",
+              "width": 0.2,
+              "color": "white"
+            }
+          ]
+        },
+        {
+          "type": "travel",
+          "direction": "forward",
+          "designated": "bicycle",
+          "width": null
+        }
+      ],
+      "highway": {
+        "highway": {
+          "Classified": "Secondary"
+        },
+        "lifecycle": "Active"
+      }
+    },
+    "warnings": [
+      "unimplemented: access, bicycle=designated"
+    ]
+  }
+}</code></pre>
+</section>
+<section id="output-1" class="slide level2">
+<h2>Output</h2>
 <ul>
-<li>lane type, width, direction</li>
-<li>turn:lanes, allowed vehicles (bus lanes with bikes or taxis), time restrictions, surface type</li>
-<li>markings / separators are lanes!</li>
+<li>type
+<ul>
+<li>travel, parking, shoulder, separator</li>
+</ul></li>
+<li>designated
+<ul>
+<li>foot, bike, motor vehicle, bus</li>
+</ul></li>
+<li>direction
+<ul>
+<li>forward, backward, both</li>
+</ul></li>
+<li>width</li>
+<li>markings / separators</li>
 </ul>
 </section>
 <section id="inverse-lanes2osm" class="slide level2">
 <h2>Inverse, lanes2osm</h2>
-</section>
-<section id="web-tool" class="slide level2">
-<h2>Web tool</h2>
-</section>
-<section id="from-code" class="slide level2">
-<h2>From code</h2>
 <ul>
-<li>multi language or not? we’ve diverged
+<li>An easier OSM lanes editor
 <ul>
-<li>python 3.9 and kotlin too</li>
+<li>Pick a way, grab its tags</li>
+<li>osm2lanes</li>
+<li>Edit the lanes with something Streetmix-like</li>
+<li>lanes2osm</li>
+<li>Upload the diff</li>
 </ul></li>
-<li>originally trying to make it easy for other people to get involved</li>
+<li>Complications?</li>
 </ul>
+</section>
+<section id="code-overview" class="slide level2">
+<h2>Code overview</h2>
+<ul>
+<li><a href="https://github.com/a-b-street/osm2lanes" class="uri">https://github.com/a-b-street/osm2lanes</a></li>
+<li>Rust, Python, and Kotlin</li>
+<li>Originally…
+<ul>
+<li>make it easy for people to get involved, no matter the preferred language</li>
+<li>“not hard” to keep the implementations in-sync</li>
+</ul></li>
+<li>Going forward…
+<ul>
+<li>Rust can target any build environment</li>
+</ul></li>
+</ul>
+</section>
+<section id="tests" class="slide level2">
+<h2>Tests!</h2>
+<p><a href="https://github.com/a-b-street/osm2lanes/blob/main/data/tests.yml" class="uri">https://github.com/a-b-street/osm2lanes/blob/main/data/tests.yml</a></p>
 </section>
 <section id="code-walkthrough" class="slide level2">
 <h2>Code walkthrough</h2>
+<ul>
+<li><a href="https://github.com/a-b-street/osm2lanes/blob/main/rust/osm2lanes/src/road/lane.rs">Lane schema</a></li>
+<li><a href="https://github.com/a-b-street/osm2lanes/blob/03afea4f6272568e2b91e6e575945e58e2654aa7/rust/osm2lanes/src/transform/tags_to_lanes/mod.rs#L382">broken down by mode</a>
+<ul>
+<li>special case non-motorized paths</li>
+<li>bus</li>
+<li>bike</li>
+<li>parking</li>
+<li>sidewalks / shoulders</li>
+</ul></li>
+<li>build up from inside-to-out, both sides of the road</li>
+<li>insert separators afterwards</li>
+</ul>
 </section>
 <section id="inferred-values" class="slide level2">
 <h2>Inferred values</h2>
+<ul>
+<li>Direct tagged data</li>
+<li>Stuff we assume as a reasonable default</li>
+<li>… locale-specific config</li>
+<li>Calculated from a tagged value (splitting total width over all the lanes)</li>
+</ul>
 </section></section>
 <section>
 <section id="part-3-complications" class="title-slide slide level1 center">
 <h1>Part 3: Complications</h1>
 
 </section>
-<section id="separate-ways" class="slide level2">
-<h2>Separate ways</h2>
+<section id="designated-vs-allowed" class="slide level2">
+<h2>Designated vs allowed</h2>
 <ul>
-<li>the caller has to figure out all of the related ways?
-<ul>
-<li>next talk will go into more detail</li>
-<li>just look for everything btwn buildings/parks/water</li>
-</ul></li>
-<li>also provide geometry, so we can glue things together in the right order?</li>
-<li>inferred separators</li>
+<li>Footpaths allowing, but not prioritizing, cyclists</li>
+<li>Bus lanes allowing cyclists</li>
 </ul>
 </section>
-<section id="schema-may-be-kinda-complicated" class="slide level2">
-<h2>schema may be kinda complicated?</h2>
+<section id="errors-are-rampant" class="slide level2">
+<h2>Errors are rampant</h2>
+<ul>
+<li><a href="https://www.openstreetmap.org/way/389322095" class="uri">https://www.openstreetmap.org/way/389322095</a></li>
+</ul>
+<pre><code>unsupported: cycleway=* with any cycleway:* values
+
+
+bicycle = designated
+cycleway = lane
+cycleway:left = separate
+cycleway:right = lane
+highway = secondary
+lanes = 4
+lanes:backward = 2
+lanes:forward = 2
+lcn = yes
+maxheight = default
+maxspeed = 25 mph
+name = Dexter Avenue North
+oneway = no
+surface = paved</code></pre>
+</section>
+<section id="separate-ways" class="slide level2">
+<h2>Separate ways</h2>
+<p><a href="https://www.youtube.com/watch?v=LatorN4P9aA" class="uri">https://www.youtube.com/watch?v=LatorN4P9aA</a></p>
+<ul>
+<li>Punt to the caller, feed in all of the ways?
+<ul>
+<li>next talk will go into more detail</li>
+<li>just look for everything in between buildings/parks/water?</li>
+</ul></li>
+<li>also provide geometry, so we can glue things together in the right order?</li>
+<li>inferred separators
+<ul>
+<li>or <a href="https://wiki.openstreetmap.org/wiki/Talk:Proposed_features/cycleway:separation" class="uri">https://wiki.openstreetmap.org/wiki/Talk:Proposed_features/cycleway:separation</a></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="part-4-next-steps-contributing" class="title-slide slide level1 center">
@@ -496,6 +694,12 @@
 <section id="per-lane-width" class="slide level2">
 <h2>Per-lane width</h2>
 <p>and if we can get total road/RoW width from another method, sanely distributing to lanes</p>
+</section>
+<section id="per-lane-data" class="slide level2">
+<h2>Per-lane data</h2>
+<ul>
+<li>turn:lanes, allowed vehicles (bus lanes with bikes or taxis), time restrictions, surface type</li>
+</ul>
 
 <img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
 
