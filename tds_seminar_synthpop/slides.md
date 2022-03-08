@@ -166,6 +166,7 @@ format:
 - [SUMO](https://sumo.dlr.de/docs/Demand/Introduction_to_demand_modelling_in_SUMO.html)
 - [Python notebook by Alfred Mountfield](https://gist.github.com/Alfred-Mountfield/d880b05aa6327d69d8bc4d95e5bc7df8)
   - [Description](https://github.com/a-b-street/abstreet/issues/424#issuecomment-786722031)
+- [abstr](https://github.com/a-b-street/abstr/)
 
 # Part 3: Let's build one for the UK!
 
