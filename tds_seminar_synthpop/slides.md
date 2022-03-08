@@ -359,6 +359,10 @@ Work
 - Parking
 - Conflicting movements near complex junctions
 
+## Re-aggregating
+
+![](commuter_patterns.png)
+
 # Part 4: Activity models
 
 - Limitations of the previous approach:
@@ -423,6 +427,10 @@ Work
   - [Activity model primer by TRB](https://www.psrc.org/sites/default/files/shrp2_c46.pdf)
   - [Mode choice](https://www.psrc.org/sites/default/files/2015psrc-modechoiceautomodels.pdf)
 - [NorMITs](https://github.com/Transport-for-the-North/NorMITs-Demand/)
+
+## Even Soundcast isn't meant for this level of disaggregation
+
+![](soundcast_uw.png)
 
 # Part 5: Mode shift
 
