@@ -291,6 +291,10 @@ https://distanciamiento.inspide.com/
 
 https://www.openstreetmap.org/relation/1277566#map=16/51.4718/-2.5168
 
+### more parcel
+
+[OpenAddresses](https://openaddresses.io/)
+
 ## Negative space
 
 Get even more radical. If we have nothing but buildings, group them into a block, take some kind of concave hull. Widen road center-lines until they hit.
