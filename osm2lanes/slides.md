@@ -21,6 +21,10 @@ format:
 
 ## About Michael
 
+- <https://github.com/a-b-street/osm2lanes>
+- <https://www.openstreetmap.org/user/droogmic>
+- Software Engineer, ASML, Netherlands
+
 ## Talk outline
 
 1.  Background
