@@ -261,6 +261,7 @@ Work
 - [Colouring London](https://colouringlondon.org)
 - [Seattle housing units](https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1/explore)
 - Use zoning codes?
+- [OpenAddresses](https://openaddresses.io) -- one housing unit per address?
 
 ## Trip attractor tables (for destinations)
 
@@ -283,7 +284,7 @@ Work
 - OSM isn't perfect, check your data
 - Procedural generation
   - limitations
-- Alternate data: OS building footprints?
+- Alternate data: OS building footprints (ZoomStack), [OpenAddresses](https://openaddresses.io)
 
 ## Study area size
 
