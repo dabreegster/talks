@@ -44,7 +44,7 @@ format:
 - a bunch of tools to explore less cars in cities
 - all work off a heavily processed map representation
     - road and intersection geometry
-    - driveways between buildings and roads
+    - driveways between buildings and roads, parking lot capacity
     - turn restrictions, traffic signal timing, routing
 :::
 ::::
@@ -110,9 +110,9 @@ From left to right:
 - vector map of whole world showing lane tagging
 - Streetmix style editor for lane tagging
   - <https://github.com/openstreetmap/iD/issues/387>
+- both of these help improve lane tagging
 - road space studies
   - 60% of width used by 20% of people
-- both of these help improve lane tagging
 
 # Part 2: How it works today
 
@@ -300,16 +300,31 @@ surface = paved
 
 # Part 4: Next steps / contributing
 
-## Web tool steps
-
-- npm
-
 ## Test cases
+
+- Particularly cycleway buffers, <https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Radwege#Tagging-Beispiele>
+
+## Locales
+
+- <https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata>
+
+## Web map
+
+<https://github.com/a-b-street/osm2lanes/blob/main/web/index.html>
+
+- Click a road, see its lanes in cross-section view
+- Rust <-> Javascript API
+- Publish on npm
 
 ## Per-lane width
 
-and if we can get total road/RoW width from another method, sanely distributing to lanes
+- Use it when it's tagged
+- If we know the curb-to-curb width or entire road width...
+  - sanely distribute width to known lanes
 
 ## Per-lane data
 
-- turn:lanes, allowed vehicles (bus lanes with bikes or taxis), time restrictions, surface type
+- turn:lanes
+- allowed vehicles (bus lanes with bikes or taxis)
+- time-restricted turns or parking
+- surface type

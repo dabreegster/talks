@@ -384,7 +384,7 @@
 <li>all work off a heavily processed map representation
 <ul>
 <li>road and intersection geometry</li>
-<li>driveways between buildings and roads</li>
+<li>driveways between buildings and roads, parking lot capacity</li>
 <li>turn restrictions, traffic signal timing, routing</li>
 </ul></li>
 </ul>
@@ -458,11 +458,11 @@
 <ul>
 <li><a href="https://github.com/openstreetmap/iD/issues/387" class="uri">https://github.com/openstreetmap/iD/issues/387</a></li>
 </ul></li>
+<li>both of these help improve lane tagging</li>
 <li>road space studies
 <ul>
 <li>60% of width used by 20% of people</li>
 </ul></li>
-<li>both of these help improve lane tagging</li>
 </ul>
 </section></section>
 <section>
@@ -687,23 +687,44 @@ surface = paved</code></pre>
 <h1>Part 4: Next steps / contributing</h1>
 
 </section>
-<section id="web-tool-steps" class="slide level2">
-<h2>Web tool steps</h2>
-<ul>
-<li>npm</li>
-</ul>
-</section>
 <section id="test-cases" class="slide level2">
 <h2>Test cases</h2>
+<ul>
+<li>Particularly cycleway buffers, <a href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Radwege#Tagging-Beispiele" class="uri">https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Radwege#Tagging-Beispiele</a></li>
+</ul>
+</section>
+<section id="locales" class="slide level2">
+<h2>Locales</h2>
+<ul>
+<li><a href="https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata" class="uri">https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata</a></li>
+</ul>
+</section>
+<section id="web-map" class="slide level2">
+<h2>Web map</h2>
+<p><a href="https://github.com/a-b-street/osm2lanes/blob/main/web/index.html" class="uri">https://github.com/a-b-street/osm2lanes/blob/main/web/index.html</a></p>
+<ul>
+<li>Click a road, see its lanes in cross-section view</li>
+<li>Rust &lt;-&gt; Javascript API</li>
+<li>Publish on npm</li>
+</ul>
 </section>
 <section id="per-lane-width" class="slide level2">
 <h2>Per-lane width</h2>
-<p>and if we can get total road/RoW width from another method, sanely distributing to lanes</p>
+<ul>
+<li>Use it when it’s tagged</li>
+<li>If we know the curb-to-curb width or entire road width…
+<ul>
+<li>sanely distribute width to known lanes</li>
+</ul></li>
+</ul>
 </section>
 <section id="per-lane-data" class="slide level2">
 <h2>Per-lane data</h2>
 <ul>
-<li>turn:lanes, allowed vehicles (bus lanes with bikes or taxis), time restrictions, surface type</li>
+<li>turn:lanes</li>
+<li>allowed vehicles (bus lanes with bikes or taxis)</li>
+<li>time-restricted turns or parking</li>
+<li>surface type</li>
 </ul>
 
 <img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
