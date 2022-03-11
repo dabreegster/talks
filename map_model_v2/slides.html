@@ -331,13 +331,13 @@
 
 <section id="title-slide" class="center">
   <h1 class="title">Map model from scratch</h1>
+  <p class="subtitle">12 March 2022, FOSSGIS OSM-Samstag</p>
   <p class="author">Dustin Carlino</p>
 </section>
 
 <section>
 <section id="intro" class="title-slide slide level1 center">
 <h1>Intro</h1>
-<!-- date / venue for title? -->
 <!-- What would it take to scale Straßenraumkarte Neukölln everywhere? The OpenStreetMap data model does not easily represent complex junctions, crossing islands, contraflow cycle lanes, pocket parking, bulb-outs, etc. Let's brainstorm what a new schema for representing complex 2D street space could be and how we could render and edit it. We'll then talk about a few practical ways to move towards this schema with OSM. 30 min presentation, 30 min discussion -->
 
 <img data-src="neukolln_map.jpg" class="r-stretch"><p><a href="https://supaplexosm.github.io/strassenraumkarte-neukoelln/?map=micromap#20/52.49555/13.42073">Straßenraumkarte Neukölln</a> changed everything for me</p>
@@ -349,21 +349,26 @@
 <li>A/B Street since 2018</li>
 <li>Alan Turing Institute since December 2021</li>
 </ul>
-<aside class="notes">
-<p>I’ve tried to squeeze as much geometric detail from OSM as possible – see <a href="https://a-b-street.github.io/docs/tech/map/geometry/index.html">here</a>, but it’s a losing battle. Neukölln inspired me to take a fresh look.</p>
-</aside>
+</section>
+<section id="a-losing-battle" class="slide level2">
+<h2>A losing battle</h2>
+<p><a href="https://a-b-street.github.io/docs/tech/map/geometry/index.html" class="uri">https://a-b-street.github.io/docs/tech/map/geometry/index.html</a></p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="divided_taipei.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="heuristic_loop101.png"></p>
+</div>
+</div>
 </section>
 <section id="talk-outline" class="slide level2">
 <h2>Talk outline</h2>
 <ul>
 <li>Why OSM can’t represent road geometry</li>
 <li>Thought experiment: a schema from scratch</li>
-<li>Actually using this schema</li>
+<li>Practical next steps</li>
 <li>Discussion</li>
 </ul>
-<aside class="notes">
-<p>This is just a brainstorm; I don’t have plans to build it. The schema I’ll pitch has many problems.</p>
-</aside>
 </section></section>
 <section>
 <section id="part-1-why" class="title-slide slide level1 center">
@@ -441,10 +446,10 @@
 <section id="advanced-use-cases" class="slide level2">
 <h2>“Advanced” use cases</h2>
 </section>
-<section id="accessmap" class="slide level2">
-<h2>AccessMap</h2>
+<section id="pedestrian-crossings" class="slide level2">
+<h2>Pedestrian crossings</h2>
 <ul>
-<li><a href="https://www.accessmap.io" class="uri">https://www.accessmap.io</a></li>
+<li><a href="https://www.accessmap.io" class="uri">https://www.accessmap.io</a>, Open Sidewalks, Project Sidewalk</li>
 <li>sidewalk width and curb cuts</li>
 <li>sidewalk width isn’t constant</li>
 <li>the shape near bus shelters, rubbish bins, other obstacles</li>
@@ -453,11 +458,13 @@
 <section id="sidewalk-width-matters" class="slide level2">
 <h2>Sidewalk width matters</h2>
 <ul>
-<li>Social distancing on sidewalks?</li>
+<li>Social distancing on sidewalks?
+<ul>
+<li>Extended pavements in London for COVID</li>
+</ul></li>
 <li>Madrid: <a href="https://distanciamiento.inspide.com/" class="uri">https://distanciamiento.inspide.com/</a></li>
 <li>New York: <a href="https://www.sidewalkwidths.nyc/#13/40.714/-74.005" class="uri">https://www.sidewalkwidths.nyc/#13/40.714/-74.005</a></li>
 <li>São Paulo: <a href="https://github.com/a-b-street/abstreet/issues/859" class="uri">https://github.com/a-b-street/abstreet/issues/859</a></li>
-<li>Extended pavements in London for COVID</li>
 </ul>
 </section>
 <section id="cad" class="slide level2">
@@ -472,7 +479,8 @@
 <ul>
 <li>Understand a junction as one logical object for signal timing, turning movements</li>
 </ul>
-</section>
+
+<img data-src="edit_tsig.png" class="r-stretch"></section>
 <section id="road-space-reallocation" class="slide level2">
 <h2>Road space reallocation</h2>
 <ul>
@@ -515,34 +523,64 @@
 </section>
 <section id="complex-junctions" class="slide level2">
 <h2>Complex junctions</h2>
-<p>https://www.openstreetmap.org/node/5220776402</p>
-</section>
+<p><a href="https://www.openstreetmap.org/node/5220776402" class="uri">https://www.openstreetmap.org/node/5220776402</a></p>
+
+<img data-src="junction_test.png" class="r-stretch"></section>
 <section id="bike-lanes-crossing-a-slip-lane" class="slide level2">
 <h2>Bike lanes crossing a slip lane</h2>
-<p>bike lanes crossing a slip lane https://www.openstreetmap.org/node/4694379084</p>
-</section>
-<section id="londons-unclear-bikebus-lanes" class="slide level2">
-<h2>London’s unclear bike/bus lanes</h2>
+<p><a href="https://www.openstreetmap.org/node/4694379084" class="uri">https://www.openstreetmap.org/node/4694379084</a></p>
+
+<img data-src="slip_lane.png" class="r-stretch"></section>
+<section id="londons-weird-bike-infrastructure" class="slide level2">
+<h2>London’s weird bike infrastructure</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="london_ec.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="narrow_pavement.png"></p>
+</div>
+</div>
 </section>
 <section id="contraflow-cycle-entrances" class="slide level2">
 <h2>Contraflow cycle entrances</h2>
-<p>https://www.openstreetmap.org/node/3194001392</p>
-</section>
+<p><a href="https://www.openstreetmap.org/node/3194001392" class="uri">https://www.openstreetmap.org/node/3194001392</a></p>
+
+<img data-src="contraflow.png" class="r-stretch"></section>
 <section id="crossing-islands" class="slide level2">
 <h2>Crossing islands</h2>
-<p>small and large</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="island1.png"></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="island2.png"></p>
+</div>
+</div>
 </section>
 <section id="pocket-parking" class="slide level2">
 <h2>Pocket parking</h2>
-</section>
+
+<img data-src="pocket_parking.png" class="r-stretch"></section>
 <section id="bulb-outs" class="slide level2">
 <h2>Bulb outs</h2>
-</section>
+<p><a href="https://www.sfbetterstreets.org/find-project-types/pedestrian-safety-and-traffic-calming/traffic-calming-overview/curb-extensions/" class="uri">https://www.sfbetterstreets.org/find-project-types/pedestrian-safety-and-traffic-calming/traffic-calming-overview/curb-extensions/</a></p>
+
+<img data-src="bulb-out.jpg" class="r-stretch"></section>
 <section id="lets-just-draw-stuff" class="slide level2">
 <h2>Let’s just draw stuff</h2>
 <p>Just try to partition 2D space into objects, label the areas with some attributes</p>
-<p>north of montlake bridge</p>
 </section>
+<section id="borough-station" class="slide level2">
+<h2>Borough station</h2>
+
+<img data-src="borough1.png" class="r-stretch"></section>
+<section id="borough-station-1" class="slide level2">
+<h2>Borough station</h2>
+
+<img data-src="borough2.png" class="r-stretch"></section>
+<section id="borough-station-2" class="slide level2">
+<h2>Borough station</h2>
+
+<img data-src="borough3.png" class="r-stretch"></section>
 <section id="connections-tagged-things-along-the-boundary-of-adjacent-polygons" class="slide level2">
 <h2>Connections / tagged things along the boundary of adjacent polygons</h2>
 <p>Show curb height and stuff. If it’s too thin, just treat it as a boundary</p>
@@ -666,7 +704,8 @@
 </section>
 <section id="todo-how-does-the-neukölln-map-work" class="slide level2">
 <h2>TODO: how does the Neukölln map work?</h2>
-<div class="footer footer-default">
+
+<img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
 
 </div>
 </section></section>
@@ -723,7 +762,7 @@
         progress: true,
 
         // Display the page number of the current slide
-        slideNumber: false,
+        slideNumber: 'c/t',
 
         // 'all', 'print', or 'speaker'
         showSlideNumber: 'all',

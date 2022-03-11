@@ -1,12 +1,14 @@
 ---
 title: "Map model from scratch"
+subtitle: "12 March 2022, FOSSGIS OSM-Samstag"
 author: "Dustin Carlino"
-format: revealjs
+format:
+  revealjs:
+    slide-number: true
+    logo: logo.svg
 ---
 
 # Intro
-
-<!-- date / venue for title? -->
 
 <!-- What would it take to scale Straßenraumkarte Neukölln everywhere? The OpenStreetMap data model does not easily represent complex junctions, crossing islands, contraflow cycle lanes, pocket parking, bulb-outs, etc. Let's brainstorm what a new schema for representing complex 2D street space could be and how we could render and edit it. We'll then talk about a few practical ways to move towards this schema with OSM. 30 min presentation, 30 min discussion -->
 
@@ -21,20 +23,25 @@ format: revealjs
 - A/B Street since 2018
 - Alan Turing Institute since December 2021
 
-::: {.notes}
-I've tried to squeeze as much geometric detail from OSM as possible -- see [here](https://a-b-street.github.io/docs/tech/map/geometry/index.html), but it's a losing battle. Neukölln inspired me to take a fresh look.
+## A losing battle
+
+<https://a-b-street.github.io/docs/tech/map/geometry/index.html>
+
+:::: {.columns}
+::: {.column width="50%"}
+![](divided_taipei.png)
 :::
+::: {.column width="50%"}
+![](heuristic_loop101.png)
+:::
+::::
 
 ## Talk outline
 
 - Why OSM can't represent road geometry
 - Thought experiment: a schema from scratch
-- Actually using this schema
+- Practical next steps
 - Discussion
-
-::: {.notes}
-This is just a brainstorm; I don't have plans to build it. The schema I'll pitch has many problems.
-:::
 
 # Part 1: Why
 
@@ -72,17 +79,14 @@ This is just a brainstorm; I don't have plans to build it. The schema I'll pitch
 ## Arbitrary modeling choices
 
 :::: {.columns}
-
 ::: {.column width="50%"}
 <https://www.openstreetmap.org/#map=19/47.63818/-122.31442>
 ![](arbitrary_osm.png)
 :::
-
 ::: {.column width="50%"}
 <https://www.openstreetmap.org/#map=18/47.53965/-122.33635>
 ![](osm_highway_split.png)
 :::
-
 ::::
 
 - Can't represent middle of road at splits/joins
@@ -105,9 +109,9 @@ This is just a brainstorm; I don't have plans to build it. The schema I'll pitch
 
 ## "Advanced" use cases
 
-## AccessMap
+## Pedestrian crossings
 
-- <https://www.accessmap.io>
+- <https://www.accessmap.io>, Open Sidewalks, Project Sidewalk
 - sidewalk width and curb cuts
 - sidewalk width isn't constant
 - the shape near bus shelters, rubbish bins, other obstacles
@@ -115,10 +119,10 @@ This is just a brainstorm; I don't have plans to build it. The schema I'll pitch
 ## Sidewalk width matters
 
 - Social distancing on sidewalks?
+  - Extended pavements in London for COVID
 - Madrid: <https://distanciamiento.inspide.com/>
 - New York: <https://www.sidewalkwidths.nyc/#13/40.714/-74.005>
 - São Paulo: <https://github.com/a-b-street/abstreet/issues/859>
-- Extended pavements in London for COVID
 
 ## CAD
 
@@ -129,6 +133,8 @@ This is just a brainstorm; I don't have plans to build it. The schema I'll pitch
 ## Traffic simulation
 
 - Understand a junction as one logical object for signal timing, turning movements
+
+![](edit_tsig.png)
 
 ## Road space reallocation
 
@@ -164,31 +170,69 @@ Here are some things it has to handle
 
 ## Complex junctions
 
-https://www.openstreetmap.org/node/5220776402
+<https://www.openstreetmap.org/node/5220776402>
+
+![](junction_test.png)
 
 ## Bike lanes crossing a slip lane
 
-bike lanes crossing a slip lane https://www.openstreetmap.org/node/4694379084
+<https://www.openstreetmap.org/node/4694379084>
 
-## London's unclear bike/bus lanes
+![](slip_lane.png)
+
+## London's weird bike infrastructure
+
+:::: {.columns}
+::: {.column width="50%"}
+![](london_ec.png)
+:::
+::: {.column width="50%"}
+![](narrow_pavement.png)
+:::
+::::
 
 ## Contraflow cycle entrances
 
-https://www.openstreetmap.org/node/3194001392
+<https://www.openstreetmap.org/node/3194001392>
+
+![](contraflow.png)
 
 ## Crossing islands
 
-small and large
+:::: {.columns}
+::: {.column width="50%"}
+![](island1.png)
+:::
+::: {.column width="50%"}
+![](island2.png)
+:::
+::::
 
 ## Pocket parking
 
+![](pocket_parking.png)
+
 ## Bulb outs
+
+<https://www.sfbetterstreets.org/find-project-types/pedestrian-safety-and-traffic-calming/traffic-calming-overview/curb-extensions/>
+
+![](bulb-out.jpg)
 
 ## Let's just draw stuff
 
 Just try to partition 2D space into objects, label the areas with some attributes
 
-north of montlake bridge
+## Borough station
+
+![](borough1.png)
+
+## Borough station
+
+![](borough2.png)
+
+## Borough station
+
+![](borough3.png)
 
 ## Connections / tagged things along the boundary of adjacent polygons
 
