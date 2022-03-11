@@ -240,12 +240,20 @@ Here are some things it has to handle
   - right side
 - Attributes (or even... a JSON object) per piece
 
+## Subdivide space
+
+![](subdivide.png)
+
 ## Boundaries of adjacent polygons
 
 - When polygons share a boundary, use linear referencing to mark an interval of it
 - Add attributes (cough JSON cough) to it
 - Curb cuts, turns
 - If it's thick enough, subdivide into a polygon
+
+## Boundaries of adjacent polygons
+
+![](seattle_satellite_trace.png)
 
 ## Linear vs freeform movement
 
