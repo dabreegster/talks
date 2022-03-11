@@ -567,20 +567,33 @@
 <img data-src="bulb-out.jpg" class="r-stretch"></section>
 <section id="lets-just-draw-stuff" class="slide level2">
 <h2>Let’s just draw stuff</h2>
-<p>Just try to partition 2D space into objects, label the areas with some attributes</p>
-</section>
+
+<img data-src="borough1.png" class="r-stretch"></section>
 <section id="borough-station" class="slide level2">
 <h2>Borough station</h2>
 
-<img data-src="borough1.png" class="r-stretch"></section>
+<img data-src="borough2.png" class="r-stretch"></section>
 <section id="borough-station-1" class="slide level2">
 <h2>Borough station</h2>
 
-<img data-src="borough2.png" class="r-stretch"></section>
-<section id="borough-station-2" class="slide level2">
-<h2>Borough station</h2>
-
 <img data-src="borough3.png" class="r-stretch"></section>
+<section id="subdivide-space" class="slide level2">
+<h2>Subdivide space</h2>
+<ul>
+<li>One road object
+<ul>
+<li>left side
+<ul>
+<li>lanes</li>
+<li>separate cycle track</li>
+<li>pavement</li>
+</ul></li>
+<li>median / crossing island</li>
+<li>right side</li>
+</ul></li>
+</ul>
+<p>Attributes (or even… a JSON object) per piece</p>
+</section>
 <section id="connections-tagged-things-along-the-boundary-of-adjacent-polygons" class="slide level2">
 <h2>Connections / tagged things along the boundary of adjacent polygons</h2>
 <p>Show curb height and stuff. If it’s too thin, just treat it as a boundary</p>
@@ -608,81 +621,140 @@
 <li>navmeshes</li>
 <li>3D engines</li>
 </ul>
+</section>
+<section id="asks" class="slide level2">
+<h2>Asks</h2>
+<p>some CAD or drawing program to subdivide space, snap lines easily?</p>
 </section></section>
 <section>
-<section id="part-3-is-this-practical" class="title-slide slide level1 center">
-<h1>Part 3: Is this practical?</h1>
+<section id="part-3-practical-next-steps" class="title-slide slide level1 center">
+<h1>Part 3: Practical next steps</h1>
 
 </section>
 <section id="would-this-be-hard-to-map" class="slide level2">
 <h2>Would this be hard to map?</h2>
 <ul>
 <li>in ID or JOSM, oh yeah</li>
-<li>needs a UI dedicated to it. what might that look like?
+<li>dedicated UI
 <ul>
-<li>demo of thickening lines over satellite</li>
-<li>when width varies, creating bulges and dragging them? do people know examples from CAD / 3d modeling?</li>
-</ul></li>
-<li>pay as you go
-<ul>
-<li>just tag the center line, classic quick lane count</li>
-<li>do the abst approach: desperate heuristics, show it</li>
-<li>if the UI for adding detail is easy, people will do it, use that instead of inference</li>
+<li>first step: just draw a linestring over satellite, quickly thicken it or shift left/right</li>
+<li>when width varies, creating bulges and dragging them?</li>
 </ul></li>
 </ul>
+</section>
+<section id="pay-as-you-go-a-migration-plan" class="slide level2">
+<h2>Pay as you go / a migration plan</h2>
+<p>If we did come up with a new schema, we don’t need to start mapping from scratch</p>
+<ol type="1">
+<li>Continue mapping the road center with lane attributes</li>
+<li>Use osm2lanes + A/B Street’s road/intersection geometry heuristics</li>
+<li>Use the dedicated UI to correct mistakes / add detail</li>
+</ol>
 </section>
 <section id="satellite-imagery" class="slide level2">
 <h2>Satellite imagery</h2>
 <ul>
-<li>is this enough?</li>
-<li>tree cover</li>
-</ul>
-</section>
-<section id="machine-learning" class="slide level2">
-<h2>machine learning</h2>
-<ul>
-<li>from satellite or streetview</li>
-<li>sure, I’m not familiar here, not seen any widespread demos, just papers</li>
+<li>Sufficient to map this kind of detail?</li>
+<li>Tree cover and building shadows</li>
+<li>Any easy-to-use computer vision tools for snapping lines to edges or segmenting?</li>
 </ul>
 </section>
 <section id="what-other-data-is-sometimes-available" class="slide level2">
 <h2>What other data is sometimes available?</h2>
-<h3 id="seattle">seattle</h3>
+
+<img data-src="seattle_satellite.png" class="r-stretch"></section>
+<section id="seattle" class="slide level2">
+<h2>Seattle</h2>
+
+<img data-src="seattle_parcels.png" class="r-stretch"></section>
+<section id="seattle-1" class="slide level2">
+<h2>Seattle</h2>
+
+<img data-src="seattle_curbs.png" class="r-stretch"></section>
+<section id="seattle-2" class="slide level2">
+<h2>Seattle</h2>
+
+<img data-src="seattle_negative_space.png" class="r-stretch"></section>
+<section id="seattle-3" class="slide level2">
+<h2>Seattle</h2>
 <ul>
-<li>Parcels, https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1</li>
-<li>Pavement edges, https://data.seattle.gov/dataset/Pavement-Edge-zip/gy82-cq84</li>
-<li>Channelization?! https://data-seattlecitygis.opendata.arcgis.com/datasets/channelization-file-geodatabase/about</li>
+<li><a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1">Parcels</a></li>
+<li><a href="https://data.seattle.gov/dataset/Pavement-Edge-zip/gy82-cq84">Pavement edges</a></li>
+<li><a href="https://data-seattlecitygis.opendata.arcgis.com/datasets/channelization-file-geodatabase/about">Channelization</a></li>
 </ul>
-<h3 id="london">london</h3>
+</section>
+<section id="london" class="slide level2">
+<h2>London</h2>
+
+<img data-src="inspire_polygons.png" class="r-stretch"><ul>
+<li><a href="https://use-land-property-data.service.gov.uk/datasets/inspire">INSPIRE parcels</a></li>
+</ul>
+</section>
+<section id="são-paulo" class="slide level2">
+<h2>São Paulo</h2>
 <ul>
-<li>parcels, https://use-land-property-data.service.gov.uk/datasets/inspire
+<li><a href="https://github.com/spstreets/OD2017/releases/download/1/sw.gpkg" class="uri">https://github.com/spstreets/OD2017/releases/download/1/sw.gpkg</a> and <a href="https://github.com/spstreets/OD2017/releases/download/1/streets.gpkg" class="uri">https://github.com/spstreets/OD2017/releases/download/1/streets.gpkg</a></li>
+<li>Thanks to <a href="https://github.com/lucasccdias">Lucas</a></li>
+</ul>
+
+<img data-src="sp_sidewalks_unzoom.png" class="r-stretch"></section>
+<section id="são-paulo-1" class="slide level2">
+<h2>São Paulo</h2>
+
+<img data-src="sp_sidewalks_zoom.png" class="r-stretch"></section>
+<section id="são-paulo-2" class="slide level2">
+<h2>São Paulo</h2>
+
+<img data-src="sp_polygons.png" class="r-stretch"></section>
+<section id="landuse-polygons" class="slide level2">
+<h2>Landuse polygons</h2>
+<p><a href="https://www.openstreetmap.org/relation/1277566#map=17/51.47069/-2.52027" class="uri">https://www.openstreetmap.org/relation/1277566#map=17/51.47069/-2.52027</a></p>
+
+<img data-src="landuse.png" class="r-stretch"></section>
+<section id="modest-proposals" class="slide level2">
+<h2>Modest proposals</h2>
 <ul>
-<li>good enough or not?</li>
+<li>Estimate width
+<ul>
+<li>Start from OSM center-line</li>
+<li>Project left until you hit something</li>
+<li>Repeat for right</li>
+<li>Shift the center-line to actually be centered</li>
 </ul></li>
 </ul>
-<h3 id="são-paulo">São Paulo</h3>
-<ul>
-<li>https://github.com/spstreets/OD2017/releases/download/1/sw.gpkg and https://github.com/spstreets/OD2017/releases/download/1/streets.gpkg</li>
-</ul>
-<h3 id="montana">Montana</h3>
+</section>
+<section id="montana" class="slide level2">
+<h2>Montana</h2>
 <ul>
 <li>http://svc.mt.gov/msl/mtcadastral/ (Jesse Crocker)</li>
 </ul>
-<h3 id="des-moines">Des Moines</h3>
+</section>
+<section id="des-moines" class="slide level2">
+<h2>Des Moines</h2>
 <p>https://www.dsm.city/city_of_des_moines_gis_data/index.php planimetrics (Justin Gruca)</p>
-<h3 id="denver">Denver</h3>
+</section>
+<section id="denver" class="slide level2">
+<h2>Denver</h2>
 <p>https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import (Minh Nguyen)</p>
-<h3 id="san-jose">San Jose</h3>
+</section>
+<section id="san-jose" class="slide level2">
+<h2>San Jose</h2>
 <p>https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00 sidewalk polygons (Minh) and curbfaces https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about</p>
-<h3 id="ohio">Ohio</h3>
+</section>
+<section id="ohio" class="slide level2">
+<h2>Ohio</h2>
 <p>https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources various (Minh)</p>
-<h3 id="nyc">NYC</h3>
+</section>
+<section id="nyc" class="slide level2">
+<h2>NYC</h2>
 <p>https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733 https://streets.planning.nyc.gov/about (Maxim)</p>
-<h3 id="madrid">Madrid</h3>
+</section>
+<section id="madrid" class="slide level2">
+<h2>Madrid</h2>
 <p>https://distanciamiento.inspide.com/</p>
-<h3 id="landuse-polygons">landuse polygons</h3>
-<p>https://www.openstreetmap.org/relation/1277566#map=16/51.4718/-2.5168</p>
-<h3 id="more-parcel">more parcel</h3>
+</section>
+<section id="more-parcel" class="slide level2">
+<h2>more parcel</h2>
 <p><a href="https://openaddresses.io/">OpenAddresses</a></p>
 </section>
 <section id="negative-space" class="slide level2">
