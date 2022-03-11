@@ -354,13 +354,13 @@
 <section id="about-michael" class="slide level2">
 <h2>About Michael</h2>
 <ul>
-<li><a href="https://github.com/a-b-street/osm2lanes" class="uri">https://github.com/a-b-street/osm2lanes</a></li>
+<li><a href="https://github.com/droogmic/" class="uri">https://github.com/droogmic/</a></li>
 <li><a href="https://www.openstreetmap.org/user/droogmic" class="uri">https://www.openstreetmap.org/user/droogmic</a></li>
-<li>Software Engineer, ASML, Netherlands</li>
+<li>Software Engineer, ASML, Netherlands since 2018</li>
 </ul>
 </section>
 <section id="talk-outline" class="slide level2">
-<h2>Talk outline</h2>
+<h2>Talk Outline</h2>
 <ol type="1">
 <li>Background</li>
 <li>How it works today</li>
@@ -392,25 +392,25 @@
 </div>
 </section>
 <section id="edit-roads" class="slide level2">
-<h2>Edit roads</h2>
+<h2>Edit Roads</h2>
 
 <img data-src="https://a-b-street.github.io/docs/project/history/retrospective/edit_roads.gif" class="r-stretch"></section>
 <section id="simulate-traffic" class="slide level2">
-<h2>Simulate traffic</h2>
+<h2>Simulate Traffic</h2>
 
 <img data-src="https://a-b-street.github.io/docs/project/history/retrospective/traffic_sim.gif" class="r-stretch"></section>
 <section id="plan-bike-networks" class="slide level2">
-<h2>Plan bike networks</h2>
+<h2>Plan Bike Networks</h2>
 <p><a href="http://bike.abstreet.org">bike.abstreet.org</a></p>
 
 <img data-src="https://a-b-street.github.io/docs/software/ungap_the_map/demo.gif" class="r-stretch"></section>
 <section id="low-traffic-neighborhoods" class="slide level2">
-<h2>Low-traffic neighborhoods</h2>
+<h2>Low-traffic Neighborhoods</h2>
 <p><a href="http://ltn.abstreet.org">ltn.abstreet.org</a></p>
 
 <img data-src="https://a-b-street.github.io/docs/software/ltn/ltn.gif" class="r-stretch"></section>
 <section id="sharing-code" class="slide level2">
-<h2>Sharing code</h2>
+<h2>Sharing Code</h2>
 <ul>
 <li><a href="https://github.com/a-b-street/abstreet/discussions/789" class="uri">https://github.com/a-b-street/abstreet/discussions/789</a></li>
 <li><a href="https://github.com/a-b-street/abstreet/blob/master/raw_map/src/lane_specs.rs" class="uri">https://github.com/a-b-street/abstreet/blob/master/raw_map/src/lane_specs.rs</a></li>
@@ -451,7 +451,7 @@
 </ul>
 </section>
 <section id="end-user-stories" class="slide level2">
-<h2>End-user stories</h2>
+<h2>End-user Stories</h2>
 <ul>
 <li>vector map of whole world showing lane tagging</li>
 <li>Streetmix style editor for lane tagging
@@ -473,9 +473,14 @@
 <section id="input" class="slide level2">
 <h2>Input</h2>
 <ul>
-<li>One way’s key/values</li>
-<li>left- or right-handed driving?</li>
-<li>country code (for inferring lane widths, colors)</li>
+<li>An OSM way’s tags</li>
+<li>A locale (country / region code), for inferring if not explicitly defined, for example
+<ul>
+<li>tag meaning</li>
+<li>left- or right-handed driving</li>
+<li>lane widths</li>
+<li>lane separator styles</li>
+</ul></li>
 </ul>
 </section>
 <section id="output" class="slide level2">
@@ -489,7 +494,7 @@
           "type": "travel",
           "direction": "backward",
           "designated": "bicycle",
-          "width": null
+          "width": 2.0
         },
         {
           "type": "separator",
@@ -505,7 +510,7 @@
           "type": "travel",
           "direction": "backward",
           "designated": "motor_vehicle",
-          "width": null
+          "width": 3.5
         },
         {
           "type": "separator",
@@ -521,7 +526,7 @@
           "type": "travel",
           "direction": "forward",
           "designated": "motor_vehicle",
-          "width": null
+          "width": 3.5
         },
         {
           "type": "separator",
@@ -537,7 +542,7 @@
           "type": "travel",
           "direction": "forward",
           "designated": "bicycle",
-          "width": null
+          "width": 2.0
         }
       ],
       "highway": {
@@ -553,8 +558,8 @@
   }
 }</code></pre>
 </section>
-<section id="output-1" class="slide level2">
-<h2>Output</h2>
+<section id="output-osm2lanes" class="slide level2">
+<h2>Output, <code>osm2lanes</code></h2>
 <ul>
 <li>type
 <ul>
@@ -563,6 +568,7 @@
 <li>designated
 <ul>
 <li>foot, bike, motor vehicle, bus</li>
+<li>(in the future we will add <code>access=*</code> per lane)</li>
 </ul></li>
 <li>direction
 <ul>
@@ -573,16 +579,17 @@
 </ul>
 </section>
 <section id="inverse-lanes2osm" class="slide level2">
-<h2>Inverse, lanes2osm</h2>
+<h2>Inverse, <code>lanes2osm</code></h2>
 <ul>
 <li>An easier OSM lanes editor
 <ul>
 <li>Pick a way, grab its tags</li>
-<li>osm2lanes</li>
+<li><code>osm2lanes</code></li>
 <li>Edit the lanes with something Streetmix-like</li>
-<li>lanes2osm</li>
+<li><code>lanes2osm</code></li>
 <li>Upload the diff</li>
 </ul></li>
+<li>Maybe a tag “autoformatter” in iD/JOSM?</li>
 <li>Complications?</li>
 </ul>
 </section>
@@ -607,41 +614,19 @@
 <p><a href="https://github.com/a-b-street/osm2lanes/blob/main/data/tests.yml" class="uri">https://github.com/a-b-street/osm2lanes/blob/main/data/tests.yml</a></p>
 </section>
 <section id="code-walkthrough" class="slide level2">
-<h2>Code walkthrough</h2>
+<h2>Code Walkthrough</h2>
 <ul>
 <li><a href="https://github.com/a-b-street/osm2lanes/blob/main/rust/osm2lanes/src/road/lane.rs">Lane schema</a></li>
-<li><a href="https://github.com/a-b-street/osm2lanes/blob/03afea4f6272568e2b91e6e575945e58e2654aa7/rust/osm2lanes/src/transform/tags_to_lanes/mod.rs#L382">broken down by mode</a>
-<ul>
-<li>special case non-motorized paths</li>
-<li>bus</li>
-<li>bike</li>
-<li>parking</li>
-<li>sidewalks / shoulders</li>
-</ul></li>
-<li>build up from inside-to-out, both sides of the road</li>
-<li>insert separators afterwards</li>
-</ul>
-</section>
-<section id="inferred-values" class="slide level2">
-<h2>Inferred values</h2>
-<ul>
-<li>Direct tagged data</li>
-<li>Stuff we assume as a reasonable default</li>
-<li>… locale-specific config</li>
-<li>Calculated from a tagged value (splitting total width over all the lanes)</li>
+<li><a href="https://github.com/a-b-street/osm2lanes/blob/03afea4f6272568e2b91e6e575945e58e2654aa7/rust/osm2lanes/src/transform/tags_to_lanes/mod.rs#L382">Nested switch case logic by transport mode</a><br>
+special case non-motorized paths, bus, bike, parking, sidewalks / shoulders</li>
+<li>forward and backward lanes handled separately, lanes usually appended inside-to-out</li>
+<li>separators inserted last based on the two adjacent lane types</li>
 </ul>
 </section></section>
 <section>
 <section id="part-3-complications" class="title-slide slide level1 center">
 <h1>Part 3: Complications</h1>
 
-</section>
-<section id="designated-vs-allowed" class="slide level2">
-<h2>Designated vs allowed</h2>
-<ul>
-<li>Footpaths allowing, but not prioritizing, cyclists</li>
-<li>Bus lanes allowing cyclists</li>
-</ul>
 </section>
 <section id="errors-are-rampant" class="slide level2">
 <h2>Errors are rampant</h2>
@@ -666,8 +651,46 @@ name = Dexter Avenue North
 oneway = no
 surface = paved</code></pre>
 </section>
+<section id="error-and-warning-handling" class="slide level2">
+<h2>Error and Warning Handling</h2>
+<ul>
+<li>issues encountered in tags classified as
+<ul>
+<li>ambiguity</li>
+<li>unimplemented</li>
+<li>unsupported</li>
+<li>deprecated</li>
+</ul></li>
+<li>error is thrown if sufficiently problematic</li>
+<li>otherwise a warning is added, and we try and continue</li>
+</ul>
+</section>
+<section id="inferred-values" class="slide level2">
+<h2>Inferred Values</h2>
+<p>not all data is right or wrong, usually it is missing</p>
+<ul>
+<li>Direct tagged data</li>
+<li>Calculated (total width must be the sum of the other widths)</li>
+<li>Inferred (splitting total width over all the lanes evenly)</li>
+<li>Default based on locale</li>
+<li>Reasonable default</li>
+</ul>
+<p>the data consumer wants to know what lane data was tagged and what was a guess?</p>
+</section>
+<section id="designated-vs-allowed" class="slide level2">
+<h2>Designated vs Allowed</h2>
+<ul>
+<li>footpaths allowing, but not prioritizing, cyclists</li>
+<li>bus lanes allowing cyclists</li>
+</ul>
+<p>this is a generic library</p>
+<ul>
+<li>most rendering applications simply wants to know what the designated purpose is</li>
+<li>a routing application wants to know what the full access is</li>
+</ul>
+</section>
 <section id="separate-ways" class="slide level2">
-<h2>Separate ways</h2>
+<h2>Separate Ways</h2>
 <p><a href="https://www.youtube.com/watch?v=LatorN4P9aA" class="uri">https://www.youtube.com/watch?v=LatorN4P9aA</a></p>
 <ul>
 <li>Punt to the caller, feed in all of the ways?
@@ -685,31 +708,31 @@ surface = paved</code></pre>
 <section>
 <section id="part-4-next-steps-contributing" class="title-slide slide level1 center">
 <h1>Part 4: Next steps / contributing</h1>
-
+<p><a href="https://github.com/a-b-street/osm2lanes" class="uri">https://github.com/a-b-street/osm2lanes</a></p>
 </section>
 <section id="test-cases" class="slide level2">
 <h2>Test cases</h2>
-<ul>
-<li>Particularly cycleway buffers, <a href="https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Radwege#Tagging-Beispiele" class="uri">https://wiki.openstreetmap.org/wiki/Berlin/Verkehrswende/Radwege#Tagging-Beispiele</a></li>
-</ul>
+<p>we need a healthy combination of: - real world examples (with mapillary / pictures to know what exists on the ground) - esoteric examples, when real world examples cannot be found to test the extremes</p>
 </section>
-<section id="locales" class="slide level2">
-<h2>Locales</h2>
+<section id="osm2lanes" class="slide level2">
+<h2><code>osm2lanes</code></h2>
+<p>Most implementation is in rust,<br>
+but rust is not too hard to learn.</p>
+<p>Try one of the <a href="https://github.com/a-b-street/osm2lanes/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22">good first issues</a>!</p>
+<h3 id="web-interface">Web Interface</h3>
+<p>Web interface: https://a-b-street.github.io/osm2lanes/</p>
 <ul>
-<li><a href="https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata" class="uri">https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata</a></li>
+<li>written almost entirely in rust</li>
+<li>allows for rapid improvement of implementation</li>
 </ul>
-</section>
-<section id="web-map" class="slide level2">
-<h2>Web map</h2>
-<p><a href="https://github.com/a-b-street/osm2lanes/blob/main/web/index.html" class="uri">https://github.com/a-b-street/osm2lanes/blob/main/web/index.html</a></p>
-<ul>
-<li>Click a road, see its lanes in cross-section view</li>
-<li>Rust &lt;-&gt; Javascript API</li>
-<li>Publish on npm</li>
-</ul>
+</section></section>
+<section>
+<section id="osm2lanes-future" class="title-slide slide level1 center">
+<h1><code>osm2lanes</code> Future</h1>
+
 </section>
 <section id="per-lane-width" class="slide level2">
-<h2>Per-lane width</h2>
+<h2>Per-lane Width</h2>
 <ul>
 <li>Use it when it’s tagged</li>
 <li>If we know the curb-to-curb width or entire road width…
@@ -719,12 +742,34 @@ surface = paved</code></pre>
 </ul>
 </section>
 <section id="per-lane-data" class="slide level2">
-<h2>Per-lane data</h2>
+<h2>Per-lane Data</h2>
 <ul>
 <li>turn:lanes</li>
 <li>allowed vehicles (bus lanes with bikes or taxis)</li>
 <li>time-restricted turns or parking</li>
 <li>surface type</li>
+<li>speed limit</li>
+</ul>
+</section>
+<section id="locales" class="slide level2">
+<h2>Locales</h2>
+<ul>
+<li><a href="https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata" class="uri">https://github.com/streetcomplete/StreetComplete/tree/master/res/country_metadata</a></li>
+</ul>
+</section>
+<section id="library" class="slide level2">
+<h2>Library</h2>
+<p>This library needs to be used to be useful.</p>
+<p>If you know a project that can use this functionality, help contribute there to make it a dependency.</p>
+<p>Use it on your own projects!</p>
+</section>
+<section id="web-map" class="slide level2">
+<h2>Web map</h2>
+<p><a href="https://github.com/a-b-street/osm2lanes/blob/main/web/index.html" class="uri">https://github.com/a-b-street/osm2lanes/blob/main/web/index.html</a></p>
+<ul>
+<li>Click a road, see its lanes in cross-section view</li>
+<li>Rust &lt;-&gt; Javascript API</li>
+<li>Publish on npm</li>
 </ul>
 
 <img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
