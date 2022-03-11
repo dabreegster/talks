@@ -220,10 +220,6 @@ Here are some things it has to handle
 
 ## Let's just draw stuff
 
-Just try to partition 2D space into objects, label the areas with some attributes
-
-## Borough station
-
 ![](borough1.png)
 
 ## Borough station
@@ -233,6 +229,18 @@ Just try to partition 2D space into objects, label the areas with some attribute
 ## Borough station
 
 ![](borough3.png)
+
+## Subdivide space
+
+- One road object
+  - left side
+    - lanes
+    - separate cycle track
+    - pavement
+  - median / crossing island
+  - right side
+
+Attributes (or even... a JSON object) per piece
 
 ## Connections / tagged things along the boundary of adjacent polygons
 
@@ -261,81 +269,122 @@ Varying width based on linear referencing? Cav contour "bulges"?
 - navmeshes
 - 3D engines
 
-# Part 3: Is this practical?
+## Asks
+
+some CAD or drawing program to subdivide space, snap lines easily?
+
+# Part 3: Practical next steps
 
 ## Would this be hard to map?
 
 - in ID or JOSM, oh yeah
-- needs a UI dedicated to it. what might that look like?
-  - demo of thickening lines over satellite
-  - when width varies, creating bulges and dragging them? do people know examples from CAD / 3d modeling?
-- pay as you go
-  - just tag the center line, classic quick lane count
-  - do the abst approach: desperate heuristics, show it
-  - if the UI for adding detail is easy, people will do it, use that instead of inference
+- dedicated UI
+  - first step: just draw a linestring over satellite, quickly thicken it or shift left/right
+  - when width varies, creating bulges and dragging them?
+
+## Pay as you go / a migration plan
+
+If we did come up with a new schema, we don't need to start mapping from scratch
+
+1. Continue mapping the road center with lane attributes
+2. Use osm2lanes + A/B Street's road/intersection geometry heuristics
+3. Use the dedicated UI to correct mistakes / add detail
 
 ## Satellite imagery
 
-- is this enough?
-- tree cover
-
-## machine learning
-
-- from satellite or streetview
-- sure, I'm not familiar here, not seen any widespread demos, just papers
+- Sufficient to map this kind of detail?
+- Tree cover and building shadows
+- Any easy-to-use computer vision tools for snapping lines to edges or segmenting?
 
 ## What other data is sometimes available?
 
-### seattle
+![](seattle_satellite.png)
 
-- Parcels, https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1
-- Pavement edges, https://data.seattle.gov/dataset/Pavement-Edge-zip/gy82-cq84
-- Channelization?! https://data-seattlecitygis.opendata.arcgis.com/datasets/channelization-file-geodatabase/about
+## Seattle
 
-### london
+![](seattle_parcels.png)
 
-- parcels, https://use-land-property-data.service.gov.uk/datasets/inspire
-  - good enough or not?
+## Seattle
 
-### São Paulo
+![](seattle_curbs.png)
 
-- https://github.com/spstreets/OD2017/releases/download/1/sw.gpkg and https://github.com/spstreets/OD2017/releases/download/1/streets.gpkg
+## Seattle
 
-### Montana
+![](seattle_negative_space.png)
+
+## Seattle
+
+- [Parcels](https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1)
+- [Pavement edges](https://data.seattle.gov/dataset/Pavement-Edge-zip/gy82-cq84)
+- [Channelization](https://data-seattlecitygis.opendata.arcgis.com/datasets/channelization-file-geodatabase/about)
+
+## London
+
+![](inspire_polygons.png)
+
+- [INSPIRE parcels](https://use-land-property-data.service.gov.uk/datasets/inspire)
+
+## São Paulo
+
+- <https://github.com/spstreets/OD2017/releases/download/1/sw.gpkg> and <https://github.com/spstreets/OD2017/releases/download/1/streets.gpkg>
+- Thanks to [Lucas](https://github.com/lucasccdias)
+
+![](sp_sidewalks_unzoom.png)
+
+## São Paulo
+
+![](sp_sidewalks_zoom.png)
+
+## São Paulo
+
+![](sp_polygons.png)
+
+## Landuse polygons
+
+<https://www.openstreetmap.org/relation/1277566#map=17/51.47069/-2.52027>
+
+![](landuse.png)
+
+## Modest proposals
+
+- Estimate width
+  - Start from OSM center-line
+  - Project left until you hit something
+  - Repeat for right
+  - Shift the center-line to actually be centered
+
+## Montana
 
 - http://svc.mt.gov/msl/mtcadastral/ (Jesse Crocker)
 
-### Des Moines
+## Des Moines
 
 https://www.dsm.city/city_of_des_moines_gis_data/index.php planimetrics (Justin Gruca)
 
-### Denver
+## Denver
 
 https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import (Minh Nguyen)
 
-### San Jose
+## San Jose
 
 https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00 sidewalk polygons (Minh)
 and curbfaces https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about
 
-### Ohio
+## Ohio
 
 https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources various (Minh)
 
-### NYC
+## NYC
 
 https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733
 https://streets.planning.nyc.gov/about (Maxim)
 
-### Madrid
+## Madrid
 
 https://distanciamiento.inspide.com/
 
-### landuse polygons
 
-https://www.openstreetmap.org/relation/1277566#map=16/51.4718/-2.5168
-
-### more parcel
+## more parcel
 
 [OpenAddresses](https://openaddresses.io/)
 
