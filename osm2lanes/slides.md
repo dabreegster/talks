@@ -326,21 +326,21 @@ this is a generic library
 ## Test cases
 
 we need a healthy combination of:
+
 - real world examples (with mapillary / pictures to know what exists on the ground)
 - esoteric examples, when real world examples cannot be found to test the extremes
 
 ## `osm2lanes`
 
-Most implementation is in rust, \
-but rust is not too hard to learn.
+Most implementation is in Rust, but Rust is not too hard to learn.
 
 Try one of the [good first issues](https://github.com/a-b-street/osm2lanes/issues?q=is%3Aissue+is%3Aopen+label%3A%22good+first+issue%22)!
 
-### Web Interface
+## Web Interface
 
-Web interface: https://a-b-street.github.io/osm2lanes/
+Web interface: <https://a-b-street.github.io/osm2lanes/>
 
-- written almost entirely in rust
+- written almost entirely in Rust
 - allows for rapid improvement of implementation
 
 # `osm2lanes` Future
@@ -365,11 +365,9 @@ Web interface: https://a-b-street.github.io/osm2lanes/
 
 ## Library
 
-This library needs to be used to be useful.
-
-If you know a project that can use this functionality, help contribute there to make it a dependency.
-
-Use it on your own projects!
+- This library needs to be used to be useful.
+- If you know a project that can use this functionality, help contribute there to make it a dependency.
+- Use it on your own projects!
 
 ## Web map
 
