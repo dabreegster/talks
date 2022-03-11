@@ -338,7 +338,6 @@
 <section>
 <section id="intro" class="title-slide slide level1 center">
 <h1>Intro</h1>
-<!-- What would it take to scale Straßenraumkarte Neukölln everywhere? The OpenStreetMap data model does not easily represent complex junctions, crossing islands, contraflow cycle lanes, pocket parking, bulb-outs, etc. Let's brainstorm what a new schema for representing complex 2D street space could be and how we could render and edit it. We'll then talk about a few practical ways to move towards this schema with OSM. 30 min presentation, 30 min discussion -->
 
 <img data-src="neukolln_map.jpg" class="r-stretch"><p><a href="https://supaplexosm.github.io/strassenraumkarte-neukoelln/?map=micromap#20/52.49555/13.42073">Straßenraumkarte Neukölln</a> changed everything for me</p>
 </section>
@@ -585,46 +584,38 @@
 <li>left side
 <ul>
 <li>lanes</li>
+<li>grass verge</li>
 <li>separate cycle track</li>
 <li>pavement</li>
 </ul></li>
 <li>median / crossing island</li>
 <li>right side</li>
 </ul></li>
+<li>Attributes (or even… a JSON object) per piece</li>
 </ul>
-<p>Attributes (or even… a JSON object) per piece</p>
 </section>
-<section id="connections-tagged-things-along-the-boundary-of-adjacent-polygons" class="slide level2">
-<h2>Connections / tagged things along the boundary of adjacent polygons</h2>
-<p>Show curb height and stuff. If it’s too thin, just treat it as a boundary</p>
+<section id="boundaries-of-adjacent-polygons" class="slide level2">
+<h2>Boundaries of adjacent polygons</h2>
+<ul>
+<li>When polygons share a boundary, use linear referencing to mark an interval of it</li>
+<li>Add attributes (cough JSON cough) to it</li>
+<li>Curb cuts, turns</li>
+<li>If it’s thick enough, subdivide into a polygon</li>
+</ul>
 </section>
 <section id="linear-vs-freeform-movement" class="slide level2">
 <h2>Linear vs freeform movement</h2>
-<p>Calculate straight-skeletons or something, or add back in the center lines for the simple case</p>
-<p>When turn lanes start/end, where should we draw it?</p>
-</section>
-<section id="does-this-schema-hold-up" class="slide level2">
-<h2>Does this schema hold up?</h2>
-<p>Kind of like the pipes and connectors proposal</p>
-<p>No attempt at 3D</p>
 <ul>
-<li>stress tests / go thru examples from geom article like taiwan</li>
+<li>Calculate straight-skeletons?</li>
+<li>Or also have the classic center lines</li>
 </ul>
 </section>
-<section id="simpler-alt-center-lines-with-width" class="slide level2">
-<h2>Simpler alt: center lines with width</h2>
-<p>Varying width based on linear referencing? Cav contour “bulges”?</p>
-</section>
-<section id="appendix-other-possible-inspirations" class="slide level2">
-<h2>Appendix: other possible inspirations</h2>
+<section id="questions" class="slide level2">
+<h2>Questions</h2>
 <ul>
-<li>navmeshes</li>
-<li>3D engines</li>
+<li>some CAD or drawing program to subdivide space, snap lines easily?</li>
+<li>game engines: navmeshes?</li>
 </ul>
-</section>
-<section id="asks" class="slide level2">
-<h2>Asks</h2>
-<p>some CAD or drawing program to subdivide space, snap lines easily?</p>
 </section></section>
 <section>
 <section id="part-3-practical-next-steps" class="title-slide slide level1 center">
@@ -711,8 +702,8 @@
 <p><a href="https://www.openstreetmap.org/relation/1277566#map=17/51.47069/-2.52027" class="uri">https://www.openstreetmap.org/relation/1277566#map=17/51.47069/-2.52027</a></p>
 
 <img data-src="landuse.png" class="r-stretch"></section>
-<section id="modest-proposals" class="slide level2">
-<h2>Modest proposals</h2>
+<section id="a-modest-proposal" class="slide level2">
+<h2>A modest proposal</h2>
 <ul>
 <li>Estimate width
 <ul>
@@ -723,59 +714,49 @@
 </ul></li>
 </ul>
 </section>
-<section id="montana" class="slide level2">
-<h2>Montana</h2>
+<section id="more-data" class="slide level2">
+<h2>More data</h2>
 <ul>
-<li>http://svc.mt.gov/msl/mtcadastral/ (Jesse Crocker)</li>
+<li><a href="http://svc.mt.gov/msl/mtcadastral/">Montana cadastral</a> thanks to Jesse Crocker</li>
+<li><a href="https://www.dsm.city/city_of_des_moines_gis_data/index.php">Des Moines planimetrics</a> via Justin Gruca</li>
+<li><a href="https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import">Denver planimetrics</a> via Minh Nguyen</li>
+<li>San Jose <a href="https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00">sidewalk polygons</a> and <a href="https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about">curbfaces</a> from Minh</li>
+<li><a href="https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources">Ohio</a> from Minh</li>
+<li>NYC <a href="https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733">land use map</a> and <a href="https://streets.planning.nyc.gov/about">street plans</a> from Maxim</li>
+<li><a href="https://distanciamiento.inspide.com/">Madrid social distancing on sidewalks</a></li>
+<li><a href="https://openaddresses.io/">OpenAddresses</a> collects parcel data now too</li>
 </ul>
-</section>
-<section id="des-moines" class="slide level2">
-<h2>Des Moines</h2>
-<p>https://www.dsm.city/city_of_des_moines_gis_data/index.php planimetrics (Justin Gruca)</p>
-</section>
-<section id="denver" class="slide level2">
-<h2>Denver</h2>
-<p>https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import (Minh Nguyen)</p>
-</section>
-<section id="san-jose" class="slide level2">
-<h2>San Jose</h2>
-<p>https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00 sidewalk polygons (Minh) and curbfaces https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about</p>
-</section>
-<section id="ohio" class="slide level2">
-<h2>Ohio</h2>
-<p>https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources various (Minh)</p>
-</section>
-<section id="nyc" class="slide level2">
-<h2>NYC</h2>
-<p>https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733 https://streets.planning.nyc.gov/about (Maxim)</p>
-</section>
-<section id="madrid" class="slide level2">
-<h2>Madrid</h2>
-<p>https://distanciamiento.inspide.com/</p>
-</section>
-<section id="more-parcel" class="slide level2">
-<h2>more parcel</h2>
-<p><a href="https://openaddresses.io/">OpenAddresses</a></p>
 </section>
 <section id="negative-space" class="slide level2">
 <h2>Negative space</h2>
-<p>Get even more radical. If we have nothing but buildings, group them into a block, take some kind of concave hull. Widen road center-lines until they hit.</p>
-<p>This is an example where full automation wouldn’t work. The pay-as-you-go / tool-assisted model. Someone opens an editor somewhere in OSM, uses this tool to produce a guess, then adjusts and uploads it</p>
-</section></section>
-<section>
-<section id="conclusion" class="title-slide slide level1 center">
-<h1>Conclusion</h1>
-<p>actually doing this in OSM – migration plan? keep old software working? cultural split?</p>
-<p>steps in this direction for the pay-as-you go model: osm2lanes and osm2polygons</p>
+<ul>
+<li>Nothing but buildings?
+<ul>
+<li>Group into a block</li>
+<li>Take a concave hull</li>
+<li>Widen road center-lines until they hit</li>
+</ul></li>
+<li>Not advocating for full automation / imports
+<ul>
+<li>Human/machine collaboration, just a better tool</li>
+</ul></li>
+</ul>
 </section>
 <section id="appendix-other-resources" class="slide level2">
 <h2>Appendix: other resources</h2>
-<p>https://www.ian-ko.com/ET_SolutionCenter/gw_derive_setback_areas.htm https://desktop.arcgis.com/en/arcmap/10.3/manage-data/editing-parcels/workflow-migrating-road-centerlines.htm</p>
-<p>is the osm data model creaking?</p>
-<p>https://wiki.openstreetmap.org/wiki/Talk:Key:area:highway#Proposal_for_revision_to_wiki_article https://geo.dianacht.de/topo/?zoom=19&amp;lat=48.15112&amp;lon=11.46511</p>
+<ul>
+<li><a href="https://www.ian-ko.com/ET_SolutionCenter/gw_derive_setback_areas.htm" class="uri">https://www.ian-ko.com/ET_SolutionCenter/gw_derive_setback_areas.htm</a></li>
+<li><a href="https://desktop.arcgis.com/en/arcmap/10.3/manage-data/editing-parcels/workflow-migrating-road-centerlines.htm" class="uri">https://desktop.arcgis.com/en/arcmap/10.3/manage-data/editing-parcels/workflow-migrating-road-centerlines.htm</a></li>
+</ul>
 </section>
-<section id="todo-how-does-the-neukölln-map-work" class="slide level2">
-<h2>TODO: how does the Neukölln map work?</h2>
+<section id="conclusion" class="slide level2">
+<h2>Conclusion</h2>
+<ul>
+<li>My next step: turn <a href="https://a-b-street.github.io/docs/tech/map/geometry/index.html" class="uri">https://a-b-street.github.io/docs/tech/map/geometry/index.html</a> into a library, like osm2lanes</li>
+<li>Contact me: <a href="mailto:dabreegter@gmail.com" class="email">dabreegter@gmail.com</a></li>
+<li>These slides: <a href="https://dabreegster.github.io/talks/map_model_v2/slides.html" class="uri">https://dabreegster.github.io/talks/map_model_v2/slides.html</a></li>
+<li>Slides are on Github: <a href="https://github.com/dabreegster/talks" class="uri">https://github.com/dabreegster/talks</a></li>
+</ul>
 
 <img src="logo.svg" class="slide-logo r-stretch"><div class="footer footer-default">
 

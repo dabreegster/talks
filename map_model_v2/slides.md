@@ -10,8 +10,6 @@ format:
 
 # Intro
 
-<!-- What would it take to scale Straßenraumkarte Neukölln everywhere? The OpenStreetMap data model does not easily represent complex junctions, crossing islands, contraflow cycle lanes, pocket parking, bulb-outs, etc. Let's brainstorm what a new schema for representing complex 2D street space could be and how we could render and edit it. We'll then talk about a few practical ways to move towards this schema with OSM. 30 min presentation, 30 min discussion -->
-
 ![](neukolln_map.jpg)
 
 [Straßenraumkarte Neukölln](https://supaplexosm.github.io/strassenraumkarte-neukoelln/?map=micromap#20/52.49555/13.42073) changed everything for me
@@ -235,43 +233,29 @@ Here are some things it has to handle
 - One road object
   - left side
     - lanes
+    - grass verge
     - separate cycle track
     - pavement
   - median / crossing island
   - right side
+- Attributes (or even... a JSON object) per piece
 
-Attributes (or even... a JSON object) per piece
+## Boundaries of adjacent polygons
 
-## Connections / tagged things along the boundary of adjacent polygons
-
-Show curb height and stuff. If it's too thin, just treat it as a boundary
+- When polygons share a boundary, use linear referencing to mark an interval of it
+- Add attributes (cough JSON cough) to it
+- Curb cuts, turns
+- If it's thick enough, subdivide into a polygon
 
 ## Linear vs freeform movement
 
-Calculate straight-skeletons or something, or add back in the center lines for the simple case
+- Calculate straight-skeletons?
+- Or also have the classic center lines
 
-When turn lanes start/end, where should we draw it?
+## Questions
 
-## Does this schema hold up?
-
-Kind of like the pipes and connectors proposal
-
-No attempt at 3D
-
-- stress tests / go thru examples from geom article like taiwan
-
-## Simpler alt: center lines with width
-
-Varying width based on linear referencing? Cav contour "bulges"?
-
-## Appendix: other possible inspirations
-
-- navmeshes
-- 3D engines
-
-## Asks
-
-some CAD or drawing program to subdivide space, snap lines easily?
+- some CAD or drawing program to subdivide space, snap lines easily?
+- game engines: navmeshes?
 
 # Part 3: Practical next steps
 
@@ -345,7 +329,7 @@ If we did come up with a new schema, we don't need to start mapping from scratch
 
 ![](landuse.png)
 
-## Modest proposals
+## A modest proposal
 
 - Estimate width
   - Start from OSM center-line
@@ -353,61 +337,34 @@ If we did come up with a new schema, we don't need to start mapping from scratch
   - Repeat for right
   - Shift the center-line to actually be centered
 
-## Montana
+## More data
 
-- http://svc.mt.gov/msl/mtcadastral/ (Jesse Crocker)
-
-## Des Moines
-
-https://www.dsm.city/city_of_des_moines_gis_data/index.php planimetrics (Justin Gruca)
-
-## Denver
-
-https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import (Minh Nguyen)
-
-## San Jose
-
-https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00 sidewalk polygons (Minh)
-and curbfaces https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about
-
-## Ohio
-
-https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources various (Minh)
-
-## NYC
-
-https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733
-https://streets.planning.nyc.gov/about (Maxim)
-
-## Madrid
-
-https://distanciamiento.inspide.com/
-
-
-## more parcel
-
-[OpenAddresses](https://openaddresses.io/)
+- [Montana cadastral](http://svc.mt.gov/msl/mtcadastral/) thanks to Jesse Crocker
+- [Des Moines planimetrics](https://www.dsm.city/city_of_des_moines_gis_data/index.php) via Justin Gruca
+- [Denver planimetrics](https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import) via Minh Nguyen
+- San Jose [sidewalk polygons](https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00) and [curbfaces](https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about) from Minh
+- [Ohio](https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources) from Minh
+- NYC [land use map](https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733) and [street plans](https://streets.planning.nyc.gov/about) from Maxim
+- [Madrid social distancing on sidewalks](https://distanciamiento.inspide.com/)
+- [OpenAddresses](https://openaddresses.io/) collects parcel data now too
 
 ## Negative space
 
-Get even more radical. If we have nothing but buildings, group them into a block, take some kind of concave hull. Widen road center-lines until they hit.
-
-This is an example where full automation wouldn't work. The pay-as-you-go / tool-assisted model. Someone opens an editor somewhere in OSM, uses this tool to produce a guess, then adjusts and uploads it
-
-# Conclusion
-
-actually doing this in OSM -- migration plan? keep old software working? cultural split?
-
-steps in this direction for the pay-as-you go model: osm2lanes and osm2polygons
+- Nothing but buildings?
+  - Group into a block
+  - Take a concave hull
+  - Widen road center-lines until they hit
+- Not advocating for full automation / imports
+  - Human/machine collaboration, just a better tool
 
 ## Appendix: other resources
 
-https://www.ian-ko.com/ET_SolutionCenter/gw_derive_setback_areas.htm
-https://desktop.arcgis.com/en/arcmap/10.3/manage-data/editing-parcels/workflow-migrating-road-centerlines.htm
+- <https://www.ian-ko.com/ET_SolutionCenter/gw_derive_setback_areas.htm>
+- <https://desktop.arcgis.com/en/arcmap/10.3/manage-data/editing-parcels/workflow-migrating-road-centerlines.htm>
 
-is the osm data model creaking?
+## Conclusion
 
-https://wiki.openstreetmap.org/wiki/Talk:Key:area:highway#Proposal_for_revision_to_wiki_article
-https://geo.dianacht.de/topo/?zoom=19&lat=48.15112&lon=11.46511
-
-## TODO: how does the Neukölln map work?
+- My next step: turn <https://a-b-street.github.io/docs/tech/map/geometry/index.html> into a library, like osm2lanes
+- Contact me: <dabreegter@gmail.com>
+- These slides: <https://dabreegster.github.io/talks/map_model_v2/slides.html>
+- Slides are on Github: <https://github.com/dabreegster/talks>
