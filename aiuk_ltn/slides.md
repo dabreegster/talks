@@ -19,35 +19,77 @@ These slides: ...
 
 # Part 1: Background
 
-In response to rising levels of motor vehicles using sat-nav to cut through residential streets and avoid traffic, local authorities across the UK have been creating low traffic neighborhoods (LTNs). Modal filters (planters or bollards in the middle of the street) prevent drivers from passing through, but allow pedestrians and cyclists. When filters are strategically placed to prevent all through-traffic, people in the area are likely to enjoy better air quality, less noise pollution, and higher levels of physical activity.
-
-The 2020 active travel fund jump-started many new LTN schemes, but there has been a mixed public response, stemming partly from miscommunication, lack of education, and hastened consultations. To design and share LTN schemes, planners at local authorities currently use manual workflows in existing GIS software -- or sometimes just sketching ideas over satellite imagery. The resulting schemes rely on humans to assess all possible routes for through-traffic; sharing the plans with the public is usually done with a low-resolution diagram; and members of the public have no easy way to propose an alternate design.
-
 <!-- sustrans references -->
+
+## The problem
+
+- Car-centric cities
+  - Greenhouse gases
+  - Noise pollution
+  - Air quality
+  - Space for parking
+  - Collisions
+  - Suburban sprawl and unsustainable land use
+  - Lack of exercise
+
+## The problem
+
+- Rise of traffic on local streets from sat-nav
+
+## The response
+
+- Modal filters
+- Area of effect
+
+## The response
+
+- 2020 active travel fund
+- Mixed public response
+  - miscommunication
+  - lack of public education
+  - hasty consultations
+  - genuinely poorly designed LTNs
+
+## The current planning process
+
+- Communication by diagram
+- How's this affect my commute?
 
 # Part 2: The tool
 
+## Demo
+
+## The LTN tool
+
 - <http://ltn.abstreet.org>
-- web browser, Mac, Windows, Linux (no mobile)
+- web browser, Mac, Windows, Linux
+  - no mobile
 - free, open source
   - <https://github.com/a-b-street/abstreet/tree/master/apps/ltn>
-- targets local authority planners, individual residents, and campaign groups
-
-## Credits
-
-- developed in a few months
-  - 24 September proof-of-concept
-  - UX designer joined 28 February
-- built on top of the A/B Street platform
-  - alumni: Michael Kirk, Yuwen Li
+- multiple audiences
+  - local authorities / consultants
+  - individuals
+  - campaign groups
 
 ## Scope
 
 - works anywhere, thanks to OpenStreetMap
-- most appropriate for cities
-- tuned for the UK
+  - most appropriate for cities
 
-## Demo
+## Credits
+
+- Dustin Carlino: project lead
+- Cindy Huang: UX designer (beginning of March)
+- Thanks
+  - Robin Lovelace: product manager
+  - Brian Deegan, Will Petty, Sustrans
+  - Martin Lucas-Smith (CycleStreets)
+  - Feedback and testing from many!
+
+## Credits
+
+- built on the A/B Street platform
+- alumni: Michael Kirk and Yuwen Li
 
 # Part 3: Technical overview
 
