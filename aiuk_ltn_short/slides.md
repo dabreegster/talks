@@ -194,13 +194,12 @@ Join the workshop tomorrow at 15:00 for details
 
 ![](ratrun_example.png)
 
-- **Not** the bigger picture
-  - Does this path save somebody time?
-  - How many people might take this shortcut?
-
 ## Rat-run definition
 
 - A shortest path starting and ending on the perimeter road
+- **Not** the bigger picture
+  - Does this path save somebody time?
+  - How many people might take this shortcut?
 
 ## Rat-run definition
 
@@ -233,88 +232,223 @@ Join the workshop tomorrow at 15:00 for details
 
 ![](detour3.png)
 
-## Initial boundaries
+## Defining a neighborhood
 
-- We've been talking in units of a neighborhood, but how're these defined?
-- Take a "major" road from OSM and trace a complete loop
-  - Sometimes a major road just ends; Stovell Ave / Matthews Lane in levenshulme
+![](boundary_default.png)
+
+## Defining a neighborhood
+
+![](boundary_water.png)
+
 - This process will cross railroads, water
   - If it didn't, the local road on that part of the perimeter would be OK to have traffic
 
-## Boundary adjustment
+## Defining a neighborhood
 
-- But the heuristics are just a start! Plenty of reasons it might not make sense:
-  - OSM classification isnt quite right
-  - Small spaces in between a dual carriageway count!
-  - Legitimately you want to join two neighborhoods into one piece
+![](boundary_major_roads.png)
 
-## Boundary adjustment
+- Sometimes major roads just end
 
-And the most important: get people to revisit road classification!
+## Defining a neighborhood
 
-- Road classification was done a while ago with different priorities about moving vehicles through an area
-- Maybe it's time to rethink that high street as a thoroughfare
+![](boundary_dual_carriageway.png)
+
+- Spaces in between motorway loops or dual carriageways
 
 ## Boundary adjustment
 
-- Regardless of the reason, I don't want this tool to be prescriptive about boundaries! Let humans adjust:
-
-<!-- show it -->
+- Plenty of reasons the heuristics aren't perfect
+- Road classification varies regionally
 
 ## Boundary adjustment
 
-- Operates block by block
-- All blocks partitioned into contiguous neigborhoods
-- If you add a block to one neighborhood, you remove it from the other; the boundary shifts
+**Maybe road classification is worth revisiting**
 
-## Limitations with boundary adjustment
+- Different priorities about moving vehicles through an area
+- Should that high street also be a through-route?
+- Lots of resistance to LTNs is really resistance to the chosen boundary
 
-- Bridges, tunnels, edge of map
-- Tiny blocks
-- You can't create holes
-- It's not perfect; you can't always draw the boundaries you want
+## Boundary adjustment
+
+- Don't be too prescriptive; let users adjust
+
+![](boundary1.png)
+
+## Boundary adjustment
+
+![](boundary2.png)
+
+## Boundary adjustment
+
+![](blocks.png)
+
+- Per block
+- Partitioning into contiguous neighborhoods
+- Adding a block to one neighborhood removes it from another
+
+## Blockfinding
+
+![](block_order.png)
+
+- Trace around the edge of a road
+- Uses the shape of roads and intersections, inferred from OpenStreetMap
+- A block internally tracks a list of (road, left/right)
+
+## Merging two blocks
+
+![](merge1.png)
+
+- Find the common slice of the perimeters
+- "Rotate" the perimeter until the common part matches up
+- Slice and stitch together
+
+## Merging two blocks
+
+![](merge2.png)
+
+## Merging two blocks
+
+![](deadends.png)
+
+- Collapsing dead-ends
+- Clockwise and counter-clockwise blocks
+  - Winding order
+
+## Blockfinding limitations
+
+![](blocks_water.png)
+
+- Only traces roads, not natural features
+
+## Blockfinding limitations
+
+![](blocks_edge.png)
+
+- Edge of the study area
+
+## Blockfinding limitations
+
+![](bridges1.png)
+
+- Bridges / tunnels
+  - Trace the 2D area of the planar graph?
+  - Skip them?
+
+## Blockfinding limitations
+
+![](bridges2.png)
+
+## Blockfinding limitations
+
+![](holes.png)
+
+- You can't always draw the boundaries you want
 
 ## Assessing overall impact
 
-- some simple summaries
-  - rank neighborhoods by how many internal rat runs they have
-  - show rat runs / quiet streets everywhere
+<!-- We've been focusing on one neighborhood at a time -->
+
+![](all_rat_runs.png)
+
+- Show all rat-runs at once
+- Rank neighborhoods by number of internal rat-runs
 
 ## Assessing overall impact
 
-- Revisit the rat-run idea. How will traffic really detour in the short-term?
-- Need a travel demand model; where do driving trips begin and end?
-- If we know, calculate route before and after filters, show roads with less/more traffic
+- Is the rat-run realistic?
+- How many people will try to take it?
+- With new filters, how will overall traffic detour
+  - Maybe spillover to another neighborhood
 
 ## Assessing overall impact
 
-- At the moment, only have something based on 2011 data and commute trips
-- Working with Urban Observatories to get better data
+![](demand_model.png)
+
+- Where do driving trips begin and end?
+- For neighborhood-scale detours, MSOA zones are too large
+
+## Assessing overall impact
+
+<!-- example heatmap -->
+
+- Calculate all driving routes before and after filters
+- Look for quieter and busier streets
+
+## Assessing overall impact
+
+- 2011 census data, commuting only
+- Urban Observatories traffic counts
+    - Calibrate / validate
+    - Where do the 5,000 vehicles/hour along a road start and end?
+
+<!-- If you're in the audience and you have a demand model... plug it in, keep your data private -->
 
 ## Heuristics for placing filters
 
-- Always need human judgment -- prioritize calming near a park, or a load zone, or based on road width
-- But getting some automation help is always nice, especially when there's overwhelming number of choices
-- So for a neighborhood, what're filters that could be placed automatically?
+- Human judgment
+  - Prioritize near parks, areas with prior problems
+  - Can the bin collection truck turn around?
+- The use of automation
+  - Seed ideas
+  - Choice overload
+
+## Where should the filter go?
+
+![](heuristic_before.png)
+
+## Where should the filter go?
+
+![](heuristic_greedy.png)
+
+- Greedy: the road with the most rat-runs
+- Whack-a-mole
+
+## Where should the filter go?
+
+![](heuristic_border.png)
+
+- Only one entrance per cell
+  - Expensive, likely unpopular
+  - Very different results for residents
+  - Simpler crossings along the perimeter
 
 ## Heuristics for placing filters
 
-- Focus on road with most rat-runs, play whack-a-mole
+![](heuristic_human.png)
+
+- Split large cells
+- My human intuition
 
 ## Heuristics for placing filters
 
-- Brute force: only one entrance/exit to every cell
+![](heuristic_split.png)
+
+- Minimum cut of the graph
 
 ## Heuristics for placing filters
 
-- Split large cells into smaller pieces; this'll probably also have the effect of reducing rat runs
-- Consider a filter on every road segment. Does it split the cell?
-- Many solutions just cut off near the start of a neighborhood. For the resulting two cells, take the smaller number of roads (aka size). Maximize that
-- Show some surprising results / solutions. I didn't see some of these.
+![](heuristic_split_balance.png)
+
+- Trivial solutions near the perimeter
+- How large are the two resulting cells?
+
+## Heuristics for placing filters
+
+![](grid.png)
+
+- What do you do with grids?
+
+## Heuristics for placing filters
+
+![](grid_diagonal.png)
 
 ## A large-scale vision
 
-- Show a very large-scale change
+- One use of automation...
+
+## A large-scale vision
+
+<!-- What do we show? How many filters to stop most rat runs? -->
 
 # Part 4: Next steps
 
@@ -343,6 +477,12 @@ And the most important: get people to revisit road classification!
   -  The cells show if it's possible to drive through or not!
   -  (Barring data quality / bugs)
 - There's no magic / AI. It's explainable, and thus trustworthy
+
+(Also, it's very rewarding to work on this -- quick visual feedback)
+
+## Takeaway for shorter talk
+
+- What stuff doesn't work well yet
 
 ## Conclusion
 

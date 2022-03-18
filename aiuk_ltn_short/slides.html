@@ -560,18 +560,16 @@
 <section id="predicting-rat-runs-1" class="slide level2">
 <h2>Predicting rat-runs</h2>
 
-<img data-src="ratrun_example.png" class="r-stretch"><ul>
+<img data-src="ratrun_example.png" class="r-stretch"></section>
+<section id="rat-run-definition" class="slide level2">
+<h2>Rat-run definition</h2>
+<ul>
+<li>A shortest path starting and ending on the perimeter road</li>
 <li><strong>Not</strong> the bigger picture
 <ul>
 <li>Does this path save somebody time?</li>
 <li>How many people might take this shortcut?</li>
 </ul></li>
-</ul>
-</section>
-<section id="rat-run-definition" class="slide level2">
-<h2>Rat-run definition</h2>
-<ul>
-<li>A shortest path starting and ending on the perimeter road</li>
 </ul>
 </section>
 <section id="rat-run-definition-1" class="slide level2">
@@ -608,122 +606,269 @@
 <h2>Rat-run results</h2>
 
 <img data-src="detour3.png" class="r-stretch"></section>
-<section id="initial-boundaries" class="slide level2">
-<h2>Initial boundaries</h2>
-<ul>
-<li>We’ve been talking in units of a neighborhood, but how’re these defined?</li>
-<li>Take a “major” road from OSM and trace a complete loop
-<ul>
-<li>Sometimes a major road just ends; Stovell Ave / Matthews Lane in levenshulme</li>
-</ul></li>
+<section id="defining-a-neighborhood" class="slide level2">
+<h2>Defining a neighborhood</h2>
+
+<img data-src="boundary_default.png" class="r-stretch"></section>
+<section id="defining-a-neighborhood-1" class="slide level2">
+<h2>Defining a neighborhood</h2>
+
+<img data-src="boundary_water.png" class="r-stretch"><ul>
 <li>This process will cross railroads, water
 <ul>
 <li>If it didn’t, the local road on that part of the perimeter would be OK to have traffic</li>
 </ul></li>
 </ul>
 </section>
+<section id="defining-a-neighborhood-2" class="slide level2">
+<h2>Defining a neighborhood</h2>
+
+<img data-src="boundary_major_roads.png" class="r-stretch"><ul>
+<li>Sometimes major roads just end</li>
+</ul>
+</section>
+<section id="defining-a-neighborhood-3" class="slide level2">
+<h2>Defining a neighborhood</h2>
+
+<img data-src="boundary_dual_carriageway.png" class="r-stretch"><ul>
+<li>Spaces in between motorway loops or dual carriageways</li>
+</ul>
+</section>
 <section id="boundary-adjustment" class="slide level2">
 <h2>Boundary adjustment</h2>
 <ul>
-<li>But the heuristics are just a start! Plenty of reasons it might not make sense:
-<ul>
-<li>OSM classification isnt quite right</li>
-<li>Small spaces in between a dual carriageway count!</li>
-<li>Legitimately you want to join two neighborhoods into one piece</li>
-</ul></li>
+<li>Plenty of reasons the heuristics aren’t perfect</li>
+<li>Road classification varies regionally</li>
 </ul>
 </section>
 <section id="boundary-adjustment-1" class="slide level2">
 <h2>Boundary adjustment</h2>
-<p>And the most important: get people to revisit road classification!</p>
+<p><strong>Maybe road classification is worth revisiting</strong></p>
 <ul>
-<li>Road classification was done a while ago with different priorities about moving vehicles through an area</li>
-<li>Maybe it’s time to rethink that high street as a thoroughfare</li>
+<li>Different priorities about moving vehicles through an area</li>
+<li>Should that high street also be a through-route?</li>
+<li>Lots of resistance to LTNs is really resistance to the chosen boundary</li>
 </ul>
 </section>
 <section id="boundary-adjustment-2" class="slide level2">
 <h2>Boundary adjustment</h2>
 <ul>
-<li>Regardless of the reason, I don’t want this tool to be prescriptive about boundaries! Let humans adjust:</li>
+<li>Don’t be too prescriptive; let users adjust</li>
 </ul>
-<!-- show it -->
-</section>
+
+<img data-src="boundary1.png" class="r-stretch"></section>
 <section id="boundary-adjustment-3" class="slide level2">
 <h2>Boundary adjustment</h2>
-<ul>
-<li>Operates block by block</li>
-<li>All blocks partitioned into contiguous neigborhoods</li>
-<li>If you add a block to one neighborhood, you remove it from the other; the boundary shifts</li>
+
+<img data-src="boundary2.png" class="r-stretch"></section>
+<section id="boundary-adjustment-4" class="slide level2">
+<h2>Boundary adjustment</h2>
+
+<img data-src="blocks.png" class="r-stretch"><ul>
+<li>Per block</li>
+<li>Partitioning into contiguous neighborhoods</li>
+<li>Adding a block to one neighborhood removes it from another</li>
 </ul>
 </section>
-<section id="limitations-with-boundary-adjustment" class="slide level2">
-<h2>Limitations with boundary adjustment</h2>
+<section id="blockfinding" class="slide level2">
+<h2>Blockfinding</h2>
+
+<img data-src="block_order.png" class="r-stretch"><ul>
+<li>Trace around the edge of a road</li>
+<li>Uses the shape of roads and intersections, inferred from OpenStreetMap</li>
+<li>A block internally tracks a list of (road, left/right)</li>
+</ul>
+</section>
+<section id="merging-two-blocks" class="slide level2">
+<h2>Merging two blocks</h2>
+
+<img data-src="merge1.png" class="r-stretch"><ul>
+<li>Find the common slice of the perimeters</li>
+<li>“Rotate” the perimeter until the common part matches up</li>
+<li>Slice and stitch together</li>
+</ul>
+</section>
+<section id="merging-two-blocks-1" class="slide level2">
+<h2>Merging two blocks</h2>
+
+<img data-src="merge2.png" class="r-stretch"></section>
+<section id="merging-two-blocks-2" class="slide level2">
+<h2>Merging two blocks</h2>
+
+<img data-src="deadends.png" class="r-stretch"><ul>
+<li>Collapsing dead-ends</li>
+<li>Clockwise and counter-clockwise blocks
 <ul>
-<li>Bridges, tunnels, edge of map</li>
-<li>Tiny blocks</li>
-<li>You can’t create holes</li>
-<li>It’s not perfect; you can’t always draw the boundaries you want</li>
+<li>Winding order</li>
+</ul></li>
+</ul>
+</section>
+<section id="blockfinding-limitations" class="slide level2">
+<h2>Blockfinding limitations</h2>
+
+<img data-src="blocks_water.png" class="r-stretch"><ul>
+<li>Only traces roads, not natural features</li>
+</ul>
+</section>
+<section id="blockfinding-limitations-1" class="slide level2">
+<h2>Blockfinding limitations</h2>
+
+<img data-src="blocks_edge.png" class="r-stretch"><ul>
+<li>Edge of the study area</li>
+</ul>
+</section>
+<section id="blockfinding-limitations-2" class="slide level2">
+<h2>Blockfinding limitations</h2>
+
+<img data-src="bridges1.png" class="r-stretch"><ul>
+<li>Bridges / tunnels
+<ul>
+<li>Trace the 2D area of the planar graph?</li>
+<li>Skip them?</li>
+</ul></li>
+</ul>
+</section>
+<section id="blockfinding-limitations-3" class="slide level2">
+<h2>Blockfinding limitations</h2>
+
+<img data-src="bridges2.png" class="r-stretch"></section>
+<section id="blockfinding-limitations-4" class="slide level2">
+<h2>Blockfinding limitations</h2>
+
+<img data-src="holes.png" class="r-stretch"><ul>
+<li>You can’t always draw the boundaries you want</li>
 </ul>
 </section>
 <section id="assessing-overall-impact" class="slide level2">
 <h2>Assessing overall impact</h2>
-<ul>
-<li>some simple summaries
-<ul>
-<li>rank neighborhoods by how many internal rat runs they have</li>
-<li>show rat runs / quiet streets everywhere</li>
-</ul></li>
+<!-- We've been focusing on one neighborhood at a time -->
+
+<img data-src="all_rat_runs.png" class="r-stretch"><ul>
+<li>Show all rat-runs at once</li>
+<li>Rank neighborhoods by number of internal rat-runs</li>
 </ul>
 </section>
 <section id="assessing-overall-impact-1" class="slide level2">
 <h2>Assessing overall impact</h2>
 <ul>
-<li>Revisit the rat-run idea. How will traffic really detour in the short-term?</li>
-<li>Need a travel demand model; where do driving trips begin and end?</li>
-<li>If we know, calculate route before and after filters, show roads with less/more traffic</li>
+<li>Is the rat-run realistic?</li>
+<li>How many people will try to take it?</li>
+<li>With new filters, how will overall traffic detour
+<ul>
+<li>Maybe spillover to another neighborhood</li>
+</ul></li>
 </ul>
 </section>
 <section id="assessing-overall-impact-2" class="slide level2">
 <h2>Assessing overall impact</h2>
-<ul>
-<li>At the moment, only have something based on 2011 data and commute trips</li>
-<li>Working with Urban Observatories to get better data</li>
+
+<img data-src="demand_model.png" class="r-stretch"><ul>
+<li>Where do driving trips begin and end?</li>
+<li>For neighborhood-scale detours, MSOA zones are too large</li>
 </ul>
+</section>
+<section id="assessing-overall-impact-3" class="slide level2">
+<h2>Assessing overall impact</h2>
+<!-- example heatmap -->
+<ul>
+<li>Calculate all driving routes before and after filters</li>
+<li>Look for quieter and busier streets</li>
+</ul>
+</section>
+<section id="assessing-overall-impact-4" class="slide level2">
+<h2>Assessing overall impact</h2>
+<ul>
+<li>2011 census data, commuting only</li>
+<li>Urban Observatories traffic counts
+<ul>
+<li>Calibrate / validate</li>
+<li>Where do the 5,000 vehicles/hour along a road start and end?</li>
+</ul></li>
+</ul>
+<!-- If you're in the audience and you have a demand model... plug it in, keep your data private -->
 </section>
 <section id="heuristics-for-placing-filters" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 <ul>
-<li>Always need human judgment – prioritize calming near a park, or a load zone, or based on road width</li>
-<li>But getting some automation help is always nice, especially when there’s overwhelming number of choices</li>
-<li>So for a neighborhood, what’re filters that could be placed automatically?</li>
+<li>Human judgment
+<ul>
+<li>Prioritize near parks, areas with prior problems</li>
+<li>Can the bin collection truck turn around?</li>
+</ul></li>
+<li>The use of automation
+<ul>
+<li>Seed ideas</li>
+<li>Choice overload</li>
+</ul></li>
+</ul>
+</section>
+<section id="where-should-the-filter-go" class="slide level2">
+<h2>Where should the filter go?</h2>
+
+<img data-src="heuristic_before.png" class="r-stretch"></section>
+<section id="where-should-the-filter-go-1" class="slide level2">
+<h2>Where should the filter go?</h2>
+
+<img data-src="heuristic_greedy.png" class="r-stretch"><ul>
+<li>Greedy: the road with the most rat-runs</li>
+<li>Whack-a-mole</li>
+</ul>
+</section>
+<section id="where-should-the-filter-go-2" class="slide level2">
+<h2>Where should the filter go?</h2>
+
+<img data-src="heuristic_border.png" class="r-stretch"><ul>
+<li>Only one entrance per cell
+<ul>
+<li>Expensive, likely unpopular</li>
+<li>Very different results for residents</li>
+<li>Simpler crossings along the perimeter</li>
+</ul></li>
 </ul>
 </section>
 <section id="heuristics-for-placing-filters-1" class="slide level2">
 <h2>Heuristics for placing filters</h2>
-<ul>
-<li>Focus on road with most rat-runs, play whack-a-mole</li>
+
+<img data-src="heuristic_human.png" class="r-stretch"><ul>
+<li>Split large cells</li>
+<li>My human intuition</li>
 </ul>
 </section>
 <section id="heuristics-for-placing-filters-2" class="slide level2">
 <h2>Heuristics for placing filters</h2>
-<ul>
-<li>Brute force: only one entrance/exit to every cell</li>
+
+<img data-src="heuristic_split.png" class="r-stretch"><ul>
+<li>Minimum cut of the graph</li>
 </ul>
 </section>
 <section id="heuristics-for-placing-filters-3" class="slide level2">
 <h2>Heuristics for placing filters</h2>
-<ul>
-<li>Split large cells into smaller pieces; this’ll probably also have the effect of reducing rat runs</li>
-<li>Consider a filter on every road segment. Does it split the cell?</li>
-<li>Many solutions just cut off near the start of a neighborhood. For the resulting two cells, take the smaller number of roads (aka size). Maximize that</li>
-<li>Show some surprising results / solutions. I didn’t see some of these.</li>
+
+<img data-src="heuristic_split_balance.png" class="r-stretch"><ul>
+<li>Trivial solutions near the perimeter</li>
+<li>How large are the two resulting cells?</li>
 </ul>
 </section>
+<section id="heuristics-for-placing-filters-4" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+
+<img data-src="grid.png" class="r-stretch"><ul>
+<li>What do you do with grids?</li>
+</ul>
+</section>
+<section id="heuristics-for-placing-filters-5" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+
+<img data-src="grid_diagonal.png" class="r-stretch"></section>
 <section id="a-large-scale-vision" class="slide level2">
 <h2>A large-scale vision</h2>
 <ul>
-<li>Show a very large-scale change</li>
+<li>One use of automation…</li>
 </ul>
+</section>
+<section id="a-large-scale-vision-1" class="slide level2">
+<h2>A large-scale vision</h2>
+<!-- What do we show? How many filters to stop most rat runs? -->
 </section></section>
 <section>
 <section id="part-4-next-steps" class="title-slide slide level1 center">
@@ -764,6 +909,13 @@
 <li>(Barring data quality / bugs)</li>
 </ul></li>
 <li>There’s no magic / AI. It’s explainable, and thus trustworthy</li>
+</ul>
+<p>(Also, it’s very rewarding to work on this – quick visual feedback)</p>
+</section>
+<section id="takeaway-for-shorter-talk" class="slide level2">
+<h2>Takeaway for shorter talk</h2>
+<ul>
+<li>What stuff doesn’t work well yet</li>
 </ul>
 </section>
 <section id="conclusion" class="slide level2">
