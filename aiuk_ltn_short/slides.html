@@ -340,7 +340,7 @@
 <p>These slides: …</p>
 <ul>
 <li>Background of LTNs</li>
-<li>Demo</li>
+<li>The tool</li>
 <li>Technical overview</li>
 <li>Next steps</li>
 </ul>
@@ -350,11 +350,12 @@
 <h1>Part 1: Background</h1>
 <p>In response to rising levels of motor vehicles using sat-nav to cut through residential streets and avoid traffic, local authorities across the UK have been creating low traffic neighborhoods (LTNs). Modal filters (planters or bollards in the middle of the street) prevent drivers from passing through, but allow pedestrians and cyclists. When filters are strategically placed to prevent all through-traffic, people in the area are likely to enjoy better air quality, less noise pollution, and higher levels of physical activity.</p>
 <p>The 2020 active travel fund jump-started many new LTN schemes, but there has been a mixed public response, stemming partly from miscommunication, lack of education, and hastened consultations. To design and share LTN schemes, planners at local authorities currently use manual workflows in existing GIS software – or sometimes just sketching ideas over satellite imagery. The resulting schemes rely on humans to assess all possible routes for through-traffic; sharing the plans with the public is usually done with a low-resolution diagram; and members of the public have no easy way to propose an alternate design.</p>
+<!-- sustrans references -->
 </section>
 
 <section>
-<section id="part-2-demo" class="title-slide slide level1 center">
-<h1>Part 2: Demo</h1>
+<section id="part-2-the-tool" class="title-slide slide level1 center">
+<h1>Part 2: The tool</h1>
 <ul>
 <li><a href="http://ltn.abstreet.org" class="uri">http://ltn.abstreet.org</a></li>
 <li>web browser, Mac, Windows, Linux (no mobile)</li>
@@ -392,34 +393,221 @@
 
 <img data-src="architecture.png" class="r-stretch"><p>Join the workshop tomorrow at 15:00 for details</p>
 </section>
+<section id="mostly-a-graph" class="slide level2">
+<h2>Mostly a graph</h2>
+<ul>
+<li>Road segments are edges, intersections are nodes</li>
+</ul>
+</section>
 <section id="a-neighborhoods-cells" class="slide level2">
 <h2>A neighborhood’s cells</h2>
+<!-- show a full neighborhood -->
+<p>A “neighborhood”:</p>
+<ul>
+<li>the perimeter, usually major roads designed to handle some amount of traffic</li>
+<li>the interior is the neighborhood. the user wants to study reduction of traffic through here</li>
+<li>divide the interior into “cells”</li>
+</ul>
+</section>
+<section id="a-neighborhoods-cells-1" class="slide level2">
+<h2>A neighborhood’s cells</h2>
+<!-- show two adjacent cells -->
+<p>A “cell”:</p>
+<ul>
+<li>everywhere reachable in the neighborhood BY DRIVING without leaving</li>
+</ul>
+<!-- show discnnected cell -->
+<ul>
+<li>a cell must touch the perimeter in at least one place, otherwise there’s no way for cars to get in/out</li>
+</ul>
+</section>
+<section id="a-neighborhoods-cells-2" class="slide level2">
+<h2>A neighborhood’s cells</h2>
+<ul>
+<li>Pretty straightforward graph floodfill:</li>
+<li>Start from unvisited road segment in the interior
+<ul>
+<li>expand</li>
+<li>dont cross modal filters or nondriveable roads</li>
+</ul></li>
+<li>Result is a grouping of the interior roads</li>
+</ul>
+<!-- edge cases for longer talk: two cells on a border, bike-only cells, one-ways -->
+</section>
+<section id="a-neighborhoods-cells-3" class="slide level2">
+<h2>A neighborhood’s cells</h2>
+<ul>
+<li>Many LTN schemes show areas</li>
+<li>Bit like a Voronoi diagram, but we have a bunch of roads as input</li>
+<li>Gridify</li>
+<li>Expand the grid</li>
+<li>Stop when there’s a collision, and record the adjacency for 4-color theorem</li>
+</ul>
 </section>
 <section id="predicting-rat-runs" class="slide level2">
 <h2>Predicting rat-runs</h2>
+<!-- heatmap. why some streets quiet or not? -->
+<ul>
+<li>What makes a street quiet or not?</li>
+<li>No reason to drive to a cul-de-sac / deadend</li>
+<li>For the red heatmap of detours and to point out problems, need to find shortcuts THROUGH the neighborhood</li>
+</ul>
+</section>
+<section id="predicting-rat-runs-1" class="slide level2">
+<h2>Predicting rat-runs</h2>
+<ul>
+<li>Every way a driver might cut through a neighborhood “reasonably”?</li>
+<li>Every possible path between two borders of a neighborhood?</li>
+<li>Important: unit is just this neighborhood. We don’t know why somebody would try to go from A to B, or how many might – we need to see the bigger picture for that. Later.</li>
+</ul>
+</section>
+<section id="predicting-rat-runs-2" class="slide level2">
+<h2>Predicting rat-runs</h2>
+<ul>
+<li>The path shouldn’t go OUTSIDE the neighborhood / use the perimeter</li>
+<li>If it did, it might not represent a real problem</li>
+<li>So we can be smarter, and just do the analysis by cell</li>
+<li>And we HAVE to force the pathfinding to stay in the cell</li>
+</ul>
+</section>
+<section id="predicting-rat-runs-3" class="slide level2">
+<h2>Predicting rat-runs</h2>
+<ul>
+<li>This still leave some silly examples. Somebody wouldn’t do this unless you’re in Houston highway exit hopping</li>
+<li>So make sure the entry/exit is on a “different” road</li>
+<li>Defining this is a little hard; use road name in OSM. Not perfect but</li>
+</ul>
+</section>
+<section id="initial-boundaries" class="slide level2">
+<h2>Initial boundaries</h2>
+<ul>
+<li>We’ve been talking in units of a neighborhood, but how’re these defined?</li>
+<li>Take a “major” road from OSM and trace a complete loop
+<ul>
+<li>Sometimes a major road just ends; Stovell Ave / Matthews Lane in levenshulme</li>
+</ul></li>
+<li>This process will cross railroads, water
+<ul>
+<li>If it didn’t, the local road on that part of the perimeter would be OK to have traffic</li>
+</ul></li>
+</ul>
 </section>
 <section id="boundary-adjustment" class="slide level2">
 <h2>Boundary adjustment</h2>
 <ul>
-<li>The importance of this conversation</li>
-<li>Caveats</li>
+<li>But the heuristics are just a start! Plenty of reasons it might not make sense:
+<ul>
+<li>OSM classification isnt quite right</li>
+<li>Small spaces in between a dual carriageway count!</li>
+<li>Legitimately you want to join two neighborhoods into one piece</li>
+</ul></li>
 </ul>
 </section>
-<section id="predicting-overall-impact" class="slide level2">
-<h2>Predicting overall impact</h2>
+<section id="boundary-adjustment-1" class="slide level2">
+<h2>Boundary adjustment</h2>
+<p>And the most important: get people to revisit road classification!</p>
+<ul>
+<li>Road classification was done a while ago with different priorities about moving vehicles through an area</li>
+<li>Maybe it’s time to rethink that high street as a thoroughfare</li>
+</ul>
+</section>
+<section id="boundary-adjustment-2" class="slide level2">
+<h2>Boundary adjustment</h2>
+<ul>
+<li>Regardless of the reason, I don’t want this tool to be prescriptive about boundaries! Let humans adjust:</li>
+</ul>
+<!-- show it -->
+</section>
+<section id="boundary-adjustment-3" class="slide level2">
+<h2>Boundary adjustment</h2>
+<ul>
+<li>Operates block by block</li>
+<li>All blocks partitioned into contiguous neigborhoods</li>
+<li>If you add a block to one neighborhood, you remove it from the other; the boundary shifts</li>
+</ul>
+</section>
+<section id="limitations-with-boundary-adjustment" class="slide level2">
+<h2>Limitations with boundary adjustment</h2>
+<ul>
+<li>Bridges, tunnels, edge of map</li>
+<li>Tiny blocks</li>
+<li>You can’t create holes</li>
+<li>It’s not perfect; you can’t always draw the boundaries you want</li>
+</ul>
+</section>
+<section id="assessing-overall-impact" class="slide level2">
+<h2>Assessing overall impact</h2>
+<ul>
+<li>some simple summaries
+<ul>
+<li>rank neighborhoods by how many internal rat runs they have</li>
+<li>show rat runs / quiet streets everywhere</li>
+</ul></li>
+</ul>
+</section>
+<section id="assessing-overall-impact-1" class="slide level2">
+<h2>Assessing overall impact</h2>
+<ul>
+<li>Revisit the rat-run idea. How will traffic really detour in the short-term?</li>
+<li>Need a travel demand model; where do driving trips begin and end?</li>
+<li>If we know, calculate route before and after filters, show roads with less/more traffic</li>
+</ul>
+</section>
+<section id="assessing-overall-impact-2" class="slide level2">
+<h2>Assessing overall impact</h2>
+<ul>
+<li>At the moment, only have something based on 2011 data and commute trips</li>
+<li>Working with Urban Observatories to get better data</li>
+</ul>
 </section>
 <section id="heuristics-for-placing-filters" class="slide level2">
 <h2>Heuristics for placing filters</h2>
+<ul>
+<li>Always need human judgment – prioritize calming near a park, or a load zone, or based on road width</li>
+<li>But getting some automation help is always nice, especially when there’s overwhelming number of choices</li>
+<li>So for a neighborhood, what’re filters that could be placed automatically?</li>
+</ul>
+</section>
+<section id="heuristics-for-placing-filters-1" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+<ul>
+<li>Focus on road with most rat-runs, play whack-a-mole</li>
+</ul>
+</section>
+<section id="heuristics-for-placing-filters-2" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+<ul>
+<li>Brute force: only one entrance/exit to every cell</li>
+</ul>
+</section>
+<section id="heuristics-for-placing-filters-3" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+<ul>
+<li>Split large cells into smaller pieces; this’ll probably also have the effect of reducing rat runs</li>
+<li>Consider a filter on every road segment. Does it split the cell?</li>
+<li>Many solutions just cut off near the start of a neighborhood. For the resulting two cells, take the smaller number of roads (aka size). Maximize that</li>
+<li>Show some surprising results / solutions. I didn’t see some of these.</li>
+</ul>
+</section>
+<section id="a-large-scale-vision" class="slide level2">
+<h2>A large-scale vision</h2>
+<ul>
+<li>Show a very large-scale change</li>
+</ul>
 </section></section>
 <section>
 <section id="part-4-next-steps" class="title-slide slide level1 center">
 <h1>Part 4: Next steps</h1>
 <ul>
-<li>mode shift</li>
+<li>polish what’s there</li>
 <li>sharing proposals online</li>
-<li>further engagement with LAs</li>
+<li>further engagement with LAs, prioritize accordingly</li>
+<li>new stuff
+<ul>
 <li>bus gates, one-way interventions</li>
+<li>mode shift / traffic dissipation</li>
 <li>census</li>
+</ul></li>
 </ul>
 </section>
 <section id="ltns-are-just-the-start" class="slide level2">
@@ -432,6 +620,20 @@
 <li>traffic signal timing</li>
 </ul></li>
 <li>other parts of A/B Street can help</li>
+<li>go simulate the interventions</li>
+</ul>
+</section>
+<section id="why-this-approach-can-engage-community-usefully" class="slide level2">
+<h2>Why this approach can engage community usefully</h2>
+<ul>
+<li>It’s very visual; people are used to reasoning about maps. Be familiar.</li>
+<li>You can’t argue with the results
+<ul>
+<li>The rat runs show the path somebody could take through!</li>
+<li>The cells show if it’s possible to drive through or not!</li>
+<li>(Barring data quality / bugs)</li>
+</ul></li>
+<li>There’s no magic / AI. It’s explainable, and thus trustworthy</li>
 </ul>
 </section>
 <section id="conclusion" class="slide level2">
