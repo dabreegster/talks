@@ -1,6 +1,6 @@
 ---
 title: "A digital twin to design, analyse, and visualise low-traffic neighbourhoods"
-subtitle: "AI:UK spotlight talk"
+subtitle: "AI:UK (draft talk)"
 author: "Dustin Carlino"
 format:
   revealjs:
@@ -36,6 +36,8 @@ The 2020 active travel fund jump-started many new LTN schemes, but there has bee
 ## Credits
 
 - developed in a few months
+  - 24 September proof-of-concept
+  - UX designer joined 28 February
 - built on top of the A/B Street platform
   - alumni: Michael Kirk, Yuwen Li
 

@@ -15,4 +15,4 @@ Finished slides:
 
 WIP:
 
-- https://dabreegster.github.io/talks/aiuk_ltn_short/slides.html
+- https://dabreegster.github.io/talks/aiuk_ltn/slides.html
