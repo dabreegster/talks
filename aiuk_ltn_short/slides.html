@@ -551,38 +551,63 @@
 <img data-src="border_cell3.png" class="r-stretch"></section>
 <section id="predicting-rat-runs" class="slide level2">
 <h2>Predicting rat-runs</h2>
-<!-- heatmap. why some streets quiet or not? -->
-<ul>
-<li>What makes a street quiet or not?</li>
-<li>No reason to drive to a cul-de-sac / deadend</li>
-<li>For the red heatmap of detours and to point out problems, need to find shortcuts THROUGH the neighborhood</li>
+
+<img data-src="ratrun_heatmap.png" class="r-stretch"><ul>
+<li>What’s a rat-run?</li>
+<li>Why are some streets quiet?</li>
 </ul>
 </section>
 <section id="predicting-rat-runs-1" class="slide level2">
 <h2>Predicting rat-runs</h2>
+
+<img data-src="ratrun_example.png" class="r-stretch"><ul>
+<li><strong>Not</strong> the bigger picture
 <ul>
-<li>Every way a driver might cut through a neighborhood “reasonably”?</li>
-<li>Every possible path between two borders of a neighborhood?</li>
-<li>Important: unit is just this neighborhood. We don’t know why somebody would try to go from A to B, or how many might – we need to see the bigger picture for that. Later.</li>
+<li>Does this path save somebody time?</li>
+<li>How many people might take this shortcut?</li>
+</ul></li>
 </ul>
 </section>
-<section id="predicting-rat-runs-2" class="slide level2">
-<h2>Predicting rat-runs</h2>
+<section id="rat-run-definition" class="slide level2">
+<h2>Rat-run definition</h2>
 <ul>
-<li>The path shouldn’t go OUTSIDE the neighborhood / use the perimeter</li>
-<li>If it did, it might not represent a real problem</li>
-<li>So we can be smarter, and just do the analysis by cell</li>
-<li>And we HAVE to force the pathfinding to stay in the cell</li>
+<li>A shortest path starting and ending on the perimeter road</li>
 </ul>
 </section>
-<section id="predicting-rat-runs-3" class="slide level2">
-<h2>Predicting rat-runs</h2>
-<ul>
-<li>This still leave some silly examples. Somebody wouldn’t do this unless you’re in Houston highway exit hopping</li>
-<li>So make sure the entry/exit is on a “different” road</li>
-<li>Defining this is a little hard; use road name in OSM. Not perfect but</li>
+<section id="rat-run-definition-1" class="slide level2">
+<h2>Rat-run definition</h2>
+
+<img data-src="ratrun_same_road.png" class="r-stretch"><ul>
+<li>The start and end must be on different roads</li>
+<li>Name changes</li>
 </ul>
 </section>
+<section id="rat-run-definition-2" class="slide level2">
+<h2>Rat-run definition</h2>
+
+<img data-src="ratrun_use_perimeter.png" class="r-stretch"><ul>
+<li>In freeflow conditions, the perimeter road is faster</li>
+</ul>
+</section>
+<section id="rat-run-definition-3" class="slide level2">
+<h2>Rat-run definition</h2>
+
+<img data-src="ratrun_stay_inside.png" class="r-stretch"><ul>
+<li>Force the shortest path to stay inside the neighborhood</li>
+</ul>
+</section>
+<section id="rat-run-results" class="slide level2">
+<h2>Rat-run results</h2>
+
+<img data-src="detour1.png" class="r-stretch"></section>
+<section id="rat-run-results-1" class="slide level2">
+<h2>Rat-run results</h2>
+
+<img data-src="detour2.png" class="r-stretch"></section>
+<section id="rat-run-results-2" class="slide level2">
+<h2>Rat-run results</h2>
+
+<img data-src="detour3.png" class="r-stretch"></section>
 <section id="initial-boundaries" class="slide level2">
 <h2>Initial boundaries</h2>
 <ul>

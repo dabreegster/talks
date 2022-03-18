@@ -185,30 +185,53 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Predicting rat-runs
 
-<!-- heatmap. why some streets quiet or not? -->
+![](ratrun_heatmap.png)
 
-- What makes a street quiet or not?
-- No reason to drive to a cul-de-sac / deadend
-- For the red heatmap of detours and to point out problems, need to find shortcuts THROUGH the neighborhood
-
-## Predicting rat-runs
-
-- Every way a driver might cut through a neighborhood "reasonably"?
-- Every possible path between two borders of a neighborhood?
-- Important: unit is just this neighborhood. We don't know why somebody would try to go from A to B, or how many might -- we need to see the bigger picture for that. Later.
+- What's a rat-run?
+- Why are some streets quiet?
 
 ## Predicting rat-runs
 
-- The path shouldn't go OUTSIDE the neighborhood / use the perimeter
-- If it did, it might not represent a real problem
-- So we can be smarter, and just do the analysis by cell
-- And we HAVE to force the pathfinding to stay in the cell
+![](ratrun_example.png)
 
-## Predicting rat-runs
+- **Not** the bigger picture
+  - Does this path save somebody time?
+  - How many people might take this shortcut?
 
-- This still leave some silly examples. Somebody wouldn't do this unless you're in Houston highway exit hopping
-- So make sure the entry/exit is on a "different" road
-- Defining this is a little hard; use road name in OSM. Not perfect but
+## Rat-run definition
+
+- A shortest path starting and ending on the perimeter road
+
+## Rat-run definition
+
+![](ratrun_same_road.png)
+
+- The start and end must be on different roads
+- Name changes
+
+## Rat-run definition
+
+![](ratrun_use_perimeter.png)
+
+- In freeflow conditions, the perimeter road is faster
+
+## Rat-run definition
+
+![](ratrun_stay_inside.png)
+
+- Force the shortest path to stay inside the neighborhood
+
+## Rat-run results
+
+![](detour1.png)
+
+## Rat-run results
+
+![](detour2.png)
+
+## Rat-run results
+
+![](detour3.png)
 
 ## Initial boundaries
 
