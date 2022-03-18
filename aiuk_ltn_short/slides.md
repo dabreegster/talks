@@ -53,48 +53,135 @@ The 2020 active travel fund jump-started many new LTN schemes, but there has bee
 
 Join the workshop tomorrow at 15:00 for details
 
-## Mostly a graph
+## OpenStreetMap into a graph
 
-- Road segments are edges, intersections are nodes
+<!-- img -->
 
-## A neighborhood's cells
+- Edges: road segments
+- Nodes: junctions
+- one-way streets, lane configuration
 
-<!-- show a full neighborhood -->
+## A neighborhood
 
-A "neighborhood":
+![](neighborhood.png)
 
-- the perimeter, usually major roads designed to handle some amount of traffic
-- the interior is the neighborhood. the user wants to study reduction of traffic through here
-- divide the interior into "cells"
+- the perimeter
+  - usually "major" roads designed to handle more traffic
+- the interior
+  - reduce traffic through here
 
-## A neighborhood's cells
+## Cells
 
-<!-- show two adjacent cells -->
+![](cells.png)
 
-A "cell":
+- Everywhere reachable by driving within the neighborhood, without leaving
 
-- everywhere reachable in the neighborhood BY DRIVING without leaving
+## Cells
 
-<!-- show discnnected cell -->
-- a cell must touch the perimeter in at least one place, otherwise there's no way for cars to get in/out
+![](adjacent_cells.png)
 
-## A neighborhood's cells
+## Disconnected cells
 
-- Pretty straightforward graph floodfill:
-- Start from unvisited road segment in the interior
+![](disconnected.png)
+
+- A cell must touch the perimeter somewhere!
+  - Otherwise, drivers can't get in / out
+
+## Calculating cells
+
+- Pretty straightforward graph floodfill
+- Start from an unvisited road segment in the interior
   - expand
-  - dont cross modal filters or nondriveable roads
-- Result is a grouping of the interior roads
+  - don't cross modal filters, non-driveable roads, or the perimeter
 
-<!-- edge cases for longer talk: two cells on a border, bike-only cells, one-ways -->
+## Floodfill
 
-## A neighborhood's cells
+![](floodfill1.png)
 
-- Many LTN schemes show areas
-- Bit like a Voronoi diagram, but we have a bunch of roads as input
-- Gridify
-- Expand the grid
-- Stop when there's a collision, and record the adjacency for 4-color theorem
+## Floodfill
+
+![](floodfill2.png)
+
+## Floodfill
+
+![](floodfill3.png)
+
+## Floodfill
+
+![](floodfill4.png)
+
+## The result
+
+![](scc.png)
+
+- The graph of the neighborhood partitioned into strongly-connected components
+
+## Cells as areas
+
+![](west_ealing.jpg)
+
+- Can we match this?
+
+## Voronoi diagrams
+
+![](voronoi.png)
+(Balu Ertl on Wikipedia, CC BY-SA 4.0)
+
+- Not straightforward to apply to line segments
+
+## Approximating with grids
+
+- Diffusion on a 10 meter grid
+- Stop when there's a collision
+  - Record the adjacency for the 4-color theorem
+
+## Approximating with grids
+
+![](grid1.png)
+
+## Approximating with grids
+
+![](grid2.png)
+
+## Approximating with grids
+
+![](grid3.png)
+
+## Approximating with grids
+
+![](marching_squares.png)
+
+- Marching Squares to turn the grid into nice contours
+
+## Edge cases with calculating cells
+
+- One-way streets
+
+![](one_ways.png)
+
+## Edge cases with calculating cells
+
+![](carless.png)
+
+- Roads without motor vehicles
+
+## Edge cases with calculating cells
+
+![](border_cell1.png)
+
+- Is this one cell?
+
+## Edge cases with calculating cells
+
+- Does this path leave the neighborhood?
+
+![](border_cell2.png)
+
+## Edge cases with calculating cells
+
+- Decision: separate cells
+
+![](border_cell3.png)
 
 ## Predicting rat-runs
 

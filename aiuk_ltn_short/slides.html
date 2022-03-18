@@ -393,57 +393,162 @@
 
 <img data-src="architecture.png" class="r-stretch"><p>Join the workshop tomorrow at 15:00 for details</p>
 </section>
-<section id="mostly-a-graph" class="slide level2">
-<h2>Mostly a graph</h2>
+<section id="openstreetmap-into-a-graph" class="slide level2">
+<h2>OpenStreetMap into a graph</h2>
+<!-- img -->
 <ul>
-<li>Road segments are edges, intersections are nodes</li>
+<li>Edges: road segments</li>
+<li>Nodes: junctions</li>
+<li>one-way streets, lane configuration</li>
 </ul>
 </section>
-<section id="a-neighborhoods-cells" class="slide level2">
-<h2>A neighborhood’s cells</h2>
-<!-- show a full neighborhood -->
-<p>A “neighborhood”:</p>
+<section id="a-neighborhood" class="slide level2">
+<h2>A neighborhood</h2>
+
+<img data-src="neighborhood.png" class="r-stretch"><ul>
+<li>the perimeter
 <ul>
-<li>the perimeter, usually major roads designed to handle some amount of traffic</li>
-<li>the interior is the neighborhood. the user wants to study reduction of traffic through here</li>
-<li>divide the interior into “cells”</li>
+<li>usually “major” roads designed to handle more traffic</li>
+</ul></li>
+<li>the interior
+<ul>
+<li>reduce traffic through here</li>
+</ul></li>
 </ul>
 </section>
-<section id="a-neighborhoods-cells-1" class="slide level2">
-<h2>A neighborhood’s cells</h2>
-<!-- show two adjacent cells -->
-<p>A “cell”:</p>
-<ul>
-<li>everywhere reachable in the neighborhood BY DRIVING without leaving</li>
-</ul>
-<!-- show discnnected cell -->
-<ul>
-<li>a cell must touch the perimeter in at least one place, otherwise there’s no way for cars to get in/out</li>
+<section id="cells" class="slide level2">
+<h2>Cells</h2>
+
+<img data-src="cells.png" class="r-stretch"><ul>
+<li>Everywhere reachable by driving within the neighborhood, without leaving</li>
 </ul>
 </section>
-<section id="a-neighborhoods-cells-2" class="slide level2">
-<h2>A neighborhood’s cells</h2>
+<section id="cells-1" class="slide level2">
+<h2>Cells</h2>
+
+<img data-src="adjacent_cells.png" class="r-stretch"></section>
+<section id="disconnected-cells" class="slide level2">
+<h2>Disconnected cells</h2>
+
+<img data-src="disconnected.png" class="r-stretch"><ul>
+<li>A cell must touch the perimeter somewhere!
 <ul>
-<li>Pretty straightforward graph floodfill:</li>
-<li>Start from unvisited road segment in the interior
+<li>Otherwise, drivers can’t get in / out</li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-cells" class="slide level2">
+<h2>Calculating cells</h2>
+<ul>
+<li>Pretty straightforward graph floodfill</li>
+<li>Start from an unvisited road segment in the interior
 <ul>
 <li>expand</li>
-<li>dont cross modal filters or nondriveable roads</li>
+<li>don’t cross modal filters, non-driveable roads, or the perimeter</li>
 </ul></li>
-<li>Result is a grouping of the interior roads</li>
 </ul>
-<!-- edge cases for longer talk: two cells on a border, bike-only cells, one-ways -->
 </section>
-<section id="a-neighborhoods-cells-3" class="slide level2">
-<h2>A neighborhood’s cells</h2>
+<section id="floodfill" class="slide level2">
+<h2>Floodfill</h2>
+
+<img data-src="floodfill1.png" class="r-stretch"></section>
+<section id="floodfill-1" class="slide level2">
+<h2>Floodfill</h2>
+
+<img data-src="floodfill2.png" class="r-stretch"></section>
+<section id="floodfill-2" class="slide level2">
+<h2>Floodfill</h2>
+
+<img data-src="floodfill3.png" class="r-stretch"></section>
+<section id="floodfill-3" class="slide level2">
+<h2>Floodfill</h2>
+
+<img data-src="floodfill4.png" class="r-stretch"></section>
+<section id="the-result" class="slide level2">
+<h2>The result</h2>
+
+<img data-src="scc.png" class="r-stretch"><ul>
+<li>The graph of the neighborhood partitioned into strongly-connected components</li>
+</ul>
+</section>
+<section id="cells-as-areas" class="slide level2">
+<h2>Cells as areas</h2>
+
+<img data-src="west_ealing.jpg" class="r-stretch"><ul>
+<li>Can we match this?</li>
+</ul>
+</section>
+<section id="voronoi-diagrams" class="slide level2">
+<h2>Voronoi diagrams</h2>
+<p><img data-src="voronoi.png"> (Balu Ertl on Wikipedia, CC BY-SA 4.0)</p>
 <ul>
-<li>Many LTN schemes show areas</li>
-<li>Bit like a Voronoi diagram, but we have a bunch of roads as input</li>
-<li>Gridify</li>
-<li>Expand the grid</li>
-<li>Stop when there’s a collision, and record the adjacency for 4-color theorem</li>
+<li>Not straightforward to apply to line segments</li>
 </ul>
 </section>
+<section id="approximating-with-grids" class="slide level2">
+<h2>Approximating with grids</h2>
+<ul>
+<li>Diffusion on a 10 meter grid</li>
+<li>Stop when there’s a collision
+<ul>
+<li>Record the adjacency for the 4-color theorem</li>
+</ul></li>
+</ul>
+</section>
+<section id="approximating-with-grids-1" class="slide level2">
+<h2>Approximating with grids</h2>
+
+<img data-src="grid1.png" class="r-stretch"></section>
+<section id="approximating-with-grids-2" class="slide level2">
+<h2>Approximating with grids</h2>
+
+<img data-src="grid2.png" class="r-stretch"></section>
+<section id="approximating-with-grids-3" class="slide level2">
+<h2>Approximating with grids</h2>
+
+<img data-src="grid3.png" class="r-stretch"></section>
+<section id="approximating-with-grids-4" class="slide level2">
+<h2>Approximating with grids</h2>
+
+<img data-src="marching_squares.png" class="r-stretch"><ul>
+<li>Marching Squares to turn the grid into nice contours</li>
+</ul>
+</section>
+<section id="edge-cases-with-calculating-cells" class="slide level2">
+<h2>Edge cases with calculating cells</h2>
+<ul>
+<li>One-way streets</li>
+</ul>
+
+<img data-src="one_ways.png" class="r-stretch"></section>
+<section id="edge-cases-with-calculating-cells-1" class="slide level2">
+<h2>Edge cases with calculating cells</h2>
+
+<img data-src="carless.png" class="r-stretch"><ul>
+<li>Roads without motor vehicles</li>
+</ul>
+</section>
+<section id="edge-cases-with-calculating-cells-2" class="slide level2">
+<h2>Edge cases with calculating cells</h2>
+
+<img data-src="border_cell1.png" class="r-stretch"><ul>
+<li>Is this one cell?</li>
+</ul>
+</section>
+<section id="edge-cases-with-calculating-cells-3" class="slide level2">
+<h2>Edge cases with calculating cells</h2>
+<ul>
+<li>Does this path leave the neighborhood?</li>
+</ul>
+
+<img data-src="border_cell2.png" class="r-stretch"></section>
+<section id="edge-cases-with-calculating-cells-4" class="slide level2">
+<h2>Edge cases with calculating cells</h2>
+<ul>
+<li>Decision: separate cells</li>
+</ul>
+
+<img data-src="border_cell3.png" class="r-stretch"></section>
 <section id="predicting-rat-runs" class="slide level2">
 <h2>Predicting rat-runs</h2>
 <!-- heatmap. why some streets quiet or not? -->
