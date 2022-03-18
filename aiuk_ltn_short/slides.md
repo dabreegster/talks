@@ -445,6 +445,7 @@ Join the workshop tomorrow at 15:00 for details
 ## A large-scale vision
 
 - One use of automation...
+- (I'm not advocating for this)
 
 ## A large-scale vision
 
@@ -452,41 +453,62 @@ Join the workshop tomorrow at 15:00 for details
 
 # Part 4: Next steps
 
-- polish what's there
-- sharing proposals online
-- further engagement with LAs, prioritize accordingly
-- new stuff
-  - bus gates, one-way interventions
+- polish, continue testing with local authorities
+- share proposals online
+- training material (user guide, video tutorials)
+- new features
+  - bus gates
+  - one-way streets
+  - demographics -- who lives near interventions?
   - mode shift / traffic dissipation
-  - census
+
+## Current usage
+
+- Nottingham
+- Campaigning group in Lyon
+- Prototyping in 6-10 other places
+
+## Engagement model
+
+- <dcarlino@turing.ac.uk>
+- I can help import
+- Do you have travel demand data?
+- What else should this tool do?
 
 ## LTNs are just the start
 
-- interventions on boundary roads
-  - crossings
+- interventions on perimeter roads
+  - safe crossings
   - bus/cycle lanes
   - traffic signal timing
+
+## LTNs are just the start
+
+![](edit_roads.gif)
+
 - other parts of A/B Street can help
-- go simulate the interventions
+  - road space reallocation
+  - 15-minute neighborhoods / land use patterns
+  - traffic simulation (rapid prototyping)
 
-## Why this approach can engage community usefully
+## Where's the AI?
 
-- It's very visual; people are used to reasoning about maps. Be familiar.
 - You can't argue with the results
-  -  The rat runs show the path somebody could take through!
-  -  The cells show if it's possible to drive through or not!
+  -  The rat-runs show specific shortcuts!
+  -  The cells show if it's possible to cut through or not!
   -  (Barring data quality / bugs)
-- There's no magic / AI. It's explainable, and thus trustworthy
+- Explainable systems are perceived as more trustworthy
+- Classic computer science graph algorithms vs machine learning
 
-(Also, it's very rewarding to work on this -- quick visual feedback)
+## Engaging communities
 
-## Takeaway for shorter talk
-
-- What stuff doesn't work well yet
+- This tool is meant for **everyone**
+- People are visual, understand maps
+- Build consensus in live workshops
 
 ## Conclusion
 
 - <http://ltn.abstreet.org>
 - <dcarlino@turing.ac.uk>
 - <https://github.com/a-b-street/abstreet>
-- Contact me to import a city, to schedule training, to discuss ideas
+- Contact me to import a city, schedule training, discuss ideas
