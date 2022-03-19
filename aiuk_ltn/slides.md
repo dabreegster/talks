@@ -12,12 +12,14 @@ format:
 
 # Outline
 
+<!-- Easier URL to find slides -->
+
 These slides: ...
 
-- Background of LTNs
-- The tool
-- Technical overview
-- Next steps
+1. Background of LTNs
+2. The tool
+3. Technical overview
+4. Next steps
 
 # Part 1: Background
 
@@ -41,12 +43,10 @@ These slides: ...
 
 ## The response
 
+![](modal_filter.jpg)
+(Jack Fifield on Wikipedia, CC BY 2.0)
+
 - Modal filters
-
-<!-- take my own photos -->
-
-## The response
-
 - Area of effect
 - Low traffic neighborhoods
 
@@ -76,7 +76,7 @@ These slides: ...
 
 - How's this affect my trips?
 
-# Part 2: The tool
+# Part 2: The LTN tool
 
 ## Demo
 
@@ -86,7 +86,6 @@ These slides: ...
 - web browser, Mac, Windows, Linux
   - no mobile
 - free, open source
-  - <https://github.com/a-b-street/abstreet/tree/master/apps/ltn>
 - multiple audiences
   - local authorities / consultants
   - individuals
@@ -114,13 +113,19 @@ These slides: ...
 
 # Part 3: Technical overview
 
-![](architecture.png)
+- Neighborhood connectivity
+- Predicting rat-runs
+- Defining a neighborhood
+- Assessing overall impact
+- Heuristics for placing filters
 
-Join the workshop tomorrow at 15:00 for details
+## Architecture
+
+![](architecture.png)
 
 ## OpenStreetMap into a graph
 
-<!-- img -->
+![](osm_graph.png)
 
 - Edges: road segments
 - Nodes: junctions
@@ -250,6 +255,8 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Predicting rat-runs
 
+## Predicting rat-runs
+
 ![](ratrun_heatmap.png)
 
 - What's a rat-run?
@@ -299,6 +306,8 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Defining a neighborhood
 
+## Defining a neighborhood
+
 ![](boundary_default.png)
 
 ## Defining a neighborhood
@@ -306,7 +315,7 @@ Join the workshop tomorrow at 15:00 for details
 ![](boundary_water.png)
 
 - This process will cross railroads, water
-  - If it didn't, the local road on that part of the perimeter would be OK to have traffic
+  - If it didn't, we're fine with heavy traffic on the nearest local road
 
 ## Defining a neighborhood
 
@@ -327,7 +336,7 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Boundary adjustment
 
-**Maybe road classification is worth revisiting**
+Maybe road classification is worth revisiting!
 
 - Different priorities about moving vehicles through an area
 - Should that high street also be a through-route?
@@ -411,6 +420,8 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Assessing overall impact
 
+## Assessing overall impact
+
 ![](all_rat_runs.png)
 
 - Show all rat-runs at once
@@ -420,7 +431,7 @@ Join the workshop tomorrow at 15:00 for details
 
 - Is the rat-run realistic?
 - How many people will try to take it?
-- With new filters, how will overall traffic detour
+- With new filters, how will traffic detour overall?
   - Maybe spillover to another neighborhood
 
 ## Assessing overall impact
@@ -432,18 +443,20 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Assessing overall impact
 
-<!-- example heatmap -->
+![](impact_prediction.png)
 
 - Calculate all driving routes before and after filters
 - Look for quieter and busier streets
 
 ## Assessing overall impact
 
-- 2011 census data, commuting only
+- 2011 census data, commuting for work only
 - Urban Observatories traffic counts
     - Calibrate / validate
     - Where do the 5,000 vehicles/hour along a road start and end?
 - Bring your own demand model (doesn't need to be public data)
+
+## Heuristics for placing filters
 
 ## Heuristics for placing filters
 
@@ -504,21 +517,12 @@ Join the workshop tomorrow at 15:00 for details
 
 ![](grid_diagonal.png)
 
-## A large-scale vision
-
-- One use of automation...
-- (I'm not advocating for this)
-
-## A large-scale vision
-
-<!-- What do we show? How many filters to stop most rat runs? -->
-
 # Part 4: Next steps
 
 - polish, continue testing with local authorities
 - share proposals online
 - training material (user guide, video tutorials)
-- new features
+- popular feature requests
   - bus gates
   - one-way streets
   - demographics -- who lives near interventions?
@@ -528,14 +532,15 @@ Join the workshop tomorrow at 15:00 for details
 
 - Nottingham
 - Campaigning group in Lyon
-- Prototyping in 6-10 other places
+- Initial testing in ~10 other places
 
 ## Engagement model
 
 - <dcarlino@turing.ac.uk>
-- I can help import
+- I can help import your city
 - Do you have travel demand data?
 - What else should this tool do?
+- I'm looking for help from software engineers & UX designers
 
 ## LTNs are just the start
 
@@ -555,12 +560,11 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Where's the AI?
 
-- You can't argue with the results
+- Classic computer science graph algorithms vs machine learning
+- You can't argue with the results *(barring data quality / bugs)*
   -  The rat-runs show specific shortcuts!
   -  The cells show if it's possible to cut through or not!
-  -  (Barring data quality / bugs)
 - Explainable systems are perceived as more trustworthy
-- Classic computer science graph algorithms vs machine learning
 
 ## Engaging communities
 
