@@ -337,13 +337,14 @@
 
 <section id="outline" class="title-slide slide level1 center">
 <h1>Outline</h1>
+<!-- Easier URL to find slides -->
 <p>These slides: …</p>
-<ul>
+<ol type="1">
 <li>Background of LTNs</li>
 <li>The tool</li>
 <li>Technical overview</li>
 <li>Next steps</li>
-</ul>
+</ol>
 </section>
 
 <section>
@@ -376,19 +377,14 @@
 </section>
 <section id="the-response" class="slide level2">
 <h2>The response</h2>
+<p><img data-src="modal_filter.jpg"> (Jack Fifield on Wikipedia, CC BY 2.0)</p>
 <ul>
 <li>Modal filters</li>
-</ul>
-<!-- take my own photos -->
-</section>
-<section id="the-response-1" class="slide level2">
-<h2>The response</h2>
-<ul>
 <li>Area of effect</li>
 <li>Low traffic neighborhoods</li>
 </ul>
 </section>
-<section id="the-response-2" class="slide level2">
+<section id="the-response-1" class="slide level2">
 <h2>The response</h2>
 <ul>
 <li>2020 active travel fund</li>
@@ -423,8 +419,8 @@
 </ul>
 </section></section>
 <section>
-<section id="part-2-the-tool" class="title-slide slide level1 center">
-<h1>Part 2: The tool</h1>
+<section id="part-2-the-ltn-tool" class="title-slide slide level1 center">
+<h1>Part 2: The LTN tool</h1>
 
 </section>
 <section id="demo" class="slide level2">
@@ -438,10 +434,7 @@
 <ul>
 <li>no mobile</li>
 </ul></li>
-<li>free, open source
-<ul>
-<li><a href="https://github.com/a-b-street/abstreet/tree/master/apps/ltn" class="uri">https://github.com/a-b-street/abstreet/tree/master/apps/ltn</a></li>
-</ul></li>
+<li>free, open source</li>
 <li>multiple audiences
 <ul>
 <li>local authorities / consultants</li>
@@ -483,13 +476,22 @@
 <section>
 <section id="part-3-technical-overview" class="title-slide slide level1 center">
 <h1>Part 3: Technical overview</h1>
-
-<img data-src="architecture.png" class="r-stretch"><p>Join the workshop tomorrow at 15:00 for details</p>
+<ul>
+<li>Neighborhood connectivity</li>
+<li>Predicting rat-runs</li>
+<li>Defining a neighborhood</li>
+<li>Assessing overall impact</li>
+<li>Heuristics for placing filters</li>
+</ul>
 </section>
+<section id="architecture" class="slide level2">
+<h2>Architecture</h2>
+
+<img data-src="architecture.png" class="r-stretch"></section>
 <section id="openstreetmap-into-a-graph" class="slide level2">
 <h2>OpenStreetMap into a graph</h2>
-<!-- img -->
-<ul>
+
+<img data-src="osm_graph.png" class="r-stretch"><ul>
 <li>Edges: road segments</li>
 <li>Nodes: junctions</li>
 <li>one-way streets, lane configuration</li>
@@ -644,13 +646,16 @@
 <img data-src="border_cell3.png" class="r-stretch"></section>
 <section id="predicting-rat-runs" class="slide level2">
 <h2>Predicting rat-runs</h2>
+</section>
+<section id="predicting-rat-runs-1" class="slide level2">
+<h2>Predicting rat-runs</h2>
 
 <img data-src="ratrun_heatmap.png" class="r-stretch"><ul>
 <li>What’s a rat-run?</li>
 <li>Why are some streets quiet?</li>
 </ul>
 </section>
-<section id="predicting-rat-runs-1" class="slide level2">
+<section id="predicting-rat-runs-2" class="slide level2">
 <h2>Predicting rat-runs</h2>
 
 <img data-src="ratrun_example.png" class="r-stretch"></section>
@@ -701,26 +706,29 @@
 <img data-src="detour3.png" class="r-stretch"></section>
 <section id="defining-a-neighborhood" class="slide level2">
 <h2>Defining a neighborhood</h2>
+</section>
+<section id="defining-a-neighborhood-1" class="slide level2">
+<h2>Defining a neighborhood</h2>
 
 <img data-src="boundary_default.png" class="r-stretch"></section>
-<section id="defining-a-neighborhood-1" class="slide level2">
+<section id="defining-a-neighborhood-2" class="slide level2">
 <h2>Defining a neighborhood</h2>
 
 <img data-src="boundary_water.png" class="r-stretch"><ul>
 <li>This process will cross railroads, water
 <ul>
-<li>If it didn’t, the local road on that part of the perimeter would be OK to have traffic</li>
+<li>If it didn’t, we’re fine with heavy traffic on the nearest local road</li>
 </ul></li>
 </ul>
 </section>
-<section id="defining-a-neighborhood-2" class="slide level2">
+<section id="defining-a-neighborhood-3" class="slide level2">
 <h2>Defining a neighborhood</h2>
 
 <img data-src="boundary_major_roads.png" class="r-stretch"><ul>
 <li>Sometimes major roads just end</li>
 </ul>
 </section>
-<section id="defining-a-neighborhood-3" class="slide level2">
+<section id="defining-a-neighborhood-4" class="slide level2">
 <h2>Defining a neighborhood</h2>
 
 <img data-src="boundary_dual_carriageway.png" class="r-stretch"><ul>
@@ -736,7 +744,7 @@
 </section>
 <section id="boundary-adjustment-1" class="slide level2">
 <h2>Boundary adjustment</h2>
-<p><strong>Maybe road classification is worth revisiting</strong></p>
+<p>Maybe road classification is worth revisiting!</p>
 <ul>
 <li>Different priorities about moving vehicles through an area</li>
 <li>Should that high street also be a through-route?</li>
@@ -834,24 +842,27 @@
 </section>
 <section id="assessing-overall-impact" class="slide level2">
 <h2>Assessing overall impact</h2>
+</section>
+<section id="assessing-overall-impact-1" class="slide level2">
+<h2>Assessing overall impact</h2>
 
 <img data-src="all_rat_runs.png" class="r-stretch"><ul>
 <li>Show all rat-runs at once</li>
 <li>Rank neighborhoods by number of internal rat-runs</li>
 </ul>
 </section>
-<section id="assessing-overall-impact-1" class="slide level2">
+<section id="assessing-overall-impact-2" class="slide level2">
 <h2>Assessing overall impact</h2>
 <ul>
 <li>Is the rat-run realistic?</li>
 <li>How many people will try to take it?</li>
-<li>With new filters, how will overall traffic detour
+<li>With new filters, how will traffic detour overall?
 <ul>
 <li>Maybe spillover to another neighborhood</li>
 </ul></li>
 </ul>
 </section>
-<section id="assessing-overall-impact-2" class="slide level2">
+<section id="assessing-overall-impact-3" class="slide level2">
 <h2>Assessing overall impact</h2>
 
 <img data-src="demand_model.png" class="r-stretch"><ul>
@@ -859,18 +870,18 @@
 <li>For neighborhood-scale detours, MSOA zones are too large</li>
 </ul>
 </section>
-<section id="assessing-overall-impact-3" class="slide level2">
+<section id="assessing-overall-impact-4" class="slide level2">
 <h2>Assessing overall impact</h2>
-<!-- example heatmap -->
-<ul>
+
+<img data-src="impact_prediction.png" class="r-stretch"><ul>
 <li>Calculate all driving routes before and after filters</li>
 <li>Look for quieter and busier streets</li>
 </ul>
 </section>
-<section id="assessing-overall-impact-4" class="slide level2">
+<section id="assessing-overall-impact-5" class="slide level2">
 <h2>Assessing overall impact</h2>
 <ul>
-<li>2011 census data, commuting only</li>
+<li>2011 census data, commuting for work only</li>
 <li>Urban Observatories traffic counts
 <ul>
 <li>Calibrate / validate</li>
@@ -880,6 +891,9 @@
 </ul>
 </section>
 <section id="heuristics-for-placing-filters" class="slide level2">
+<h2>Heuristics for placing filters</h2>
+</section>
+<section id="heuristics-for-placing-filters-1" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 <ul>
 <li>Human judgment
@@ -918,7 +932,7 @@
 </ul></li>
 </ul>
 </section>
-<section id="heuristics-for-placing-filters-1" class="slide level2">
+<section id="heuristics-for-placing-filters-2" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
 <img data-src="heuristic_human.png" class="r-stretch"><ul>
@@ -926,14 +940,14 @@
 <li>My human intuition</li>
 </ul>
 </section>
-<section id="heuristics-for-placing-filters-2" class="slide level2">
+<section id="heuristics-for-placing-filters-3" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
 <img data-src="heuristic_split.png" class="r-stretch"><ul>
 <li>Minimum cut of the graph</li>
 </ul>
 </section>
-<section id="heuristics-for-placing-filters-3" class="slide level2">
+<section id="heuristics-for-placing-filters-4" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
 <img data-src="heuristic_split_balance.png" class="r-stretch"><ul>
@@ -941,28 +955,17 @@
 <li>How large are the two resulting cells?</li>
 </ul>
 </section>
-<section id="heuristics-for-placing-filters-4" class="slide level2">
+<section id="heuristics-for-placing-filters-5" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
 <img data-src="grid.png" class="r-stretch"><ul>
 <li>What do you do with grids?</li>
 </ul>
 </section>
-<section id="heuristics-for-placing-filters-5" class="slide level2">
+<section id="heuristics-for-placing-filters-6" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
-<img data-src="grid_diagonal.png" class="r-stretch"></section>
-<section id="a-large-scale-vision" class="slide level2">
-<h2>A large-scale vision</h2>
-<ul>
-<li>One use of automation…</li>
-<li>(I’m not advocating for this)</li>
-</ul>
-</section>
-<section id="a-large-scale-vision-1" class="slide level2">
-<h2>A large-scale vision</h2>
-<!-- What do we show? How many filters to stop most rat runs? -->
-</section></section>
+<img data-src="grid_diagonal.png" class="r-stretch"></section></section>
 <section>
 <section id="part-4-next-steps" class="title-slide slide level1 center">
 <h1>Part 4: Next steps</h1>
@@ -970,7 +973,7 @@
 <li>polish, continue testing with local authorities</li>
 <li>share proposals online</li>
 <li>training material (user guide, video tutorials)</li>
-<li>new features
+<li>popular feature requests
 <ul>
 <li>bus gates</li>
 <li>one-way streets</li>
@@ -984,16 +987,17 @@
 <ul>
 <li>Nottingham</li>
 <li>Campaigning group in Lyon</li>
-<li>Prototyping in 6-10 other places</li>
+<li>Initial testing in ~10 other places</li>
 </ul>
 </section>
 <section id="engagement-model" class="slide level2">
 <h2>Engagement model</h2>
 <ul>
 <li><a href="mailto:dcarlino@turing.ac.uk" class="email">dcarlino@turing.ac.uk</a></li>
-<li>I can help import</li>
+<li>I can help import your city</li>
 <li>Do you have travel demand data?</li>
 <li>What else should this tool do?</li>
+<li>I’m looking for help from software engineers &amp; UX designers</li>
 </ul>
 </section>
 <section id="ltns-are-just-the-start" class="slide level2">
@@ -1022,14 +1026,13 @@
 <section id="wheres-the-ai" class="slide level2">
 <h2>Where’s the AI?</h2>
 <ul>
-<li>You can’t argue with the results
+<li>Classic computer science graph algorithms vs machine learning</li>
+<li>You can’t argue with the results <em>(barring data quality / bugs)</em>
 <ul>
 <li>The rat-runs show specific shortcuts!</li>
 <li>The cells show if it’s possible to cut through or not!</li>
-<li>(Barring data quality / bugs)</li>
 </ul></li>
 <li>Explainable systems are perceived as more trustworthy</li>
-<li>Classic computer science graph algorithms vs machine learning</li>
 </ul>
 </section>
 <section id="engaging-communities" class="slide level2">
