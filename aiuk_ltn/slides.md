@@ -14,8 +14,6 @@ format:
 
 <!-- Easier URL to find slides -->
 
-These slides: ...
-
 1. Background of LTNs
 2. The tool
 3. Technical overview
@@ -36,19 +34,30 @@ These slides: ...
 
 ## The problem
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](urban_minor_roads_dft.png)
-
-- Rise of traffic on local streets from sat-nav
-- <https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf>
+:::
+::: {.column width="50%"}
+Rise of traffic on local streets from sat-nav
+:::
+::::
+*<https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf>*
 
 ## The response
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](modal_filter.jpg)
-(Jack Fifield on Wikipedia, CC BY 2.0)
 
+*(Jack Fifield on Wikipedia, CC BY 2.0)*
+:::
+::: {.column width="50%"}
 - Modal filters
 - Area of effect
 - Low traffic neighborhoods
+:::
+::::
 
 ## The response
 
@@ -63,14 +72,14 @@ These slides: ...
 
 ![](west_ealing.jpg)
 
-- Communication by diagram
+Communication by diagram
 
 ## The current planning process
 
 ![](deegan_cad.png)
 
 - Live workshops
-- <https://www.youtube.com/watch?v=pHucS2F33W8&t=1052s>
+- *<https://www.youtube.com/watch?v=pHucS2F33W8&t=1052s>*
 
 ## The current planning process
 
@@ -82,7 +91,7 @@ These slides: ...
 
 ## The LTN tool
 
-- <http://ltn.abstreet.org>
+- *<http://ltn.abstreet.org>*
 - web browser, Mac, Windows, Linux
   - no mobile
 - free, open source
@@ -125,26 +134,36 @@ These slides: ...
 
 ## OpenStreetMap into a graph
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](osm_graph.png)
-
+:::
+::: {.column width="50%"}
 - Edges: road segments
 - Nodes: junctions
 - one-way streets, lane configuration
+:::
+::::
 
 ## A neighborhood
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](neighborhood.png)
-
+:::
+::: {.column width="50%"}
 - the perimeter
   - usually "major" roads designed to handle more traffic
 - the interior
   - reduce traffic through here
+:::
+::::
 
 ## Cells
 
 ![](cells.png)
 
-- Everywhere reachable by driving within the neighborhood, without leaving
+Everywhere reachable by driving within the neighborhood, without leaving
 
 ## Cells
 
@@ -184,20 +203,21 @@ These slides: ...
 
 ![](scc.png)
 
-- The graph of the neighborhood partitioned into strongly-connected components
+The graph of the neighborhood partitioned into strongly-connected components
 
 ## Cells as areas
 
 ![](west_ealing.jpg)
 
-- Can we match this?
+Can we match this?
 
 ## Voronoi diagrams
 
 ![](voronoi.png)
-(Balu Ertl on Wikipedia, CC BY-SA 4.0)
 
-- Not straightforward to apply to line segments
+*(Balu Ertl on Wikipedia, CC BY-SA 4.0)*
+
+Not straightforward to apply to line segments
 
 ## Approximating with grids
 
@@ -221,37 +241,37 @@ These slides: ...
 
 ![](marching_squares.png)
 
-- Marching Squares to turn the grid into nice contours
+Marching Squares to turn the grid into nice contours
 
 ## Edge cases with calculating cells
 
-- One-way streets
-
 ![](one_ways.png)
+
+One-way streets
 
 ## Edge cases with calculating cells
 
 ![](carless.png)
 
-- Roads without motor vehicles
+Roads without motor vehicles
 
 ## Edge cases with calculating cells
 
 ![](border_cell1.png)
 
-- Is this one cell?
+Is this one cell?
 
 ## Edge cases with calculating cells
-
-- Does this path leave the neighborhood?
 
 ![](border_cell2.png)
 
+Does this path leave the neighborhood?
+
 ## Edge cases with calculating cells
 
-- Decision: separate cells
-
 ![](border_cell3.png)
+
+Decision: separate cells
 
 ## Predicting rat-runs
 
@@ -284,13 +304,13 @@ These slides: ...
 
 ![](ratrun_use_perimeter.png)
 
-- In freeflow conditions, the perimeter road is faster
+In freeflow conditions, the perimeter road is faster
 
 ## Rat-run definition
 
 ![](ratrun_stay_inside.png)
 
-- Force the shortest path to stay inside the neighborhood
+Force the shortest path to stay inside the neighborhood
 
 ## Rat-run results
 
@@ -321,13 +341,13 @@ These slides: ...
 
 ![](boundary_major_roads.png)
 
-- Sometimes major roads just end
+Sometimes major roads just end
 
 ## Defining a neighborhood
 
 ![](boundary_dual_carriageway.png)
 
-- Spaces in between motorway loops or dual carriageways
+Spaces in between motorway loops or dual carriageways
 
 ## Boundary adjustment
 
@@ -344,9 +364,9 @@ Maybe road classification is worth revisiting!
 
 ## Boundary adjustment
 
-- Don't be too prescriptive; let users adjust
-
 ![](boundary1.png)
+
+Don't be too prescriptive; let users adjust
 
 ## Boundary adjustment
 
@@ -362,19 +382,29 @@ Maybe road classification is worth revisiting!
 
 ## Blockfinding
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](block_order.png)
-
+:::
+::: {.column width="50%"}
 - Trace around the edge of a road
 - Uses the shape of roads and intersections, inferred from OpenStreetMap
 - A block internally tracks a list of (road, left/right)
+:::
+::::
 
 ## Merging two blocks
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](merge1.png)
-
+:::
+::: {.column width="50%"}
 - Find the common slice of the perimeters
 - "Rotate" the perimeter until the common part matches up
 - Slice and stitch together
+:::
+::::
 
 ## Merging two blocks
 
@@ -392,13 +422,13 @@ Maybe road classification is worth revisiting!
 
 ![](blocks_water.png)
 
-- Only traces roads, not natural features
+Only traces roads, not natural features
 
 ## Blockfinding limitations
 
 ![](blocks_edge.png)
 
-- Edge of the study area
+Edge of the study area
 
 ## Blockfinding limitations
 
@@ -416,7 +446,7 @@ Maybe road classification is worth revisiting!
 
 ![](holes.png)
 
-- You can't always draw the boundaries you want
+You can't always draw the boundaries you want
 
 ## Assessing overall impact
 
@@ -480,25 +510,29 @@ Maybe road classification is worth revisiting!
 
 ## Where should the filter go?
 
+:::: {.columns}
+::: {.column width="50%"}
 ![](heuristic_border.png)
-
+:::
+::: {.column width="50%"}
 - Only one entrance per cell
   - Expensive, likely unpopular
   - Very different results for residents
   - Simpler crossings along the perimeter
+:::
+::::
 
 ## Heuristics for placing filters
 
 ![](heuristic_human.png)
 
-- Split large cells
-- My human intuition
+Split large cells (intuition)
 
 ## Heuristics for placing filters
 
 ![](heuristic_split.png)
 
-- Minimum cut of the graph
+Minimum cut of the graph
 
 ## Heuristics for placing filters
 
@@ -511,7 +545,7 @@ Maybe road classification is worth revisiting!
 
 ![](grid.png)
 
-- What do you do with grids?
+Gridded streets?
 
 ## Heuristics for placing filters
 
@@ -574,7 +608,7 @@ Maybe road classification is worth revisiting!
 
 ## Conclusion
 
-- <http://ltn.abstreet.org>
+- *<http://ltn.abstreet.org>*
+  - Code at *<https://github.com/a-b-street/abstreet>*
 - <dcarlino@turing.ac.uk>
-- <https://github.com/a-b-street/abstreet>
 - Contact me to import a city, schedule training, discuss ideas
