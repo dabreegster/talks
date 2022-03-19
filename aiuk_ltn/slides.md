@@ -4,8 +4,10 @@ subtitle: "AI:UK (draft talk)"
 author: "Dustin Carlino"
 format:
   revealjs:
-    slide-number: true
-    logo: logo.svg
+    logo: aiuk_logo.png
+    progress: false
+    menu: false
+    theme: custom.scss
 ---
 
 # Outline
