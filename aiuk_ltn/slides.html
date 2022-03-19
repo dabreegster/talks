@@ -338,7 +338,6 @@
 <section id="outline" class="title-slide slide level1 center">
 <h1>Outline</h1>
 <!-- Easier URL to find slides -->
-<p>These slides: …</p>
 <ol type="1">
 <li>Background of LTNs</li>
 <li>The tool</li>
@@ -369,20 +368,29 @@
 </section>
 <section id="the-problem-1" class="slide level2">
 <h2>The problem</h2>
-
-<img data-src="urban_minor_roads_dft.png" class="r-stretch"><ul>
-<li>Rise of traffic on local streets from sat-nav</li>
-<li><a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf" class="uri">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf</a></li>
-</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="urban_minor_roads_dft.png"></p>
+</div><div class="column" style="width:50%;">
+<p>Rise of traffic on local streets from sat-nav</p>
+</div>
+</div>
+<p><em><a href="https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf" class="uri">https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf</a></em></p>
 </section>
 <section id="the-response" class="slide level2">
 <h2>The response</h2>
-<p><img data-src="modal_filter.jpg"> (Jack Fifield on Wikipedia, CC BY 2.0)</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="modal_filter.jpg"></p>
+<p><em>(Jack Fifield on Wikipedia, CC BY 2.0)</em></p>
+</div><div class="column" style="width:50%;">
 <ul>
 <li>Modal filters</li>
 <li>Area of effect</li>
 <li>Low traffic neighborhoods</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="the-response-1" class="slide level2">
 <h2>The response</h2>
@@ -400,16 +408,14 @@
 <section id="the-current-planning-process" class="slide level2">
 <h2>The current planning process</h2>
 
-<img data-src="west_ealing.jpg" class="r-stretch"><ul>
-<li>Communication by diagram</li>
-</ul>
+<img data-src="west_ealing.jpg" class="r-stretch"><p>Communication by diagram</p>
 </section>
 <section id="the-current-planning-process-1" class="slide level2">
 <h2>The current planning process</h2>
 
 <img data-src="deegan_cad.png" class="r-stretch"><ul>
 <li>Live workshops</li>
-<li><a href="https://www.youtube.com/watch?v=pHucS2F33W8&amp;t=1052s" class="uri">https://www.youtube.com/watch?v=pHucS2F33W8&amp;t=1052s</a></li>
+<li><em><a href="https://www.youtube.com/watch?v=pHucS2F33W8&amp;t=1052s" class="uri">https://www.youtube.com/watch?v=pHucS2F33W8&amp;t=1052s</a></em></li>
 </ul>
 </section>
 <section id="the-current-planning-process-2" class="slide level2">
@@ -429,7 +435,7 @@
 <section id="the-ltn-tool" class="slide level2">
 <h2>The LTN tool</h2>
 <ul>
-<li><a href="http://ltn.abstreet.org" class="uri">http://ltn.abstreet.org</a></li>
+<li><em><a href="http://ltn.abstreet.org" class="uri">http://ltn.abstreet.org</a></em></li>
 <li>web browser, Mac, Windows, Linux
 <ul>
 <li>no mobile</li>
@@ -490,17 +496,25 @@
 <img data-src="architecture.png" class="r-stretch"></section>
 <section id="openstreetmap-into-a-graph" class="slide level2">
 <h2>OpenStreetMap into a graph</h2>
-
-<img data-src="osm_graph.png" class="r-stretch"><ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="osm_graph.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>Edges: road segments</li>
 <li>Nodes: junctions</li>
 <li>one-way streets, lane configuration</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="a-neighborhood" class="slide level2">
 <h2>A neighborhood</h2>
-
-<img data-src="neighborhood.png" class="r-stretch"><ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="neighborhood.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>the perimeter
 <ul>
 <li>usually “major” roads designed to handle more traffic</li>
@@ -510,13 +524,13 @@
 <li>reduce traffic through here</li>
 </ul></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="cells" class="slide level2">
 <h2>Cells</h2>
 
-<img data-src="cells.png" class="r-stretch"><ul>
-<li>Everywhere reachable by driving within the neighborhood, without leaving</li>
-</ul>
+<img data-src="cells.png" class="r-stretch"><p>Everywhere reachable by driving within the neighborhood, without leaving</p>
 </section>
 <section id="cells-1" class="slide level2">
 <h2>Cells</h2>
@@ -562,23 +576,18 @@
 <section id="the-result" class="slide level2">
 <h2>The result</h2>
 
-<img data-src="scc.png" class="r-stretch"><ul>
-<li>The graph of the neighborhood partitioned into strongly-connected components</li>
-</ul>
+<img data-src="scc.png" class="r-stretch"><p>The graph of the neighborhood partitioned into strongly-connected components</p>
 </section>
 <section id="cells-as-areas" class="slide level2">
 <h2>Cells as areas</h2>
 
-<img data-src="west_ealing.jpg" class="r-stretch"><ul>
-<li>Can we match this?</li>
-</ul>
+<img data-src="west_ealing.jpg" class="r-stretch"><p>Can we match this?</p>
 </section>
 <section id="voronoi-diagrams" class="slide level2">
 <h2>Voronoi diagrams</h2>
-<p><img data-src="voronoi.png"> (Balu Ertl on Wikipedia, CC BY-SA 4.0)</p>
-<ul>
-<li>Not straightforward to apply to line segments</li>
-</ul>
+
+<img data-src="voronoi.png" class="r-stretch"><p><em>(Balu Ertl on Wikipedia, CC BY-SA 4.0)</em></p>
+<p>Not straightforward to apply to line segments</p>
 </section>
 <section id="approximating-with-grids" class="slide level2">
 <h2>Approximating with grids</h2>
@@ -605,45 +614,33 @@
 <section id="approximating-with-grids-4" class="slide level2">
 <h2>Approximating with grids</h2>
 
-<img data-src="marching_squares.png" class="r-stretch"><ul>
-<li>Marching Squares to turn the grid into nice contours</li>
-</ul>
+<img data-src="marching_squares.png" class="r-stretch"><p>Marching Squares to turn the grid into nice contours</p>
 </section>
 <section id="edge-cases-with-calculating-cells" class="slide level2">
 <h2>Edge cases with calculating cells</h2>
-<ul>
-<li>One-way streets</li>
-</ul>
 
-<img data-src="one_ways.png" class="r-stretch"></section>
+<img data-src="one_ways.png" class="r-stretch"><p>One-way streets</p>
+</section>
 <section id="edge-cases-with-calculating-cells-1" class="slide level2">
 <h2>Edge cases with calculating cells</h2>
 
-<img data-src="carless.png" class="r-stretch"><ul>
-<li>Roads without motor vehicles</li>
-</ul>
+<img data-src="carless.png" class="r-stretch"><p>Roads without motor vehicles</p>
 </section>
 <section id="edge-cases-with-calculating-cells-2" class="slide level2">
 <h2>Edge cases with calculating cells</h2>
 
-<img data-src="border_cell1.png" class="r-stretch"><ul>
-<li>Is this one cell?</li>
-</ul>
+<img data-src="border_cell1.png" class="r-stretch"><p>Is this one cell?</p>
 </section>
 <section id="edge-cases-with-calculating-cells-3" class="slide level2">
 <h2>Edge cases with calculating cells</h2>
-<ul>
-<li>Does this path leave the neighborhood?</li>
-</ul>
 
-<img data-src="border_cell2.png" class="r-stretch"></section>
+<img data-src="border_cell2.png" class="r-stretch"><p>Does this path leave the neighborhood?</p>
+</section>
 <section id="edge-cases-with-calculating-cells-4" class="slide level2">
 <h2>Edge cases with calculating cells</h2>
-<ul>
-<li>Decision: separate cells</li>
-</ul>
 
-<img data-src="border_cell3.png" class="r-stretch"></section>
+<img data-src="border_cell3.png" class="r-stretch"><p>Decision: separate cells</p>
+</section>
 <section id="predicting-rat-runs" class="slide level2">
 <h2>Predicting rat-runs</h2>
 </section>
@@ -681,16 +678,12 @@
 <section id="rat-run-definition-2" class="slide level2">
 <h2>Rat-run definition</h2>
 
-<img data-src="ratrun_use_perimeter.png" class="r-stretch"><ul>
-<li>In freeflow conditions, the perimeter road is faster</li>
-</ul>
+<img data-src="ratrun_use_perimeter.png" class="r-stretch"><p>In freeflow conditions, the perimeter road is faster</p>
 </section>
 <section id="rat-run-definition-3" class="slide level2">
 <h2>Rat-run definition</h2>
 
-<img data-src="ratrun_stay_inside.png" class="r-stretch"><ul>
-<li>Force the shortest path to stay inside the neighborhood</li>
-</ul>
+<img data-src="ratrun_stay_inside.png" class="r-stretch"><p>Force the shortest path to stay inside the neighborhood</p>
 </section>
 <section id="rat-run-results" class="slide level2">
 <h2>Rat-run results</h2>
@@ -724,16 +717,12 @@
 <section id="defining-a-neighborhood-3" class="slide level2">
 <h2>Defining a neighborhood</h2>
 
-<img data-src="boundary_major_roads.png" class="r-stretch"><ul>
-<li>Sometimes major roads just end</li>
-</ul>
+<img data-src="boundary_major_roads.png" class="r-stretch"><p>Sometimes major roads just end</p>
 </section>
 <section id="defining-a-neighborhood-4" class="slide level2">
 <h2>Defining a neighborhood</h2>
 
-<img data-src="boundary_dual_carriageway.png" class="r-stretch"><ul>
-<li>Spaces in between motorway loops or dual carriageways</li>
-</ul>
+<img data-src="boundary_dual_carriageway.png" class="r-stretch"><p>Spaces in between motorway loops or dual carriageways</p>
 </section>
 <section id="boundary-adjustment" class="slide level2">
 <h2>Boundary adjustment</h2>
@@ -753,11 +742,9 @@
 </section>
 <section id="boundary-adjustment-2" class="slide level2">
 <h2>Boundary adjustment</h2>
-<ul>
-<li>Don’t be too prescriptive; let users adjust</li>
-</ul>
 
-<img data-src="boundary1.png" class="r-stretch"></section>
+<img data-src="boundary1.png" class="r-stretch"><p>Don’t be too prescriptive; let users adjust</p>
+</section>
 <section id="boundary-adjustment-3" class="slide level2">
 <h2>Boundary adjustment</h2>
 
@@ -773,21 +760,31 @@
 </section>
 <section id="blockfinding" class="slide level2">
 <h2>Blockfinding</h2>
-
-<img data-src="block_order.png" class="r-stretch"><ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="block_order.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>Trace around the edge of a road</li>
 <li>Uses the shape of roads and intersections, inferred from OpenStreetMap</li>
 <li>A block internally tracks a list of (road, left/right)</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="merging-two-blocks" class="slide level2">
 <h2>Merging two blocks</h2>
-
-<img data-src="merge1.png" class="r-stretch"><ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="merge1.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>Find the common slice of the perimeters</li>
 <li>“Rotate” the perimeter until the common part matches up</li>
 <li>Slice and stitch together</li>
 </ul>
+</div>
+</div>
 </section>
 <section id="merging-two-blocks-1" class="slide level2">
 <h2>Merging two blocks</h2>
@@ -807,16 +804,12 @@
 <section id="blockfinding-limitations" class="slide level2">
 <h2>Blockfinding limitations</h2>
 
-<img data-src="blocks_water.png" class="r-stretch"><ul>
-<li>Only traces roads, not natural features</li>
-</ul>
+<img data-src="blocks_water.png" class="r-stretch"><p>Only traces roads, not natural features</p>
 </section>
 <section id="blockfinding-limitations-1" class="slide level2">
 <h2>Blockfinding limitations</h2>
 
-<img data-src="blocks_edge.png" class="r-stretch"><ul>
-<li>Edge of the study area</li>
-</ul>
+<img data-src="blocks_edge.png" class="r-stretch"><p>Edge of the study area</p>
 </section>
 <section id="blockfinding-limitations-2" class="slide level2">
 <h2>Blockfinding limitations</h2>
@@ -836,9 +829,7 @@
 <section id="blockfinding-limitations-4" class="slide level2">
 <h2>Blockfinding limitations</h2>
 
-<img data-src="holes.png" class="r-stretch"><ul>
-<li>You can’t always draw the boundaries you want</li>
-</ul>
+<img data-src="holes.png" class="r-stretch"><p>You can’t always draw the boundaries you want</p>
 </section>
 <section id="assessing-overall-impact" class="slide level2">
 <h2>Assessing overall impact</h2>
@@ -922,8 +913,11 @@
 </section>
 <section id="where-should-the-filter-go-2" class="slide level2">
 <h2>Where should the filter go?</h2>
-
-<img data-src="heuristic_border.png" class="r-stretch"><ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="heuristic_border.png"></p>
+</div><div class="column" style="width:50%;">
+<ul>
 <li>Only one entrance per cell
 <ul>
 <li>Expensive, likely unpopular</li>
@@ -931,21 +925,18 @@
 <li>Simpler crossings along the perimeter</li>
 </ul></li>
 </ul>
+</div>
+</div>
 </section>
 <section id="heuristics-for-placing-filters-2" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
-<img data-src="heuristic_human.png" class="r-stretch"><ul>
-<li>Split large cells</li>
-<li>My human intuition</li>
-</ul>
+<img data-src="heuristic_human.png" class="r-stretch"><p>Split large cells (intuition)</p>
 </section>
 <section id="heuristics-for-placing-filters-3" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
-<img data-src="heuristic_split.png" class="r-stretch"><ul>
-<li>Minimum cut of the graph</li>
-</ul>
+<img data-src="heuristic_split.png" class="r-stretch"><p>Minimum cut of the graph</p>
 </section>
 <section id="heuristics-for-placing-filters-4" class="slide level2">
 <h2>Heuristics for placing filters</h2>
@@ -958,9 +949,7 @@
 <section id="heuristics-for-placing-filters-5" class="slide level2">
 <h2>Heuristics for placing filters</h2>
 
-<img data-src="grid.png" class="r-stretch"><ul>
-<li>What do you do with grids?</li>
-</ul>
+<img data-src="grid.png" class="r-stretch"><p>Gridded streets?</p>
 </section>
 <section id="heuristics-for-placing-filters-6" class="slide level2">
 <h2>Heuristics for placing filters</h2>
@@ -1046,9 +1035,11 @@
 <section id="conclusion" class="slide level2">
 <h2>Conclusion</h2>
 <ul>
-<li><a href="http://ltn.abstreet.org" class="uri">http://ltn.abstreet.org</a></li>
+<li><em><a href="http://ltn.abstreet.org" class="uri">http://ltn.abstreet.org</a></em>
+<ul>
+<li>Code at <em><a href="https://github.com/a-b-street/abstreet" class="uri">https://github.com/a-b-street/abstreet</a></em></li>
+</ul></li>
 <li><a href="mailto:dcarlino@turing.ac.uk" class="email">dcarlino@turing.ac.uk</a></li>
-<li><a href="https://github.com/a-b-street/abstreet" class="uri">https://github.com/a-b-street/abstreet</a></li>
 <li>Contact me to import a city, schedule training, discuss ideas</li>
 </ul>
 
