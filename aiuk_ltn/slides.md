@@ -19,8 +19,6 @@ These slides: ...
 
 # Part 1: Background
 
-<!-- sustrans references -->
-
 ## The problem
 
 - Car-centric cities
@@ -34,12 +32,21 @@ These slides: ...
 
 ## The problem
 
+![](urban_minor_roads_dft.png)
+
 - Rise of traffic on local streets from sat-nav
+- <https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/916749/road-traffic-estimates-in-great-britain-2019.pdf>
 
 ## The response
 
 - Modal filters
+
+<!-- take my own photos -->
+
+## The response
+
 - Area of effect
+- Low traffic neighborhoods
 
 ## The response
 
@@ -52,8 +59,20 @@ These slides: ...
 
 ## The current planning process
 
+![](west_ealing.jpg)
+
 - Communication by diagram
-- How's this affect my commute?
+
+## The current planning process
+
+![](deegan_cad.png)
+
+- Live workshops
+- <https://www.youtube.com/watch?v=pHucS2F33W8&t=1052s>
+
+## The current planning process
+
+- How's this affect my trips?
 
 # Part 2: The tool
 
@@ -390,8 +409,6 @@ Join the workshop tomorrow at 15:00 for details
 
 ## Assessing overall impact
 
-<!-- We've been focusing on one neighborhood at a time -->
-
 ![](all_rat_runs.png)
 
 - Show all rat-runs at once
@@ -424,8 +441,7 @@ Join the workshop tomorrow at 15:00 for details
 - Urban Observatories traffic counts
     - Calibrate / validate
     - Where do the 5,000 vehicles/hour along a road start and end?
-
-<!-- If you're in the audience and you have a demand model... plug it in, keep your data private -->
+- Bring your own demand model (doesn't need to be public data)
 
 ## Heuristics for placing filters
 
