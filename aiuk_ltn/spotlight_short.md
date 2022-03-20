@@ -184,18 +184,6 @@ Everywhere reachable by driving within the neighborhood, without leaving
   - Does this path save somebody time?
   - How many people might take this shortcut?
 
-## Rat-run results
-
-![](detour1.png)
-
-## Rat-run results
-
-![](detour2.png)
-
-## Rat-run results
-
-![](detour3.png)
-
 ## Defining a neighborhood
 
 ![](boundary_default.png)
@@ -223,14 +211,6 @@ Don't be too prescriptive; let users adjust
 
 ![](boundary2.png)
 
-## Boundary adjustment
-
-![](blocks.png)
-
-- Per block
-- Partitioning into contiguous neighborhoods
-- Adding a block to one neighborhood removes it from another
-
 ## Blockfinding limitations
 
 ![](holes.png)
@@ -256,26 +236,6 @@ You can't always draw the boundaries you want
 
 - Greedy: the road with the most rat-runs
 - Whack-a-mole
-
-## Where should the filter go?
-
-:::: {.columns}
-::: {.column width="50%"}
-![](heuristic_border.png)
-:::
-::: {.column width="50%"}
-- Only one entrance per cell
-  - Expensive, likely unpopular
-  - Very different results for residents
-  - Simpler crossings along the perimeter
-:::
-::::
-
-## Heuristics for placing filters
-
-![](heuristic_human.png)
-
-Split large cells (intuition)
 
 ## Heuristics for placing filters
 
