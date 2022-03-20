@@ -10,18 +10,7 @@ format:
     theme: custom.scss
 ---
 
-# Outline
-
-<!-- Easier URL to find slides -->
-
-1. Background of LTNs
-2. The tool
-3. Technical overview
-4. Next steps
-
 # Part 1: Background
-
-## The problem
 
 - Car-centric cities
   - Greenhouse gases
@@ -284,23 +273,11 @@ Minimum cut of the graph
   - 15-minute neighborhoods / land use patterns
   - traffic simulation (rapid prototyping)
 
-## Where's the AI?
-
-- Classic computer science graph algorithms vs machine learning
-- You can't argue with the results *(barring data quality / bugs)*
-  -  The rat-runs show specific shortcuts!
-  -  The cells show if it's possible to cut through or not!
-- Explainable systems are perceived as more trustworthy
-
-## Engaging communities
-
-- This tool is meant for **everyone**
-- People are visual, understand maps
-- Build consensus in live workshops
-
 ## Conclusion
 
 - *<http://ltn.abstreet.org>*
   - Code at *<https://github.com/a-b-street/abstreet>*
 - <dcarlino@turing.ac.uk>
 - Contact me to import a city, schedule training, discuss ideas
+
+<!-- Easier URL to find slides -->
