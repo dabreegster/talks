@@ -46,18 +46,15 @@ Rise of traffic on local streets from sat-nav
 
 ## The response
 
-:::: {.columns}
-::: {.column width="50%"}
-![](modal_filter.jpg)
+![](filters_new.png)
 
-*(Jack Fifield on Wikipedia, CC BY 2.0)*
-:::
-::: {.column width="50%"}
-- Modal filters
-- Area of effect
-- Low traffic neighborhoods
-:::
-::::
+Modal filters
+
+## The response
+
+![](filters_old.png)
+
+Area of effect = Low traffic neighborhoods (LTNs)
 
 ## The response
 
