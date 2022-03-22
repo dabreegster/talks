@@ -1,6 +1,6 @@
 ---
 title: "A digital twin to design, analyse, and visualise low-traffic neighbourhoods"
-subtitle: "AI:UK (draft talk)"
+subtitle: "AI:UK Research in action"
 author: "Dustin Carlino"
 format:
   revealjs:
