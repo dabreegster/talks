@@ -18,6 +18,7 @@ format:
 2. The tool
 3. Technical overview
 4. Next steps
+5. Discussion
 
 # Part 1: Background
 
@@ -80,11 +81,15 @@ Communication by diagram
 
 ## The current planning process
 
+![](routing_for_users.png)
+
 - How's this affect my trips?
 
 # Part 2: The LTN tool
 
 ## Demo
+
+- Bristol and Camden
 
 ## The LTN tool
 
