@@ -90,10 +90,14 @@ format:
 - <https://strassenraumkarte.osm-berlin.org/?map=micromap#20/52.49555/13.42073>
 - Pocket parking, curb bulbs, complex junctions
 
+## Rendering
+
+![](neukolln2.png)
+
 ## How is road space allocated today?
 
 - COVID pavement widths ([Madrid project](https://distanciamiento.inspide.com/))
-- Street parking capacity vs vehicle ownership (Neukoelln blog post)
+- Street parking capacity vs vehicle ownership ([Suppalex030's blog post](https://www.openstreetmap.org/user/Supaplex030/diary/396104))
 
 ## Editing a road by lanes
 
@@ -154,15 +158,16 @@ format:
 
 ## osm2streets
 
-![](raw_map_editor.png)
-
 - A directed graph with geometry
 - Start from OSM, then apply transformations to it
   - Collapse degenerate intersections when nothing important differs
   - Find and merge short roads
   - Shrink parallel overlapping roads (stop-gap)
   - Snap parallel cycleways to road (broken)
-- Ben's ideas for the final structure
+
+## osm2streets
+
+![](raw_map_editor.png)
 
 ## osm2streets
 
@@ -171,67 +176,175 @@ format:
 - Browse test cases: <https://a-b-street.github.io/osm2streets/>
 - OSM input, GeoJSON output: <https://github.com/a-b-street/osm2streets/tree/main/tests/src/bristol_sausage_links>
 
+## osm2streets: example transformation
+
+![](merge_short.png)
+
+- Both geometry and graph properties used
+  - Remove edge
+  - Remove one of the nodes (arbitrarily)
+  - Connect edges to the surviving node
+  - Use points from original polygons to form the final
+  - Preserve turn restrictions?
+
+## osm2streets: example transformation
+
+- road we're deleting has simple restrictions
+- road we're deleting has complicated restrictions
+- **road we're deleting is the target of a simple BanTurns restriction**
+- road we're deleting is the target of a simple OnlyAllowTurns restriction
+- road we're deleting is the target of a complicated restriction
+- **road we're deleting is the 'via' of a complicated restriction**
+- road we're deleting has turn lanes that wind up orphaning something
+
 ## osm2streets: sausage links
 
+![](sausage_before.png)
 
-example sausage links
+- Why's the road split?
+
+## osm2streets: sausage links
+
+![](sausage_after.png)
+
+- Geometry: straight line, ignore the bend drawn (or "average" two line-strings?)
+- Lanes: Append in left-to-right order
+
+## osm2streets: sausage links
+
+![](sausage_bad.png)
+
+- One-way directions are the same
+- Length of two roads is very different
+- Distance between equivalent points on line-strings changes
+
+## osm2streets: dual carriageways
 
 dual carriageways in general... preserving the graph structure of turns
 
-## OSM representations
+## osmstreets: merging parallel ways isn't easy
 
-future idea: linear referencing + changing widths
+![](slip_lane.png)
 
-	split the road when a turn lane appears or not?
+Cycle lanes crossing slip lanes
 
-	in OSM, draw overlapping ways to indicate intervals?
+## osmstreets: merging parallel ways isn't easy
 
-## momepy's GSOC
+![](not_parallel.png)
 
-graph and geometric approach
+- Cyclepath is sometimes part of the road, sometimes legitimately a separate path
+- New splits?
+
+## momepy's GSoC
+
+- <https://github.com/pysal/momepy/discussions/361>
+- Graph and geometric approaches
 
 ## Find width between buildings/areas
 
-- isnt it simple? just perpendicular line and find stuff? maybe?
+![](seattle_negative_space.png)
 
-## Manually draw polygons in OSM as additional things for grouping
+## Find width between buildings/areas
 
-- only for the hard cases
-- with a web app making this easy, why not?
+- Seattle
+  - [Parcels](https://data-seattlecitygis.opendata.arcgis.com/datasets/parcels-1)
+  - [Pavement edges](https://data.seattle.gov/dataset/Pavement-Edge-zip/gy82-cq84)
+  - [Channelization](https://data-seattlecitygis.opendata.arcgis.com/datasets/channelization-file-geodatabase/about)
+- [UK INSPIRE parcels](https://use-land-property-data.service.gov.uk/datasets/inspire)
+- [Montana cadastral](http://svc.mt.gov/msl/mtcadastral/) thanks to Jesse Crocker
+- [Des Moines planimetrics](https://www.dsm.city/city_of_des_moines_gis_data/index.php) via Justin Gruca
+- [Denver planimetrics](https://wiki.openstreetmap.org/wiki/Denver_Planimetrics_Import) via Minh Nguyen
+- San Jose [sidewalk polygons](https://gisdata-csj.opendata.arcgis.com/datasets/sidewalk/explore?location=37.332265%2C-121.889490%2C17.00) and [curbfaces](https://gisdata-csj.opendata.arcgis.com/datasets/CSJ::curbfaces/about) from Minh
+- [Ohio](https://wiki.openstreetmap.org/wiki/Ohio/Imports#Potential_resources) from Minh
+- NYC [land use map](https://zola.planning.nyc.gov/about/#9.72/40.7125/-73.733) and [street plans](https://streets.planning.nyc.gov/about) from Maxim
+- [Madrid social distancing on sidewalks](https://distanciamiento.inspide.com/)
+- [OpenAddresses](https://openaddresses.io/) collects parcel data now too
 
-# Desired output
+## Find width between buildings/areas
 
-- something callable from python, JS, etc
-- osmx kind of library, work with OSM street networks at a higher level
+- Estimate road width
+  - Start from OSM center-line
+  - Project left until you hit something
+  - Repeat for right
+  - Shift the center-line to actually be centered
+  - Also look for parallel OSM ways
+- Urban areas only
+- Likely to need lots of human intervention; tool-assisted OSM tagging?
 
-- routing, rendering, semantic description of roads
+## Tag areas in OSM?
 
-- blockfinding
-- 15m isochrone
-- what do you need it for?
+- Keep the linestring representation
+- In simple cases, tag road width
+- In complex cases, manually tag road and junction areas
+  - Can then walk left-to-right and gather all lanes
+  - Curb cuts, pocket parking, turn lanes
+- Thanks to Marek for following: <https://wiki.openstreetmap.org/wiki/Proposed_features/area_highway/mapping_guidelines>
 
-- sometimes 
+## Tag areas in OSM?
+
+![](MarekXjunctionExampleWithTagging.jpg)
+
+## Tag areas in OSM?
+
+![](MarekDoubleTCrossingWithPartiallyPedestrianWays.jpg)
+
+## Tag areas in OSM?
+
+![](MarekXcrossingWith4xChelix.jpg)
+
+## Tag areas in OSM?
+
+- It's additive to the schema; no existing software breaks
+- This could be done, and probably the OSM community would do it.
+- You can't tag what you can't see
+- "Just" need a web viewer and editor
+
+## An idea for turn lanes and pocket parking
+
+- Courtesy [Ben](https://github.com/BudgieInWA)
+- One OSM way for the "entire street", block to block
+- An overlapping way showing where the turn lane appears
+  - Another where it exists with full width
+- Equivalent to linear referencing
+- Technically doable in OSM schema, but...
+  - Editor UI for overlapping ways
+  - Making all common renderers, editors, etc understand this
+
+# Next steps and API design
+
+## Desired output
+
+- Data + library/API calls
+  - Usable from web / Javascript, native (Python or other)
+  - Like [osmnx](https://github.com/gboeing/osmnx), work with OSM street networks at a higher level
+  - Also related: CityGML
+
+## Desired output
+
+- Desiderata
+  - Detailed rendering -- including markings
+  - Routing and isochrones
+  - Semantic description of lanes along roads
+  - Blockfinding
+  - **Editing**
+
+## Desired output
+
+- What would you like to do with OSM street networks that you can't?
+
+## Small next steps
 
 
-## We want a representation that...
+- Streetmix-style lane editor for OSM
+  - "How do I tag a contraflow shared bus/bike lane?"
+  - Bonus: Split roads when the lanes differ
+- The A/B Street-style renderer, but as a web map
+  - "You can't tag what you can't see"
+  - Either figure out how to generate tiles worldwide
+  - or dynamically render with Overpass as the data source
 
-1. shows geometry pretty accurately
-2. lets you understand hierarchy -- entire junction, just the north approaching road and its crossing islands, individual lanes, stopping line
-3. represents routing / turn restrictions
-4. represents semantics that apply over space (loading zones, no parking overnight)
+## Thanks!
 
-
-
-
-
-# Other next steps
-
-- drag n drop OSM lane editor
-	- split roads when lanes differ
-	- show topdown view
-
-- just get current 2D rendering, but dynamically from overpass
-
-# Questions for audience
-
-schema for street space? cityGML?
+- <https://github.com/a-b-street/osm2streets>
+- <https://github.com/a-b-street/osm2lanes>
+- <dcarlino@turing.ac.uk>
