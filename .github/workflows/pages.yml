@@ -17,16 +17,11 @@ jobs:
 
     - name: Render
       run: |
-        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes aiuk_ltn; do
+        mkdir -p dist
+        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes aiuk_ltn asg_osm2streets; do
           cd $x
           quarto render slides.md
           cd ..
-        done
-
-    - name: Copy stuff
-      run: |
-        mkdir -p dist
-        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes aiuk_ltn; do
           cp -Rv $x dist/
         done
 
