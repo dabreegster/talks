@@ -155,6 +155,8 @@ format:
   - <https://github.com/a-b-street/osm2lanes>
   - [Intersection geometry](https://a-b-street.github.io/docs/tech/map/geometry/index.html)
 - Effort driven by 2 open source contributors
+  - [Ben Ritter](https://github.com/BudgieInWA)
+  - [Michael Droogleever](https://github.com/droogmic)
 
 ## osm2streets
 
@@ -220,7 +222,17 @@ format:
 
 ## osm2streets: dual carriageways
 
-dual carriageways in general... preserving the graph structure of turns
+![](dual1.png)
+
+- Slight generalization of sausage links
+
+## osm2streets: dual carriageways
+
+![](dual2.png)
+
+- Preserve graph structure
+  - Median/verge lane in the middle
+  - Turn restrictions for the junction
 
 ## osmstreets: merging parallel ways isn't easy
 
@@ -309,6 +321,10 @@ Cycle lanes crossing slip lanes
 - Technically doable in OSM schema, but...
   - Editor UI for overlapping ways
   - Making all common renderers, editors, etc understand this
+
+## An idea for turn lanes and pocket parking
+
+![](overlapping_ways.png)
 
 # Next steps and API design
 
