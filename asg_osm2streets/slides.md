@@ -2,7 +2,7 @@
 title: "osm2streets"
 subtitle: "Generating OpenStreetMap street networks with better geometry"
 date: "7 July 2022, ASG Birmingham"
-author: "Dustin Carlino"
+author: "Dustin Carlino, Ben Ritter, Michael Droogleever"
 format:
   revealjs:
     slide-number: true
