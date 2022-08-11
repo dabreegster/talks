@@ -18,7 +18,7 @@ jobs:
     - name: Render
       run: |
         mkdir -p dist
-        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes aiuk_ltn asg_osm2streets; do
+        for x in map_model_v2 tds_seminar_synthpop census_pitch osm2lanes aiuk_ltn asg_osm2streets sotm_2022; do
           cd $x
           quarto render slides.md
           cd ..
