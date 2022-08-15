@@ -13,9 +13,6 @@ format:
 - Background
 - What osm2streets does
 - Example transformations
-  - dog-leg intersections
-  - dual carriageways
-  - parallel cycletracks along a main road
 - Challenges and next steps
 
 <!-- ....................................................................... -->
@@ -137,10 +134,13 @@ can we do this everywhere?
 
 # What osm2streets does
 
-## The demo
+## The demo: Tempe
 
-just demo the browser thing
-import an area live or reimport or something
+![](demo_tempe.mp4)
+
+## The demo: St George's cycletrack
+
+![](demo_st_georges.mp4)
 
 ## The schema
 
@@ -169,21 +169,11 @@ import an area live or reimport or something
 
 ## The architecture
 
-1st...
+![](architecture_small.png)
 
-- rust: street network crate, import streets crate, output file
-  - within st network: roads and intersections data, route, render to geojson
-- input: osm.xml driving side, config
+## The architecture
 
-2nd...
-
-- streetexplorer JS app
-	- leaflet or mapbox or whatever
-        - compile rust layer to WASM, overpass fetch, call methods to generate network and then render to geojson layers for... polygons, lane markings. call APIs to get turns.
-
-future ecosystem:
-	- call through java and hook into josm
-	- integrate parts of it with id editor
+![](architecture_full.png)
 
 ## How it works
 
@@ -212,7 +202,7 @@ future ecosystem:
 
 ## How you can use it
 
-TODO: show qgis example
+![](qgis.png)
 
 - GIS
   - Export the polygons, use in your QGIS projects
@@ -265,13 +255,53 @@ TODO: show qgis example
     - Clip representative OSM examples
     - Catch regressions
 
-## Simple transformation: dog-leg intersections
+## Transformation: simple sausage link
 
-## Moderate transformation: simple sausage link
+![](sausage_before.png)
 
-## Hard transformation: separate cycletracks
+## Transformation: simple sausage link
 
-## Extreme transformation: dual carriageways
+- Pattern matching (graph and geometry)
+- Debug labels
+- Fix graph structure (remove edge)
+- Simplify geometry (straight line)
+- Append lanes
+
+## Transformation: simple sausage link
+
+![](sausage_after.png)
+
+## Transformation: separate cycletracks
+
+![](cycletrack_before.png)
+
+## Transformation: separate cycletracks
+
+```
+We're only pattern matching on one type of separate cycleway right now.
+This represents a single RawRoad that's parallel to one or more main_roads.
+
+X--X
+C  M
+C  M
+C  X
+C  M
+C  M
+X--X
+
+C is the cycleway segment.
+X are intersections.
+M are main roads -- note there are two matching up to this one cycleway.
+The '-'s are short connector roads between the two.
+```
+
+## Transformation: separate cycletracks
+
+![](cycletrack_after.png)
+
+## Transformation: dual carriageways
+
+![](label_dual_carriageways.mp4)
 
 <!-- ....................................................................... -->
 
@@ -322,8 +352,10 @@ TODO: show qgis example
 
 ## Thanks!
 
+- **osm2streets.org**
 - <https://github.com/a-b-street/osm2streets>
 - <https://github.com/a-b-street/osm2lanes>
 - <dabreegster@gmail.com>
 - <https://twitter.com/CarlinoDustin>
+- These slides: ...
 - Special thanks to Ben Ritter, Michael Droogleever, Tobias Jordans
