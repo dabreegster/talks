@@ -207,7 +207,7 @@ Can we do this everywhere?
 5.  Generate polygons for the intersections and roads
   - "Trim back" the road center-line from the intersection
 
-## How you can use it: OSM enthusiasts
+## How you can use it: OSM community
 
 - a new renderer for your hard work
 - validation for lane tagging
@@ -215,7 +215,7 @@ Can we do this everywhere?
 
 ![](osm2lanes_editor.png)
 
-## How you can use it: GIS people
+## How you can use it: GIS
 
   - Export the polygons, use in your QGIS projects
 
@@ -295,7 +295,7 @@ The '-'s are short connector roads between the two.
 
 - Configurable
   - an OSM editor: don't merge intersections or parallel roads
-  - routing, rendering, transportation analysis: opt into everything
+  - routing, rendering, transportation analysis: opt into more
 
 ## Writing transformations
 
@@ -372,5 +372,5 @@ The '-'s are short connector roads between the two.
 - <https://github.com/a-b-street/osm2lanes>
 - <dabreegster@gmail.com>
 - <https://twitter.com/CarlinoDustin>
-- These slides: ...
+- These slides: <https://dabreegster.github.io/talks/sotm_2022/slides.html>
 - Special thanks to Ben Ritter, Michael Droogleever, Tobias Jordans

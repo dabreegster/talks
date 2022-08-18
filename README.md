@@ -14,7 +14,4 @@ Finished slides:
 - https://dabreegster.github.io/talks/osm2lanes/slides.html
 - https://dabreegster.github.io/talks/aiuk_ltn/slides.html
 - https://dabreegster.github.io/talks/asg_osm2streets/slides.html
-
-WIP:
-
 - https://dabreegster.github.io/talks/sotm_2022/slides.html
