@@ -26,6 +26,14 @@ format:
   - Transition cities away from motor vehicles, towards walking, cycling, public transit
   - Engage communities in designing, not just voting/approving
 
+## Map not just what exists...
+
+![](eastlake_before.png)
+
+## but the future world I think we need
+
+![](eastlake_after.png)
+
 ## A/B Street
 
 :::: {.columns}
@@ -87,9 +95,7 @@ Not ideal, but still usable
 
 ## Consequences: rendering
 
-![](phantom_collision.gif)
-
-Sometimes parallel roads with inferred width will physically overlap
+![](bristol_overlap.mp4)
 
 ## Consequences: traffic simulation
 
@@ -105,7 +111,7 @@ Sometimes parallel roads with inferred width will physically overlap
 
 ## Consequences: tracing between roads
 
-![](blockfinding_good.png)
+![](blockfinding.mp4)
 
 ## Consequences: tracing between roads
 
@@ -151,7 +157,7 @@ Can we do this everywhere?
 
 ![](demo_st_georges.mp4)
 
-## The schema
+## Post-processing OSM into a strict schema
 
 - Roads
   - A center line-string, but thickened with a total width
@@ -204,8 +210,14 @@ Can we do this everywhere?
   - *detect and collapse more general dual carriageways*
   - *if all else fails, shrink physically overlapping roads*
   - *merge parallel cyclepaths with the main road*
+
+## How it works
+
 5.  Generate polygons for the intersections and roads
   - "Trim back" the road center-line from the intersection
+
+Long article, lots of pictures:
+<https://a-b-street.github.io/docs/tech/map/geometry/index.html>
 
 ## How you can use it: OSM community
 
@@ -318,7 +330,7 @@ The '-'s are short connector roads between the two.
 
 # Challenges and next steps
 
-## Other features
+## Other features (optional)
 
 - Tracing around the block
   - requires edge of the road and intersection polygons
@@ -327,7 +339,7 @@ The '-'s are short connector roads between the two.
   - How many traffic signals does a route go through?
 - Isochrones / 15-minute walk-sheds
 
-## Other features
+## Other features (optional)
 
 - Why not Valhalla, GraphHopper, OSRM?
 - A/B Street needs this, maybe others do too
@@ -350,6 +362,8 @@ The '-'s are short connector roads between the two.
 - Make it easier to map the curb or more detail for hard cases
 - osm2streets can generate reasonable defaults for most cases
 - How can osm2streets use existing tagged areas to override?
+
+![](area_highway.png)
 
 ## The schema itself
 
